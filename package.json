@@ -1,0 +1,46 @@
+{
+  "name": "LikeAPro",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest \"__tests__/index*\" \"app/**/*.test.js\"",
+    "watch:test": "npm run test -- --watch",
+    "lint": "esw app/**/*.js tools/**/*.js index.ios.js index.android.js --fix --color --ignore-pattern 'node_modules/'",
+    "watch:lint": "npm run lint -- --watch",
+    "dev": "npm-run-all --parallel watch:*"
+  },
+  "dependencies": {
+    "react": "~15.4.0-rc.4",
+    "react-dom": "15.4.2",
+    "react-native": "0.40.0",
+    "react-native-drawer": "2.3.0",
+    "react-native-router-flux": "3.37.0",
+    "react-native-vector-icons": "4.0.0",
+    "react-redux": "5.0.2",
+    "redux": "3.6.0",
+    "redux-immutable-state-invariant": "1.2.4",
+    "redux-persist": "4.0.1",
+    "redux-thunk": "2.1.0",
+    "remote-redux-devtools": "0.5.7"
+  },
+  "devDependencies": {
+    "babel-eslint": "7.1.1",
+    "babel-jest": "18.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "cheerio": "0.22.0",
+    "colors": "1.1.2",
+    "enzyme": "2.7.0",
+    "eslint": "3.13.1",
+    "eslint-plugin-react": "6.9.0",
+    "eslint-watch": "2.1.14",
+    "jest": "18.1.0",
+    "npm-run-all": "4.0.0",
+    "react-addons-test-utils": "15.4.2",
+    "react-test-renderer": "~15.4.0-rc.4"
+  },
+  "jest": {
+    "preset": "react-native",
+    "verbose": false
+  }
+}
