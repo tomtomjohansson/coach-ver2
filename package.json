@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest \"__tests__/index*\" \"app/**/*.test.js\"",
+    "test": "jest",
     "watch:test": "npm run test -- --watch",
     "lint": "esw app/**/*.js tools/**/*.js index.ios.js index.android.js --fix --color --ignore-pattern 'node_modules/'",
     "watch:lint": "npm run lint -- --watch",
@@ -41,6 +41,8 @@
   },
   "jest": {
     "preset": "react-native",
-    "verbose": false
+    "verbose": false,
+    "testRegex": "\\.test\\.js$",
+    "setupFiles": ["./jest.setup.js"]
   }
 }

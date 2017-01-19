@@ -6,16 +6,16 @@ import * as RNRF from 'react-native-router-flux';
 const {Route, Schema, Scene, Animations, TabBar,Actions, ActionConst} = RNRF;
 const Router = connect()(RNRF.Router);
 // Components, containers
-import Login from '../containers/LoginContainer';
-import Players from '../containers/PlayersContainer';
-import SinglePlayer from '../containers/SinglePlayerContainer';
-import Games from '../containers/GamesContainer';
-import Trainings from '../containers/TrainingContainer';
-import SingleTraining from '../containers/SingleTrainingContainer';
-import TeamStats from '../containers/TeamStatsContainer';
-import MatchStats from '../containers/MatchStatsContainer';
-import StartingEleven from '../containers/StartingElevenContainer';
-import PlayingMatch from '../containers/PlayingMatchContainer';
+import Login from '../components/login/LoginContainer';
+import Players from '../components/players/PlayersContainer';
+import SinglePlayer from '../components/singlePlayer/SinglePlayerContainer';
+import Games from '../components/games/GamesContainer';
+import Trainings from '../components/training/TrainingContainer';
+import SingleTraining from '../components/singleTraining/SingleTrainingContainer';
+import TeamStats from '../components/teamStats/TeamStatsContainer';
+import MatchStats from '../components/matchStats/MatchStatsContainer';
+import StartingEleven from '../components/startingEleven/StartingElevenContainer';
+import PlayingMatch from '../components/playingMatch/PlayingMatchContainer';
 import NavigationDrawer from './NavigationDrawer';
 import NavItems from './navItems';
 // Styles
@@ -31,13 +31,13 @@ class Routes extends Component {
     return (
       <Icon name={title}
         size={metrics.icons.medium}
-        style={{color: selected ? colors.grassy :'white'}} 
+        style={{color: selected ? colors.grassy : 'white', borderTopWidth: 4, borderTopColor: colors.grassy}}
       />
     );
   }
   render() {
     return (
-      <Router renderBackButton={NavItems.hamburgerButton} navigationBarStyle={styles.navBar} titleStyle={styles.title} >
+      <Router renderBackButton={NavItems.hamburgerButton} navigationBarStyle={styles.navBar} titleStyle={styles.title} panHandlers={null}>
         <Scene key="drawer" component={NavigationDrawer} open={false}>
           <Scene key="drawerChildrenWrapper">
             <Scene  key="login"
@@ -49,7 +49,7 @@ class Routes extends Component {
             title="Välj Spelare" />
             <Scene key="singlePlayer"
             component={SinglePlayer}
-            title="Spelarens statistik" 
+            title="Spelarens statistik"
             renderBackButton={NavItems.backButton}/>
             <Scene key="teamStats"
             component={TeamStats}
@@ -63,11 +63,11 @@ class Routes extends Component {
             title="Träningar" />
             <Scene key="singleTraining"
             component={SingleTraining}
-            title="Spelarnärvaro" 
+            title="Spelarnärvaro"
             renderBackButton={NavItems.backButton}/>
             <Scene key="singleGame"
             tabs
-            tabBarStyle={{ backgroundColor: 'black' }}
+            tabBarStyle={{ backgroundColor: 'black', borderTopWidth: 2, borderTopColor: colors.transparent }}
             >
               <Scene key="SE" title="people" icon={this.TabIcon}>
                 <Scene key="eleven"
@@ -79,14 +79,14 @@ class Routes extends Component {
               <Scene key="PM" title="directions-run" icon={this.TabIcon}>
                 <Scene key="playingMatch"
                 component={PlayingMatch}
-                title="Pågående match" 
+                title="Pågående match"
                 type={ActionConst.RESET}
                 renderBackButton={NavItems.backButton}/>
               </Scene>
               <Scene key="MS" title="info" icon={this.TabIcon}>
                 <Scene key="matchStats"
                 component={MatchStats}
-                title="Matchstatistik" 
+                title="Matchstatistik"
                 type={ActionConst.RESET}
                 renderBackButton={NavItems.backButton}/>
               </Scene>

@@ -2,7 +2,7 @@
 import React, {Component} from 'React';
 import {View,Text} from 'react-native';
 // Styles
-import { objects } from '../themes';
+import {objects} from '../../themes';
 
 class StartingElevenContainer extends Component {
   render() {

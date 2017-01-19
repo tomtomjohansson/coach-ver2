@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import styles from './styles/navigationContainerStyle';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { colors, metrics } from '../themes';
+import { metrics } from '../themes';
 
 const openDrawer = () => {
   NavigationActions.refresh({

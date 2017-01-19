@@ -2,16 +2,16 @@
 import React, {Component} from 'React';
 import {View,Text} from 'react-native';
 // Styles
-import { objects } from '../themes';
+import {objects} from '../../themes';
 
-class PlayingMatchContainer extends Component {
+class TeamStatsContainer extends Component {
   render() {
     return (
       <View style={[objects.screen.mainContainer, objects.screen.container]}>
-        <Text>Playing Match container</Text>
+        <Text>TeamStats container</Text>
       </View>
     );
   }
 }
 
-export default PlayingMatchContainer;
+export default TeamStatsContainer;

@@ -2,42 +2,38 @@
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { View, StatusBar, StyleSheet, Platform } from 'react-native';
+import { View, StatusBar, StyleSheet, Platform, AsyncStorage } from 'react-native';
+import {persistStore} from 'redux-persist';
 // Containers, Components
 import Routes from './navigation/routes';
+import AppStatusBar from './components/statusBar/StatusBar';
+
+async function setItem(item, value) {
+  await AsyncStorage.setItem(item, value);
+  const thing = await AsyncStorage.getItem('thing')
+  console.log(thing);
+  await AsyncStorage.removeItem("thing");
+  console.log('Done');
+  const allKeys = await AsyncStorage.getItem('reduxPersist:players');
+  console.log(allKeys);
+}
+
+setItem('thing','thingy');
 
 const store = configureStore();
-
-const MyStatusBar = ({backgroundColor, ...props}) => (
-  <View style={[styles.statusBar, { backgroundColor }]}>
-    <StatusBar backgroundColor={backgroundColor} {...props} />
-  </View>
-);
-
+persistStore(store, {storage: AsyncStorage});
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <View style={{flex:1}}>
-        <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
+        <AppStatusBar backgroundColor="#5E8D48" barStyle="light-content"  />
         <Routes />
         </View>
       </Provider>
     )
   }
 }
-
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  statusBar: {
-    height: STATUSBAR_HEIGHT
-  },
-});
 
 export default App;

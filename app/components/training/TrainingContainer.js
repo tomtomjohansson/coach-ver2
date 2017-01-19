@@ -3,7 +3,7 @@ import React, {Component} from 'React';
 import {View,Text} from 'react-native';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 // Styles
-import { objects } from '../themes';
+import {objects} from '../../themes';
 
 class TrainingContainer extends Component {
   render() {

@@ -1,9 +1,10 @@
 import {combineReducers} from 'redux';
 
-import playerReducer from './playerReducer';
+import players from './playerReducer';
 
 const rootReducer = combineReducers({
-  playerReducer
+  players,
+  rootAPI: 'localhost:3000'
 });
 
 export default rootReducer;

@@ -1,6 +1,7 @@
 export default {
-  players: [{name:'Tompa',age:33},{name:'Ernie',age:19}],
+  players: [{name:'Tompa',age:33, _id: 1},{name:'Ernie',age:19, _id: 2}],
   games: [],
   user: {},
-  trainings: []
+  trainings: [],
+  rootUrl: 'localhost:3000'
 };

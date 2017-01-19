@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import { DefaultRenderer, Actions as NavigationActions } from 'react-native-router-flux';
 // Components, containers
 import Drawer from 'react-native-drawer';
-import DrawerContainer from '../containers/DrawerContainer';
+import DrawerContainer from '../components/drawer/DrawerContainer';
 // Styles
 import {drawer, overlay} from './styles/navigationDrawerStyle';
 

@@ -1,11 +1,11 @@
 // Dependencies
 import React, {Component} from 'React';
-import {Text, View, TouchableHighlight} from 'react-native';
+import {View} from 'react-native';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 // Components
-import DrawerItems from '../components/drawer/DrawerItems';
+import DrawerItems from './DrawerItems';
 // Styles
-import {objects} from '../themes';
+import {objects} from '../../themes';
 
 class DrawerContainer extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class DrawerContainer extends Component {
     this.items = [
         {
           function: NavigationActions.players,
-          name: 'Spelare'
+          name: 'Spelarstatistik'
         },
         {
           function: NavigationActions.teamStats,
@@ -37,7 +37,7 @@ class DrawerContainer extends Component {
   }
 
   toggleDrawer = () => {
-    this.context.drawer.toggle()
+    this.context.drawer.toggle();
   }
 
   navigateToRoute = (cb) => {
@@ -56,6 +56,6 @@ class DrawerContainer extends Component {
 
 DrawerContainer.contextTypes = {
   drawer: React.PropTypes.object
-}
+};
 
 export default DrawerContainer;
