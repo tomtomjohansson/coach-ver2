@@ -16,7 +16,10 @@ export default StyleSheet.create({
   },
   title: {
     marginTop: statusMargin,
-    color: colors.snow
+    color: colors.snow,
+    fontFamily: 'Cabin',
+    fontWeight: '400',
+    fontStyle: 'italic'
   },
   leftButton: {
     marginTop: statusMargin,

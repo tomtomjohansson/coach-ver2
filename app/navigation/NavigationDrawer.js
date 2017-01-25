@@ -26,7 +26,7 @@ class NavigationDrawer extends Component {
         content={<DrawerContainer />}
         type="overlay"
         tapToClose
-        openDrawerOffset={0.2}
+        openDrawerOffset={0.25}
         panCloseMask={0.2}
         closedDrawerOffset={-6}
         styles={drawer}

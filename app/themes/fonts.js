@@ -14,7 +14,7 @@ const size = {
   input: 18,
   regular: 17,
   medium: 14,
-  small: 12,
+  small: 11,
   tiny: 8.5
 };
 
@@ -49,7 +49,7 @@ const style = {
   },
   description: {
     fontFamily: type.base,
-    fontSize: size.medium
+    fontSize: size.small
   }
 };
 

@@ -1,12 +1,12 @@
 // Dependencies
 import React, { Component } from 'react';
-import {Text} from 'react-native';
 import {connect} from 'react-redux';
 import * as RNRF from 'react-native-router-flux';
-const {Route, Schema, Scene, Animations, TabBar,Actions, ActionConst} = RNRF;
+const {Route, Schema, Scene, Animations, TabBar,Actions, ActionConst, Modal} = RNRF;
 const Router = connect()(RNRF.Router);
 // Components, containers
 import Login from '../components/login/LoginContainer';
+import Register from '../components/login/RegisterContainer';
 import Players from '../components/players/PlayersContainer';
 import SinglePlayer from '../components/singlePlayer/SinglePlayerContainer';
 import Games from '../components/games/GamesContainer';
@@ -16,6 +16,7 @@ import TeamStats from '../components/teamStats/TeamStatsContainer';
 import MatchStats from '../components/matchStats/MatchStatsContainer';
 import StartingEleven from '../components/startingEleven/StartingElevenContainer';
 import PlayingMatch from '../components/playingMatch/PlayingMatchContainer';
+import StatusModal from './statusModal';
 import NavigationDrawer from './NavigationDrawer';
 import NavItems from './navItems';
 // Styles
@@ -38,15 +39,23 @@ class Routes extends Component {
   render() {
     return (
       <Router renderBackButton={NavItems.hamburgerButton} navigationBarStyle={styles.navBar} titleStyle={styles.title} panHandlers={null}>
+        <Scene key="modal" component={Modal} >
         <Scene key="drawer" component={NavigationDrawer} open={false}>
+          
           <Scene key="drawerChildrenWrapper">
             <Scene  key="login"
             component={Login}
             title="Logga in"
-            initial />
+            initial/>
+            <Scene  key="register"
+            component={Register}
+            title="Registrera lag" />
             <Scene key="players"
             component={Players}
             title="Välj Spelare" />
+            <Scene key="thingModal" direction="vertical">
+            <Scene title="Lägg till spelare" duration={1} key="statusModal" component={StatusModal} />
+            </Scene>
             <Scene key="singlePlayer"
             component={SinglePlayer}
             title="Spelarens statistik"
@@ -92,6 +101,7 @@ class Routes extends Component {
               </Scene>
             </Scene>
           </Scene>
+        </Scene>
         </Scene>
       </Router>
     );

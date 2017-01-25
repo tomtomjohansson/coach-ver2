@@ -47,7 +47,7 @@ class DrawerContainer extends Component {
 
   render() {
     return (
-      <View style={objects.screen.container} >
+      <View style={{flex:1}} >
         <DrawerItems navigateToRoute={this.navigateToRoute} items={this.items} />
       </View>
     );

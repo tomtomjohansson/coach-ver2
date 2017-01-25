@@ -1,6 +1,6 @@
 // Dependencies
 import React, {Component} from 'React';
-import {View,Text} from 'react-native';
+import {View,Text,Image} from 'react-native';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 // Components
@@ -21,7 +21,8 @@ class PlayerContainer extends Component {
   render() {
     const {players} = this.props;
     return (
-      <View style={[objects.screen.mainContainer, objects.screen.container]}>
+      <View style={[objects.screen.mainContainer]}>
+        <Image source={require('../../images/pitch.jpg')} style={[objects.screen.backgroundImage]} />
         <PlayerList players={players} goToSinglePlayer={this.goToSinglePlayer} />
         <AddPlayer />
       </View>

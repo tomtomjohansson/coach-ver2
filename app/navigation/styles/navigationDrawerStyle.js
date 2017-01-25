@@ -18,7 +18,7 @@ export const overlay = {
     position: 'absolute',
     left: 0,
     top: statusBarHeight,
-    width: metrics.screenWidth,
+    width: metrics.screenWidth + 10,
     height: metrics.screenHeight,
     opacity: 0,
     backgroundColor: 'black',

@@ -6,7 +6,7 @@ import {objects} from '../../themes';
 
 function PlayerList({players,goToSinglePlayer}) {
   return (
-    <ScrollView>
+    <ScrollView style={[objects.screen.container]}>
       {players.map((player,i) => 
         <TouchableOpacity key={i} onPress={()=>goToSinglePlayer(player._id)} >
           <Text>{player.name}</Text>

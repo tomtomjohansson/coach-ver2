@@ -1,31 +1,33 @@
 // Dependencies
 import React, { Component } from 'React';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, Image } from 'react-native';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import {createValidator,checkValidation} from '../../common/validation.js';
 // Components
 import Input from '../../common/Input.js';
 import Button from '../../common/Button.js';
 // Styles
-import {objects, colors, fonts} from '../../themes';
+import {objects,colors} from '../../themes';
 
-class LoginContainer extends Component {
+class RegisterContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       password: {},
       username: {},
+      email: {},
       submitted: false
     };
-    this.validators = {password: false ,username: false };
+    this.validators = {password: false ,username: false, email: false };
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    this.submitLogin = this.submitLogin.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.submitRegistration = this.submitRegistration.bind(this);
     this.createValidator = createValidator.bind(this);
     this.checkValidation = checkValidation.bind(this);
   }
-  goToRegister() {
-    NavigationActions.register();
+  goToLogin() {
+    NavigationActions.login();
   }
   onChangeUsername(value){
     this.createValidator('username','username')(value);
@@ -33,7 +35,10 @@ class LoginContainer extends Component {
   onChangePassword(value) {
     this.createValidator('password','password')(value);
   }
-  submitLogin() {
+  onChangeEmail(value) {
+    this.createValidator('email','email')(value);
+  }
+  submitRegistration() {
     this.setState({submitted: true});
     if (this.checkValidation()) {
       console.log('lets go')
@@ -42,11 +47,11 @@ class LoginContainer extends Component {
     }
   }
   render() {
-    const {password,username,submitted} = this.state;
+    const {password,username,email,submitted} = this.state;
     return (
       <View style={{flex:1}} >
       <Image source={require('../../images/pitch.jpg')} style={[objects.screen.backgroundImage]} />
-      <View style={[objects.screen.container, { height: 235}]} >
+      <View style={[objects.screen.container, {height: 300}]} >
         <Input 
           label="Användarnamn*"
           autoFocus
@@ -56,7 +61,7 @@ class LoginContainer extends Component {
           submitted={submitted}
         />
         <Input 
-          label='Lösenord*'
+          label="Lösenord*"
           placeholder="Minst sex tecken..."
           onChangeText={this.onChangePassword} 
           error={password.error}
@@ -64,9 +69,17 @@ class LoginContainer extends Component {
           secureTextEntry
           submitted={submitted}
         />
+        <Input 
+          label="Email*"
+          onChangeText={this.onChangeEmail} 
+          error={email.error}
+          value={email.value}
+          submitted={submitted}
+          keyboardType="email-address"
+        />
         <View style={[objects.screen.marginContainer]} >
-          <Button onPress={this.submitLogin} buttonType="cta" text="Logga In" />
-          <Text >Inte medlem än? <Text onPress={this.goToRegister} style={{color:colors.grassy}} >Registrera dig nu</Text></Text>
+          <Button onPress={this.submitRegistration} buttonType="cta" text="Registrera och logga in" />
+          <Text>Tillbaka till <Text onPress={this.goToLogin} style={{color:colors.grassy}} >login</Text></Text>
         </View>
       </View>
       </View>
@@ -74,4 +87,4 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer;
+export default RegisterContainer;

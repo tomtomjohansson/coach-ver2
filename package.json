@@ -14,7 +14,9 @@
     "react": "~15.4.0-rc.4",
     "react-dom": "15.4.2",
     "react-native": "0.40.0",
+    "react-native-animatable": "1.1.0",
     "react-native-drawer": "2.3.0",
+    "react-native-gifted-form": "0.0.13",
     "react-native-router-flux": "3.37.0",
     "react-native-vector-icons": "4.0.0",
     "react-redux": "5.0.2",
@@ -22,7 +24,8 @@
     "redux-immutable-state-invariant": "1.2.4",
     "redux-persist": "4.0.1",
     "redux-thunk": "2.1.0",
-    "remote-redux-devtools": "0.5.7"
+    "remote-redux-devtools": "0.5.7",
+    "validator": "6.2.1"
   },
   "devDependencies": {
     "babel-eslint": "7.1.1",
@@ -43,6 +46,11 @@
     "preset": "react-native",
     "verbose": false,
     "testRegex": "\\.test\\.js$",
-    "setupFiles": ["./jest.setup.js"]
+    "setupFiles": [
+      "./jest.setup.js"
+    ]
+  },
+  "rnpm": {
+    "assets": ["app/assets"]
   }
 }

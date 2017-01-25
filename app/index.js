@@ -7,6 +7,8 @@ import {persistStore} from 'redux-persist';
 // Containers, Components
 import Routes from './navigation/routes';
 import AppStatusBar from './components/statusBar/StatusBar';
+// Styles
+import {colors} from './themes'
 
 async function setItem(item, value) {
   await AsyncStorage.setItem(item, value);
@@ -28,7 +30,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <View style={{flex:1}}>
-        <AppStatusBar backgroundColor="#5E8D48" barStyle="light-content"  />
+        <AppStatusBar backgroundColor={colors.black} barStyle="light-content"  />
         <Routes />
         </View>
       </Provider>

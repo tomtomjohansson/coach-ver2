@@ -9,7 +9,7 @@ const objects = {
   screen: {
     mainContainer: {
       flex: 1,
-      marginTop: metrics.navBarHeight,
+      justifyContent: 'center',
       backgroundColor: colors.transparent
     },
     backgroundImage: {
@@ -17,58 +17,88 @@ const objects = {
       top: 0,
       left: 0,
       bottom: 0,
-      right: 0
+      right: 0,
+      resizeMode: 'cover'
     },
     container: {
-      flex: 1,
-      padding: metrics.baseMargin
+      marginTop: metrics.navBarHeight + metrics.baseMargin,
+      height: 200,
+      paddingTop: metrics.baseMargin,
+      paddingBottom: metrics.baseMargin,
+      borderRadius: 4,
+      margin: metrics.baseMargin,
+      backgroundColor: colors.offWhite
     },
-    section: {
-      margin: metrics.section,
-      padding: metrics.baseMargin,
-      borderTopColor: colors.frost,
-      borderTopWidth: 0.5,
-      borderBottomColor: colors.frost,
-      borderBottomWidth: 1
-    },
-    sectionText: {
-      color: colors.snow,
-      marginVertical: metrics.smallMargin,
-      textAlign: 'center',
-      fontWeight: 'bold'
-    },
-    subtitle: {
-      color: colors.snow,
-      padding: metrics.smallMargin,
-      marginBottom: metrics.smallMargin,
-      marginHorizontal: metrics.smallMargin
+    marginContainer: {
+      margin: metrics.baseMargin,
     }
   },
-  darkLabelContainer: {
-    backgroundColor: colors.cloud,
-    padding: metrics.smallMargin
-  },
-  darkLabel: {
-    fontFamily: fonts.type.bold,
-    color: colors.snow
-  },
-  groupContainer: {
-    margin: metrics.smallMargin,
+  addingForm: {
+    padding: metrics.marginHorizontal,
+    backgroundColor: colors.semiTransparent,
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  sectionTitle: {
-    ...fonts.style.h4,
-    color: colors.coal,
-    backgroundColor: colors.ricePaper,
-    padding: metrics.smallMargin,
-    marginTop: metrics.smallMargin,
-    marginHorizontal: metrics.baseMargin,
-    borderWidth: 1,
-    borderColor: colors.ember,
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    textAlign: 'center'
+    bottom: 0,
+    left: 0,
+    right: 0,
+    position: 'absolute'
+  },
+  addingIcon: {
+    color: colors.grassy,
+    marginRight: metrics.baseMargin,
+  },
+  addPlayer: {
+  },
+  inputs: {
+    container: {
+      backgroundColor: colors.offWhite,
+      height: 56,
+      borderBottomColor: colors.greyishBlue,
+      borderBottomWidth: 2,
+      marginBottom: metrics.baseMargin
+    },
+    error: {
+      borderBottomColor: colors.danger,
+      borderBottomWidth: 2
+    },
+    label: {
+      color: colors.greyishBlue,
+      paddingHorizontal: metrics.baseMargin
+    },
+    input: {
+      height: 38,
+      paddingHorizontal: metrics.baseMargin,
+      paddingVertical: metrics.smallMargin,
+      backgroundColor: colors.offWhite
+    },
+    message: {
+      paddingVertical: metrics.baseMargin,
+      color: colors.danger,
+      fontSize: fonts.size.small
+    }
+  },
+  buttons: {
+    button: {
+      height:40,
+      marginBottom: metrics.baseMargin,
+      paddingVertical: metrics.baseMargin,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 2
+    },
+    alert: {
+      backgroundColor: colors.danger
+    },
+    cta: {
+      backgroundColor: colors.grassy,
+    },
+    text: {
+      color: colors.offWhite,
+      fontFamily: 'Cabin',
+      fontWeight: '600'
+    }
   }
 };
 
