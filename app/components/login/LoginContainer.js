@@ -1,8 +1,10 @@
 // Dependencies
 import React, { Component } from 'React';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import {connect} from 'react-redux';
+import { Alert, View, Text, TouchableOpacity, Image } from 'react-native';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import {createValidator,checkValidation} from '../../common/validation.js';
+import { loginUser } from '../../actions/userActions';
 // Components
 import Input from '../../common/Input.js';
 import Button from '../../common/Button.js';
@@ -36,9 +38,18 @@ class LoginContainer extends Component {
   submitLogin() {
     this.setState({submitted: true});
     if (this.checkValidation()) {
-      console.log('lets go')
+      const user = {
+        username: this.state.username.value,
+        password: this.state.password.value
+      }
+      this.props.dispatch(loginUser(user)).then(this.handleLoginResponse);
+    }
+  }
+  handleLoginResponse(response) {
+    if (response.success) {
+      console.log(response.user);
     } else {
-      console.log('No go!')
+      Alert.alert("Inloggningen misslyckades", response.message);
     }
   }
   render() {
@@ -54,6 +65,7 @@ class LoginContainer extends Component {
           error={username.error}
           value={username.value}
           submitted={submitted}
+          autoCapitalize={'none'}
         />
         <Input 
           label='Lösenord*'
@@ -63,6 +75,7 @@ class LoginContainer extends Component {
           value={password.value}
           secureTextEntry
           submitted={submitted}
+          autoCapitalize={'none'}
         />
         <View style={[objects.screen.marginContainer]} >
           <Button onPress={this.submitLogin} buttonType="cta" text="Logga In" />
@@ -74,4 +87,11 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer;
+function mapStateToProps(state) {
+  const {user} = state;
+  return {
+    user
+  };
+}
+
+export default connect(mapStateToProps)(LoginContainer);

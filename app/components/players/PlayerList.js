@@ -1,16 +1,16 @@
 // Dependencies
-import React, {Component} from 'React';
-import {View,Text,ScrollView,TouchableOpacity} from 'react-native';
+import React from 'React';
+import {ScrollView} from 'react-native';
+// Components
+import PlayerItem from '../../common/PlayerItem';
 // Styles
 import {objects} from '../../themes';
 
 function PlayerList({players,goToSinglePlayer}) {
   return (
-    <ScrollView style={[objects.screen.container]}>
+    <ScrollView style={[objects.screen.topContainer]}>
       {players.map((player,i) => 
-        <TouchableOpacity key={i} onPress={()=>goToSinglePlayer(player._id)} >
-          <Text>{player.name}</Text>
-        </TouchableOpacity>
+        <PlayerItem key={i} index={i} player={player} onPress={goToSinglePlayer}  />
       )}
     </ScrollView>
   );

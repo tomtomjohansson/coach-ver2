@@ -5,14 +5,14 @@ import {Actions as NavigationActions} from 'react-native-router-flux';
 export default class StatusModal extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     // set state with passed in props
     this.state = {
       message: props.error,
       hide: props.hide,
-    }
+    };
     // bind functions
-    this.dismissModal = this.dismissModal.bind(this)
+    this.dismissModal = this.dismissModal.bind(this);
   }
 
   dismissModal() {
@@ -32,7 +32,7 @@ export default class StatusModal extends Component {
             <Text>asdfasdfasd asdfasdfa asdfasdfasdfasdf asdfasd</Text>
           </TouchableOpacity>
           </View>
-        )
-      
+        );
+
   }
 }

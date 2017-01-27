@@ -29,6 +29,13 @@ const objects = {
       margin: metrics.baseMargin,
       backgroundColor: colors.offWhite
     },
+    topContainer: {
+      marginTop: metrics.navBarHeight,
+      flex: 1,
+      paddingTop: metrics.baseMargin,
+      paddingBottom: metrics.baseMargin,
+      backgroundColor: colors.offWhite
+    },
     marginContainer: {
       margin: metrics.baseMargin,
     }
@@ -96,8 +103,35 @@ const objects = {
     },
     text: {
       color: colors.offWhite,
-      fontFamily: 'Cabin',
+      fontFamily: fonts.type.buttons,
       fontWeight: '600'
+    }
+  },
+  listitems: {
+    container: {
+      height: 42,
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      borderBottomWidth: 1,
+      borderBottomColor: colors.greyishBlue,
+    },
+    green: {
+      backgroundColor: colors.lightGreen
+    },
+    white: {
+      backgroundColor: colors.offWhite
+    },
+    text: {
+      fontSize: 14,
+      fontWeight: '600',
+      color: colors.black,
+      paddingHorizontal: metrics.baseMargin
+    },
+    icon: {
+      color: colors.darkBlue,
+      paddingHorizontal: metrics.baseMargin
     }
   }
 };

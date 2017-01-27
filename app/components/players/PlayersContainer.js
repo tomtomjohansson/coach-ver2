@@ -22,7 +22,6 @@ class PlayerContainer extends Component {
     const {players} = this.props;
     return (
       <View style={[objects.screen.mainContainer]}>
-        <Image source={require('../../images/pitch.jpg')} style={[objects.screen.backgroundImage]} />
         <PlayerList players={players} goToSinglePlayer={this.goToSinglePlayer} />
         <AddPlayer />
       </View>
@@ -31,7 +30,7 @@ class PlayerContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const {players} = state.players;
+  const {players} = state;
   return {
     players
   };

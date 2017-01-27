@@ -1,6 +1,6 @@
 import initialState from './initialState';
 
-export default function playerReducer(state = initialState.players, action) {
+export default function userReducer(state = initialState.user, action) {
   switch (action.type) {
     default:
       return state;

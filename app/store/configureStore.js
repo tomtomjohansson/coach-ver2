@@ -9,7 +9,7 @@ const middleware = __DEV__ ? applyMiddleware(thunk, reduxImmutableStateInvariant
 const enhancer = compose(
     middleware,
     autoRehydrate()
-)
+);
 
 export default function configureStore(initialState) {
     return createStore(

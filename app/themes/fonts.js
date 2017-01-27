@@ -1,7 +1,10 @@
 const type = {
   base: 'HelveticaNeue',
   bold: 'HelveticaNeue-Bold',
-  emphasis: 'HelveticaNeue-Italic'
+  emphasis: 'HelveticaNeue-Italic',
+  title: 'Cabin-Semibold',
+  buttons: 'Cabin-Regular',
+  nav: 'Cabin-Regular'
 };
 
 const size = {

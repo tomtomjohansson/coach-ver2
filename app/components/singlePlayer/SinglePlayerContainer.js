@@ -20,7 +20,7 @@ class SinglePlayerContainer extends Component {
 }
 
 function mapStateToProps(state,ownProps) { 
-  const player = state.players.players.find(p => 1 === p._id);
+  const player = state.players.find(p => ownProps.id === p._id);
   return {
     player
   }

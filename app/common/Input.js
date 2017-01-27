@@ -4,7 +4,20 @@ import {View,Text,TextInput} from 'react-native';
 // Styles
 import {objects, fonts,colors} from '../themes';
 
-export default function Input({label = '', placeholder = '', autoFocus = false, secureTextEntry = false, keyboardType = 'default', maxLength = 50, onChangeText, onBlur, error, submitted }) {
+export default function Input({
+    placeholder = '',
+    autoFocus = false,
+    secureTextEntry = false,
+    keyboardType = 'default', 
+    maxLength = 50,
+    autoCapitalize = 'sentences',
+    onChangeText,
+    onSubmitEditing,
+    onBlur,
+    label = '',
+    error, 
+    submitted
+  }) {
   return (
     <View style={{flex:1}} >
     <View style={[objects.inputs.container, checkErrorForContainer(submitted,error)]} >
@@ -21,6 +34,8 @@ export default function Input({label = '', placeholder = '', autoFocus = false, 
         onChangeText={onChangeText}
         onBlur={onBlur}
         secureTextEntry={secureTextEntry}
+        autoCapitalize={autoCapitalize}
+        onSubmitEditing={onSubmitEditing}
       />
     </View>
     </View>

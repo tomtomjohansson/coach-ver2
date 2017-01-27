@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as RNRF from 'react-native-router-flux';
-const {Route, Schema, Scene, Animations, TabBar,Actions, ActionConst, Modal} = RNRF;
+const {Scene, ActionConst, Modal} = RNRF;
 const Router = connect()(RNRF.Router);
 // Components, containers
 import Login from '../components/login/LoginContainer';
@@ -41,15 +41,14 @@ class Routes extends Component {
       <Router renderBackButton={NavItems.hamburgerButton} navigationBarStyle={styles.navBar} titleStyle={styles.title} panHandlers={null}>
         <Scene key="modal" component={Modal} >
         <Scene key="drawer" component={NavigationDrawer} open={false}>
-          
           <Scene key="drawerChildrenWrapper">
             <Scene  key="login"
             component={Login}
-            title="Logga in"
-            initial/>
+            title="Logga in" />
             <Scene  key="register"
             component={Register}
-            title="Registrera lag" />
+            title="Registrera lag"
+            renderBackButton={()=>false} />
             <Scene key="players"
             component={Players}
             title="Välj Spelare" />

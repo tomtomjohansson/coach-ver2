@@ -1,4 +1,4 @@
-import {metrics, colors} from '../../themes/';
+import {metrics, colors,fonts} from '../../themes/';
 import {Platform} from 'react-native';
 import {StyleSheet} from 'react-native';
 
@@ -17,9 +17,9 @@ export default StyleSheet.create({
   title: {
     marginTop: statusMargin,
     color: colors.snow,
-    fontFamily: 'Cabin',
-    fontWeight: '400',
-    fontStyle: 'italic'
+    fontFamily: fonts.type.title,
+    fontWeight: '600',
+    fontSize: 18
   },
   leftButton: {
     marginTop: statusMargin,
