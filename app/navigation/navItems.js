@@ -33,6 +33,17 @@ export default {
         />
       </TouchableOpacity>
     );
+  },
+
+  closeButton () {
+    return (
+      <TouchableOpacity onPress={NavigationActions.pop}>
+        <Icon name="close"
+          size={metrics.icons.medium}
+          style={styles.leftButton}
+        />
+      </TouchableOpacity>
+    );
   }
 
 };

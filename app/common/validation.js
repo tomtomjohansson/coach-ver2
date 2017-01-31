@@ -14,7 +14,7 @@ export function createValidator(key, type) {
   };
   this.validators[key] = () => {
     var v = this.state[key];
-    return v.value && !v.error;
+    return !v.error;
   };
   return saveValues;
 }
@@ -22,7 +22,7 @@ export function createValidator(key, type) {
 export function checkValidation() {
   var valid = true;
   for (let key in this.validators) {
-    if (!this.validators[key] || !this.validators[key]() ) {
+    if ( (typeof this.validators[key] === "boolean" && !this.validators[key]) || (typeof this.validators[key] === "function" && !this.validators[key]()) ) {
       valid = false;
       return;
     }
@@ -42,43 +42,52 @@ function validateInput(value, type) {
       return validateNumber(value);
     case 'date':
       return validateDate(value);
-      case 'string':
+    case 'string':
       return validateString(value);
     default:
       return validateString(value);
   }
 }
 
-function validatePassword(text) {
-  if (!validator.isLength(text,{min:6,max:20})) {
+function validatePassword(value) {
+  if (!validator.isLength(value,{min:6,max:20})) {
     return 'Måste bestå av minst sex tecken';
-  } else if (!/^(?:[A-ZÅÄÖa-zåäö0-9 _]+)(?:[A-ZÅÄÖa-zåäö0-9 _]*)$/.test(text)) {
+  } else if (!/^(?:[A-ZÅÄÖa-zåäö0-9 _]+)(?:[A-ZÅÄÖa-zåäö0-9 _]*)$/.test(value)) {
     return 'Endast bokstäver och siffror tillåts';
   } else {
     return false;
   }
 }
 
-function validateUsername(text) {
-  if (validator.isEmpty(text)) {
+function validateUsername(value) {
+  if (validator.isEmpty(value)) {
     return 'Fältet får inte vara tomt.';
-  } else if (!/^(?:[A-ZÅÄÖa-zåäö0-9 _]+)(?:[A-ZÅÄÖa-zåäö0-9 _]*)$/.test(text)) {
+  } else if (!/^(?:[A-ZÅÄÖa-zåäö0-9 _]+)(?:[A-ZÅÄÖa-zåäö0-9 _]*)$/.test(value)) {
     return 'Endast bokstäver och siffror tillåts';
   } else {
     return false;
   }
 }
 
-function validateEmail(text) {
-  if (!validator.isEmail(text)) {
+function validateEmail(value) {
+  if (!validator.isEmail(value)) {
     return 'Fyll i en giltig emailadress';
   } else {
     return false;
   }
 }
 
-function validateString(text) {
-  if (validator.isEmpty(text)) {
+function validateNumber(value) {
+  if (!validator.isNumeric(value) && !validator.isEmpty(value)) {
+    return 'Får bara innehålla siffror';
+  }
+  else {
+    return false;
+  }
+}
+
+function validateString(value) {
+  if (validator.isEmpty(value)) {
     return 'Fältet får inte vara tomt';
   } else {
     return false;

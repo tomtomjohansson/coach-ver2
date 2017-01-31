@@ -1,14 +1,13 @@
 // Dependencies
 import React, { Component } from 'React';
-import { Alert, View, Text, Image } from 'react-native';
+import { Alert, View, Image } from 'react-native';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import {createValidator,checkValidation} from '../../common/validation.js';
 import { registerUser } from '../../actions/userActions';
 // Components
-import Input from '../../common/Input.js';
-import Button from '../../common/Button.js';
+import RegisterForm from './RegisterForm';
 // Styles
-import {objects,colors} from '../../themes';
+import {objects} from '../../themes';
 
 class RegisterContainer extends Component {
   constructor(props) {
@@ -57,58 +56,26 @@ class RegisterContainer extends Component {
     }
   }
   handleRegistrationResponse(response) {
-    if (response.success) {
-      console.log(response.user);
-    } else {
-      Alert.alert("Registreringen misslyckades", response.message);
-    }
+    !response.success && Alert.alert("Registreringen misslyckades", response.message);
   }
   render() {
     const {password,username,email,club,submitted} = this.state;
     return (
       <View style={{flex:1}} >
       <Image source={require('../../images/pitch.jpg')} style={[objects.screen.backgroundImage]} />
-      <View style={[objects.screen.container, {height: 350}]} >
-        <Input 
-          label="Användarnamn*"
-          autoFocus
-          onChangeText={this.onChangeUsername}
-          error={username.error}
-          value={username.value}
-          submitted={submitted}
-          autoCapitalize={'none'}
-        />
-        <Input 
-          label="Lösenord*"
-          placeholder="Minst sex tecken..."
-          onChangeText={this.onChangePassword} 
-          error={password.error}
-          value={password.value}
-          secureTextEntry
-          submitted={submitted}
-          autoCapitalize={'none'}
-        />
-        <Input 
-          label="Email*"
-          onChangeText={this.onChangeEmail} 
-          error={email.error}
-          value={email.value}
-          submitted={submitted}
-          keyboardType="email-address"
-          autoCapitalize={'none'}
-        />
-        <Input 
-          label="Klubb*"
-          onChangeText={this.onChangeClub}
-          error={club.error}
-          value={club.value}
-          submitted={submitted}
-        />
-        <View style={[objects.screen.marginContainer]} >
-          <Button onPress={this.submitRegistration} buttonType="cta" text="Registrera och logga in" />
-          <Text>Tillbaka till <Text onPress={this.goToLogin} style={{color:colors.grassy}} >login</Text></Text>
-        </View>
-      </View>
+      <RegisterForm
+        password={password} 
+        username={username} 
+        email={email} 
+        club={club} 
+        submitted={submitted}
+        onChangePassword={this.onChangePassword}
+        onChangeUsername={this.onChangeUsername}
+        onChangeEmail={this.onChangeEmail}
+        onChangeClub={this.onChangeClub}
+        submitRegistration={this.submitRegistration}
+        goToLogin={this.goToLogin}
+      />
       </View>
     );
   }

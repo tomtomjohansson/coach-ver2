@@ -5,6 +5,7 @@ import * as RNRF from 'react-native-router-flux';
 const {Scene, ActionConst, Modal} = RNRF;
 const Router = connect()(RNRF.Router);
 // Components, containers
+import LoginHandler from '../LoginHandler';
 import Login from '../components/login/LoginContainer';
 import Register from '../components/login/RegisterContainer';
 import Players from '../components/players/PlayersContainer';
@@ -16,7 +17,7 @@ import TeamStats from '../components/teamStats/TeamStatsContainer';
 import MatchStats from '../components/matchStats/MatchStatsContainer';
 import StartingEleven from '../components/startingEleven/StartingElevenContainer';
 import PlayingMatch from '../components/playingMatch/PlayingMatchContainer';
-import StatusModal from './statusModal';
+import AddPlayer from '../components/players/AddPlayer';
 import NavigationDrawer from './NavigationDrawer';
 import NavItems from './navItems';
 // Styles
@@ -44,7 +45,8 @@ class Routes extends Component {
           <Scene key="drawerChildrenWrapper">
             <Scene  key="login"
             component={Login}
-            title="Logga in" />
+            title="Logga in"
+             />
             <Scene  key="register"
             component={Register}
             title="Registrera lag"
@@ -52,8 +54,8 @@ class Routes extends Component {
             <Scene key="players"
             component={Players}
             title="Välj Spelare" />
-            <Scene key="thingModal" direction="vertical">
-            <Scene title="Lägg till spelare" duration={1} key="statusModal" component={StatusModal} />
+            <Scene key="addPlayer" direction="vertical">
+            <Scene title="Lägg till spelare" duration={1} renderBackButton={NavItems.closeButton} key="addPlayerModal" component={AddPlayer} />
             </Scene>
             <Scene key="singlePlayer"
             component={SinglePlayer}

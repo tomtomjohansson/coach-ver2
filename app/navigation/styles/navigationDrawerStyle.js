@@ -5,10 +5,10 @@ const statusBarHeight = Platform.OS === 'ios' ? 0 : 20;
 
 export const drawer = {
   drawer: {
-    backgroundColor: 'black',
+    backgroundColor: colors.snow,
   },
   main: {
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
     paddingLeft: 3
   }
 }

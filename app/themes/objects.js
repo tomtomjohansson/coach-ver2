@@ -9,7 +9,6 @@ const objects = {
   screen: {
     mainContainer: {
       flex: 1,
-      justifyContent: 'center',
       backgroundColor: colors.transparent
     },
     backgroundImage: {
@@ -31,9 +30,16 @@ const objects = {
     },
     topContainer: {
       marginTop: metrics.navBarHeight,
-      flex: 1,
+      flex:1,
+      justifyContent: 'flex-start',
       paddingTop: metrics.baseMargin,
       paddingBottom: metrics.baseMargin,
+      backgroundColor: colors.offWhite
+    },
+    scrollViewContainer: {
+      marginTop: metrics.navBarHeight,
+      marginBottom: 62,
+      flex: 1,
       backgroundColor: colors.offWhite
     },
     marginContainer: {
@@ -41,8 +47,10 @@ const objects = {
     }
   },
   addingForm: {
-    padding: metrics.marginHorizontal,
-    backgroundColor: colors.semiTransparent,
+    paddingVertical: metrics.smallMargin,
+    paddingHorizontal: metrics.baseMargin,
+    backgroundColor: colors.snow,
+    opacity: 0.97,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -50,13 +58,18 @@ const objects = {
     bottom: 0,
     left: 0,
     right: 0,
-    position: 'absolute'
+    position: 'absolute',
+    shadowColor: colors.black,
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+    elevation: 2
   },
   addingIcon: {
     color: colors.grassy,
     marginRight: metrics.baseMargin,
-  },
-  addPlayer: {
+    shadowColor: colors.black,
+    shadowOpacity: 0.2,
+    shadowOffset: {width:1,height:1}
   },
   inputs: {
     container: {
@@ -93,7 +106,11 @@ const objects = {
       paddingVertical: metrics.baseMargin,
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 2
+      borderRadius: 2,
+      shadowColor: colors.black,
+      shadowOpacity: 0.3,
+      shadowOffset: {width:1,height:1},
+      elevation: 2
     },
     alert: {
       backgroundColor: colors.danger

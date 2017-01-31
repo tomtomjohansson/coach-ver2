@@ -11,12 +11,11 @@ import Button from '../../common/Button';
 // Styles
 import {objects} from '../../themes';
 
-class AddPlayer extends Component {
+class AddTraining extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: {},
-      phone: {error:false},
+      date: {},
       submitted: false
     };
     this.validators = {name: false ,phone: true };
@@ -82,4 +81,4 @@ class AddPlayer extends Component {
   }
 }
 
-export default connect()(AddPlayer);
+export default connect()(AddTraining);

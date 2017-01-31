@@ -8,18 +8,18 @@ export default function Input({
     placeholder = '',
     autoFocus = false,
     secureTextEntry = false,
-    keyboardType = 'default', 
+    keyboardType = 'default',
     maxLength = 50,
     autoCapitalize = 'sentences',
     onChangeText,
+    onChange,
     onSubmitEditing,
     onBlur,
     label = '',
-    error, 
+    error,
     submitted
   }) {
   return (
-    <View style={{flex:1}} >
     <View style={[objects.inputs.container, checkErrorForContainer(submitted,error)]} >
       <Text style={[objects.inputs.label, fonts.style.description]}>
         <Text>{label.toUpperCase()}     </Text>
@@ -32,12 +32,12 @@ export default function Input({
         keyboardType={keyboardType}
         maxLength={maxLength}
         onChangeText={onChangeText}
+        onChange={onChange}
         onBlur={onBlur}
         secureTextEntry={secureTextEntry}
         autoCapitalize={autoCapitalize}
         onSubmitEditing={onSubmitEditing}
       />
-    </View>
     </View>
   );
 }

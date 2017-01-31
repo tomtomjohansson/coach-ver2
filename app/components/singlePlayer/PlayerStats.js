@@ -6,10 +6,10 @@ import {objects} from '../../themes';
 
 function PlayerStats({player}) {
   return (
-      <View style={[objects.screen.mainContainer, objects.screen.container]}>
+      <View style={{flex:1}} >
         <Text>Single Player container</Text>
         <Text>Name: {player.name}</Text>
-        <Text>Name: {player.age}</Text>
+        <Text>Phone: {player.phone}</Text>
       </View>
     );
 }

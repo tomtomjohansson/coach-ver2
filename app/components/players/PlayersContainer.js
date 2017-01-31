@@ -5,7 +5,7 @@ import {Actions as NavigationActions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 // Components
 import PlayerList from './PlayerList';
-import AddPlayer from './AddPlayer';
+import AddItemBottom from '../../common/AddItemBottom';
 // Styles
 import {objects} from '../../themes';
 
@@ -17,13 +17,16 @@ class PlayerContainer extends Component {
   goToSinglePlayer(id) {
     NavigationActions.singlePlayer({id:id});
   }
+  openModal() {
+    NavigationActions.addPlayer();
+  }
 
   render() {
     const {players} = this.props;
     return (
       <View style={[objects.screen.mainContainer]}>
         <PlayerList players={players} goToSinglePlayer={this.goToSinglePlayer} />
-        <AddPlayer />
+        <AddItemBottom text="Lägg till spelare" openModal={this.openModal} />
       </View>
     );
   }

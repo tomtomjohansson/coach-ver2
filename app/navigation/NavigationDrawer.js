@@ -34,7 +34,7 @@ class NavigationDrawer extends Component {
         tweenDuration={350}
         tweenHandler={(ratio) => {
           this.refs.shadowOverlay.setNativeProps({
-          style: {opacity: ((ratio * 1.0) / 2),zIndex:((ratio * 1.0) / 2)}});
+          style: {opacity: ((ratio * 1.6) / 2),zIndex:((ratio * 1.0) / 2)}});
           return {
             drawer: { shadowRadius: Math.min(ratio * 5 * 5, 5) },
           };

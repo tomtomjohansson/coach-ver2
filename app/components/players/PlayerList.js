@@ -8,7 +8,7 @@ import {objects} from '../../themes';
 
 function PlayerList({players,goToSinglePlayer}) {
   return (
-    <ScrollView style={[objects.screen.topContainer]}>
+    <ScrollView style={[objects.screen.scrollViewContainer]}>
       {players.map((player,i) => 
         <PlayerItem key={i} index={i} player={player} onPress={goToSinglePlayer}  />
       )}
