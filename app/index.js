@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { View, Text, StatusBar, Platform, AsyncStorage } from 'react-native';
+import { View, Text, StatusBar, AsyncStorage } from 'react-native';
 import {persistStore} from 'redux-persist';
 import storage from 'react-native-simple-store';
 // Containers, Components

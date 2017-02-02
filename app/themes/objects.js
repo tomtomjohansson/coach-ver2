@@ -50,7 +50,7 @@ const objects = {
     paddingVertical: metrics.smallMargin,
     paddingHorizontal: metrics.baseMargin,
     backgroundColor: colors.snow,
-    opacity: 0.97,
+    opacity: 0.96,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -59,8 +59,8 @@ const objects = {
     left: 0,
     right: 0,
     position: 'absolute',
-    shadowColor: colors.black,
-    shadowOpacity: 0.5,
+    shadowColor: colors.semiTransparentBlack,
+    shadowOpacity: 0.7,
     shadowRadius: 8,
     elevation: 2
   },
@@ -126,7 +126,7 @@ const objects = {
   },
   listitems: {
     container: {
-      height: 42,
+      height: 48,
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'flex-start',

@@ -53,9 +53,10 @@ class Routes extends Component {
             renderBackButton={()=>false} />
             <Scene key="players"
             component={Players}
-            title="Välj Spelare" />
+            title="Välj Spelare"
+            initial/>
             <Scene key="addPlayer" direction="vertical">
-            <Scene title="Lägg till spelare" duration={1} renderBackButton={NavItems.closeButton} key="addPlayerModal" component={AddPlayer} />
+              <Scene title="Lägg till spelare" duration={1} renderBackButton={NavItems.closeButton} key="addPlayerModal" component={AddPlayer} />
             </Scene>
             <Scene key="singlePlayer"
             component={SinglePlayer}

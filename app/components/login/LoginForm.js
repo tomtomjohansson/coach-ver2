@@ -9,7 +9,7 @@ import {objects, colors} from '../../themes';
 
 function LoginForm({username,password,submitted,onChangeUsername,onChangePassword,submitLogin,goToRegister}) {
   return (
-    <View style={[objects.screen.container, { height: 235}]} >
+    <View style={[objects.screen.container, { height: 240}]} >
         <Input
           label="Användarnamn*"
           autoFocus
@@ -31,7 +31,7 @@ function LoginForm({username,password,submitted,onChangeUsername,onChangePasswor
         />
         <View style={[objects.screen.marginContainer]} >
           <Button onPress={submitLogin} buttonType="cta" text="Logga In" />
-          <Text >Inte medlem än? <Text onPress={goToRegister} style={{color:colors.grassy}} >Registrera dig nu</Text></Text>
+          <Text  style={{marginTop:5,fontSize:16}}>Inte medlem än? <Text onPress={goToRegister} style={{color:colors.grassy}} >Registrera dig nu</Text></Text>
         </View>
       </View>
   );

@@ -1,7 +1,6 @@
 // Dependencies
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { View, AsyncStorage } from 'react-native';
 import storage from 'react-native-simple-store';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import Routes from './navigation/routes';
@@ -29,13 +28,15 @@ class LoginHandler extends Component {
   }
   async handleLogout() {
     await storage.delete('user_token');
+    await storage.update('route',{route:'login',routeProps:{}});
     NavigationActions.login();
   }
 
   async checkForUser() {
     const user = await storage.get('user_token');
     if (user && this.checkForExpiration(user)) {
-      console.log('User logged in');
+      const {route,props} = await storage.get('route');
+      NavigationActions[route](props);
     } else {
       console.log('No User');
       NavigationActions.login();
@@ -59,10 +60,9 @@ class LoginHandler extends Component {
 }
 
 function mapStateToProps(state) {
-  const {user,route} = state;
+  const {user} = state;
   return {
     isLoggedIn: user.isLoggedIn,
-    route
   };
 }
 

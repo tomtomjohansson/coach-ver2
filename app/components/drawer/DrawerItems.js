@@ -1,7 +1,6 @@
 // Dependencies
 import React, {Component} from 'React';
 import {Text,Image,View,TouchableHighlight} from 'react-native';
-import { Actions as NavigationActions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles
 import styles from './styles/styles';
@@ -9,15 +8,15 @@ import {metrics} from '../../themes'
 
 class DrawerItems extends Component {
   render() {
-    const {navigateToRoute, items, logOut} = this.props;
+    const {navigateToRoute, items, logOut, active} = this.props;
     return (
-      <View style={{marginTop: 10}} >
+      <View >
         {items.map((item,index) => {
           return (
-            <TouchableHighlight key={index} onPress={()=>navigateToRoute(item.function)}>
-              <View style={[styles.drawerItem]} >
-                <Icon name="person"
-                  size={metrics.icons.small}
+            <TouchableHighlight key={index} onPress={()=>navigateToRoute(item.key,index)}>
+              <View style={[styles.drawerItem, active === item.key && styles.drawerActive]} >
+                <Icon name={item.icon}
+                  size={metrics.icons.medium}
                   style={styles.drawerIcon}
                 />
                 <Text style={[styles.drawerItemText]} >{ item.name }</Text>
@@ -27,8 +26,8 @@ class DrawerItems extends Component {
         })}
         <TouchableHighlight onPress={logOut}>
           <View style={[styles.drawerItem]} >
-            <Icon name="person"
-              size={metrics.icons.small}
+            <Icon name="power-settings-new"
+              size={metrics.icons.medium}
               style={styles.drawerIcon}
             />
             <Text style={[styles.drawerItemText]} >Logga Ut</Text>

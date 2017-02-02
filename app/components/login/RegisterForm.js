@@ -9,7 +9,7 @@ import {objects, colors} from '../../themes';
 
 function RegisterForm({username,email,password,club,submitted,onChangeUsername,onChangeEmail,onChangePassword,onChangeClub,submitRegistration,goToLogin}) {
   return (
-    <View style={[objects.screen.container, {height: 365}]} >
+    <View style={[objects.screen.container, {height: 370}]} >
         <Input
           label="Användarnamn*"
           autoFocus
@@ -47,7 +47,7 @@ function RegisterForm({username,email,password,club,submitted,onChangeUsername,o
         />
         <View style={[objects.screen.marginContainer]} >
           <Button onPress={submitRegistration} buttonType="cta" text="Registrera och logga in" />
-          <Text>Tillbaka till <Text onPress={goToLogin} style={{color:colors.grassy}} >login</Text></Text>
+          <Text style={{marginTop:5,fontSize:16}} >Tillbaka till <Text onPress={goToLogin} style={{color:colors.grassy}} >login</Text></Text>
         </View>
       </View>
   );

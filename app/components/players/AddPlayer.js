@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Alert, View} from 'react-native';
+import {goToRoute} from '../../actions/routeActions';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 import {createValidator,checkValidation} from '../../common/validation.js';
 import {addPlayer} from '../../actions/playerActions';
@@ -26,6 +27,7 @@ class AddPlayer extends Component {
     this.submitPlayer = this.submitPlayer.bind(this);
     this.createValidator = createValidator.bind(this);
     this.checkValidation = checkValidation.bind(this);
+    this.handleAJAXResponse = this.handleAJAXResponse.bind(this);
   }
   closeModal() {
     NavigationActions.pop();
@@ -48,7 +50,7 @@ class AddPlayer extends Component {
   }
   handleAJAXResponse(response) {
     if (response.success) {
-      NavigationActions.pop();
+      goToRoute('players',{});
     } else {
       Alert.alert("Spelaren lades inte till", response.message);
     }
@@ -65,6 +67,7 @@ class AddPlayer extends Component {
           error={name.error}
           value={name.value}
           submitted={submitted}
+          maxLength={40}
         />
         <Input
           label="Telefonnummer"
@@ -72,6 +75,8 @@ class AddPlayer extends Component {
           error={phone.error}
           value={phone.value}
           submitted={submitted}
+          keyboardType='phone-pad'
+          maxLength={20}
         />
         <View style={[objects.screen.marginContainer]}>
           <Button onPress={this.submitPlayer} buttonType="cta" text="Lägg till spelare" />

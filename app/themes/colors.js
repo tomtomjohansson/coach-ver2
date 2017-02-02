@@ -5,6 +5,7 @@ const colors = {
   lightGreen: '#E7FFE7',
   danger: '#F33501',
   black: '#130A01',
+  semiTransparentBlack: 'rgba(0,0,0,0.6)', 
   offWhite: '#FEFFF9',
   transparent: 'rgba(0,0,0,0)',
   semiTransparent: 'rgba(255,255,255,0.95)',

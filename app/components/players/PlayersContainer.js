@@ -1,8 +1,8 @@
 // Dependencies
 import React, {Component} from 'React';
 import {View,Text,Image} from 'react-native';
-import {Actions as NavigationActions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
+import {goToRoute} from '../../actions/routeActions';
 // Components
 import PlayerList from './PlayerList';
 import AddItemBottom from '../../common/AddItemBottom';
@@ -12,13 +12,16 @@ import {objects} from '../../themes';
 class PlayerContainer extends Component {
   constructor(props) {
     super(props);
+
+    this.goToSinglePlayer = this.goToSinglePlayer.bind(this);
+    this.openModal = this.openModal.bind(this);
   }
 
   goToSinglePlayer(id) {
-    NavigationActions.singlePlayer({id:id});
+    goToRoute('singlePlayer',{id:id});
   }
   openModal() {
-    NavigationActions.addPlayer();
+    goToRoute('addPlayer',{});
   }
 
   render() {

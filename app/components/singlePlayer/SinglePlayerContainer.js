@@ -2,8 +2,8 @@
 import React, {Component} from 'React';
 import {Alert, View,Text} from 'react-native';
 import {connect} from 'react-redux';
-import {Actions as NavigationActions} from 'react-native-router-flux';
 import {deletePlayer} from '../../actions/playerActions';
+import {goToRoute} from '../../actions/routeActions';
 // Components
 import PlayerStats from './PlayerStats';
 import Button from '../../common/Button.js'
@@ -15,13 +15,14 @@ class SinglePlayerContainer extends Component {
     super(props);
 
     this.deletePlayer = this.deletePlayer.bind(this);
+    this.handleAJAXresponse = this.handleAJAXresponse.bind(this);
   }
   deletePlayer() {
     this.props.dispatch(deletePlayer(this.props.player._id)).then(this.handleAJAXresponse);
   }
   handleAJAXresponse(response) {
     if (response.success) {
-      NavigationActions.players();
+      goToRoute('players',{});
     } else {
       Alert.alert("Spelaren raderades inte", response.message);
     }
