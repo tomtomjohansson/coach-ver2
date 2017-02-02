@@ -15,7 +15,7 @@ function AddItemBottom({text,openModal}) {
           size={metrics.icons.large}
         />
       </TouchableHighlight>
-      <Text style={[objects.addingText]}>{text}</Text> 
+      <Text style={[objects.addingText]}>{text}</Text>
     </View>
   );
 }

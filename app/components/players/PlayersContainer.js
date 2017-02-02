@@ -18,10 +18,10 @@ class PlayerContainer extends Component {
   }
 
   goToSinglePlayer(id) {
-    goToRoute('singlePlayer',{id:id});
+    goToRoute('singlePlayer',{id:id}, false);
   }
   openModal() {
-    goToRoute('addPlayer',{});
+    goToRoute('addPlayer',{}, false);
   }
 
   render() {

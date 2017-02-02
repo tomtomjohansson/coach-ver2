@@ -50,7 +50,7 @@ class AddPlayer extends Component {
   }
   handleAJAXResponse(response) {
     if (response.success) {
-      goToRoute('players',{});
+      goToRoute('players',{},true);
     } else {
       Alert.alert("Spelaren lades inte till", response.message);
     }

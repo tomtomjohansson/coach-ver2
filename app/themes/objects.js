@@ -140,6 +140,13 @@ const objects = {
     white: {
       backgroundColor: colors.offWhite
     },
+    header: {
+      backgroundColor: colors.greyishBlue,
+      padding: metrics.baseMargin,
+    },
+    headerText: {
+      color: colors.snow
+    },
     text: {
       fontSize: 14,
       fontWeight: '600',

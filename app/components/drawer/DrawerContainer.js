@@ -16,7 +16,7 @@ class DrawerContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: ""
+      active: ''
     };
     this.items = [{
         key: 'players',
@@ -60,7 +60,7 @@ class DrawerContainer extends Component {
   navigateToRoute(key,index) {
     this.setState({active: key});
     this.toggleDrawer();
-    goToRoute(key,{});
+    goToRoute(key,{},true);
   }
 
   render() {

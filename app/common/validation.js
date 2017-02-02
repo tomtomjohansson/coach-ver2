@@ -22,7 +22,7 @@ export function createValidator(key, type) {
 export function checkValidation() {
   var valid = true;
   for (let key in this.validators) {
-    if ( (typeof this.validators[key] === "boolean" && !this.validators[key]) || (typeof this.validators[key] === "function" && !this.validators[key]()) ) {
+    if ( (typeof this.validators[key] === 'boolean' && !this.validators[key]) || (typeof this.validators[key] === 'function' && !this.validators[key]()) ) {
       valid = false;
       return;
     }

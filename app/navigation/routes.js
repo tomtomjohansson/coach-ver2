@@ -9,15 +9,17 @@ import LoginHandler from '../LoginHandler';
 import Login from '../components/login/LoginContainer';
 import Register from '../components/login/RegisterContainer';
 import Players from '../components/players/PlayersContainer';
+import AddPlayer from '../components/players/AddPlayer';
 import SinglePlayer from '../components/singlePlayer/SinglePlayerContainer';
 import Games from '../components/games/GamesContainer';
 import Trainings from '../components/training/TrainingContainer';
+import AddTraining from '../components/training/AddTraining';
 import SingleTraining from '../components/singleTraining/SingleTrainingContainer';
 import TeamStats from '../components/teamStats/TeamStatsContainer';
 import MatchStats from '../components/matchStats/MatchStatsContainer';
 import StartingEleven from '../components/startingEleven/StartingElevenContainer';
 import PlayingMatch from '../components/playingMatch/PlayingMatchContainer';
-import AddPlayer from '../components/players/AddPlayer';
+
 import NavigationDrawer from './NavigationDrawer';
 import NavItems from './navItems';
 // Styles
@@ -72,6 +74,9 @@ class Routes extends Component {
             <Scene key="trainings"
             component={Trainings}
             title="Träningar" />
+            <Scene key="addTraining" direction="vertical">
+              <Scene title="Lägg till träning" duration={1} renderBackButton={NavItems.closeButton} key="addTrainingModal" component={AddTraining} />
+            </Scene>
             <Scene key="singleTraining"
             component={SingleTraining}
             title="Spelarnärvaro"

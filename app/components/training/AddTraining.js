@@ -1,79 +1,54 @@
 // Dependencies
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Alert, View} from 'react-native';
+import {Alert, Text, View} from 'react-native';
 import {Actions as NavigationActions} from 'react-native-router-flux';
-import {createValidator,checkValidation} from '../../common/validation.js';
-import {addPlayer} from '../../actions/playerActions';
+import {addTraining} from '../../actions/trainingActions';
 // Components
-import Input from '../../common/Input';
 import Button from '../../common/Button';
+import DateInput from '../../common/DateInput';
 // Styles
-import {objects} from '../../themes';
+import {objects, colors, metrics} from '../../themes';
 
 class AddTraining extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: {},
-      submitted: false
+      date: ''
     };
-    this.validators = {name: false ,phone: true };
     this.closeModal = this.closeModal.bind(this);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangePhone = this.onChangePhone.bind(this);
-    this.submitPlayer = this.submitPlayer.bind(this);
-    this.createValidator = createValidator.bind(this);
-    this.checkValidation = checkValidation.bind(this);
+    this.onChangeDate = this.onChangeDate.bind(this);
+    this.submitTraining = this.submitTraining.bind(this);
+  }
+  componentWillMount(){
+    const today = new Date();
+    today.setHours(17,0,0);
+    this.setState({date: today});
   }
   closeModal() {
     NavigationActions.pop();
   }
-  onChangeName(value) {
-    this.createValidator('name','username')(value);
+  onChangeDate(value) {
+    this.setState({date:value})
   }
-  onChangePhone(value) {
-    this.createValidator('phone','number')(value);
-  }
-  submitPlayer() {
-    this.setState({submitted: true});
-    if (this.checkValidation()) {
-      const player = {
-        name: this.state.name.value,
-        phone: this.state.phone.value
-      }
-      this.props.dispatch(addPlayer(player)).then(this.handleAJAXResponse);
-    }
+  submitTraining() {
+    const training = {date: this.state.date, attending: []};
+    this.props.dispatch(addTraining(training)).then(this.handleAJAXResponse);
   }
   handleAJAXResponse(response) {
     if (response.success) {
-      NavigationActions.pop();
+      NavigationActions.trainings();
     } else {
-      Alert.alert("Spelaren lades inte till", response.message);
+      Alert.alert("Träningen lades inte till", response.message);
     }
   }
   render() {
     const {name,phone,submitted} = this.state;
     return (
       <View style={[objects.screen.topContainer]} >
-        <Input
-          label="Namn*"
-          autoFocus
-          autoCapitalize={'none'}
-          onChangeText={this.onChangeName}
-          error={name.error}
-          value={name.value}
-          submitted={submitted}
-        />
-        <Input
-          label="Telefonnummer"
-          onChangeText={this.onChangePhone}
-          error={phone.error}
-          value={phone.value}
-          submitted={submitted}
-        />
+        <DateInput date={this.state.date} onChangeDate={this.onChangeDate} />
         <View style={[objects.screen.marginContainer]}>
-          <Button onPress={this.submitPlayer} buttonType="cta" text="Lägg till spelare" />
+          <Button onPress={this.submitTraining} buttonType="cta" text="Lägg till träning" />
           <Button onPress={this.closeModal} buttonType="alert" text="Avbryt" />
         </View>
       </View>

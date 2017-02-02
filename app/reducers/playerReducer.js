@@ -14,11 +14,11 @@ export default function playerReducer(state = initialState.players, action) {
     case types.ADD_PLAYER_SUCCESS:
       return [
         ...action.players
-      ]
+      ];
     case types.REMOVE_PLAYER_SUCCESS:
       return [
         ...state.filter( player => player._id !== action.playerID )
-      ]
+      ];
     default:
       return state;
   }

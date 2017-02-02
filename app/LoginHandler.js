@@ -5,6 +5,7 @@ import storage from 'react-native-simple-store';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import Routes from './navigation/routes';
 import { logoutUser } from './actions/userActions';
+import {goToRoute} from './actions/routeActions';
 
 class LoginHandler extends Component {
   constructor (props) {
@@ -23,8 +24,11 @@ class LoginHandler extends Component {
       this.handleLogout();
     }
   }
-  handleLogin() {
-    NavigationActions.players();
+  async handleLogin() {
+    // await storage.update('route', {route:'players',routeProps:{}});
+    // NavigationActions.players();
+    console.log('logging in!!!!!!!')
+    goToRoute('players',{},true);
   }
   async handleLogout() {
     await storage.delete('user_token');
@@ -38,8 +42,7 @@ class LoginHandler extends Component {
       const {route,props} = await storage.get('route');
       NavigationActions[route](props);
     } else {
-      console.log('No User');
-      NavigationActions.login();
+      this.handleLogout();
     }
   }
 
