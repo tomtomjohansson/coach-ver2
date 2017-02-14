@@ -25,9 +25,6 @@ class LoginHandler extends Component {
     }
   }
   async handleLogin() {
-    // await storage.update('route', {route:'players',routeProps:{}});
-    // NavigationActions.players();
-    console.log('logging in!!!!!!!')
     goToRoute('players',{},true);
   }
   async handleLogout() {

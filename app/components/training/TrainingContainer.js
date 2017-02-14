@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {ListView,Alert,View,Text} from 'react-native';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 import {getTrainings} from '../../actions/trainingActions';
+import {goToRoute} from '../../actions/routeActions';
 // Components
 import AddItemBottom from '../../common/AddItemBottom';
 import TrainingList from './TrainingList';
@@ -19,13 +20,16 @@ class TrainingContainer extends Component {
     });
     this.state = {
       trainings: this.ds.cloneWithRowsAndSections({})
-    }
+    };
   }
   componentWillMount() {
-    const upcoming = this.props.trainings
+    this.sortTrainings(this.props.trainings)
+  }
+  sortTrainings(trainings) {
+    const upcoming = trainings
       .filter(training => !training.attending.length)
       .sort((a,b) => new Date(a.date) - new Date(b.date));
-    const done = this.props.trainings
+    const done = trainings
       .filter(training => training.attending.length)
       .sort((a,b) => new Date(b.date) - new Date(a.date));
     const trainingsMap = {
@@ -37,11 +41,14 @@ class TrainingContainer extends Component {
   openModal() {
     NavigationActions.addTraining();
   }
+  goToSingleTraining(id) {
+    goToRoute('singleTraining',{id:id}, false);
+  }
   render() {
     const {trainings} = this.state;
     return (
       <View style={[objects.screen.mainContainer]}>
-        <TrainingList trainings={trainings} />
+        <TrainingList trainings={trainings} onPress={this.goToSingleTraining} />
         <AddItemBottom text="Lägg till träning" openModal={this.openModal} />
       </View>
     );

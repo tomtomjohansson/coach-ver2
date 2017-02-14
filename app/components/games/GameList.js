@@ -8,20 +8,25 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles
 import {objects,metrics} from '../../themes';
 
-function TrainingList({trainings,onPress}) {
+function GameList({games,onPress}) {
   return (
       <ListView style={[objects.screen.scrollViewContainer]} 
-        dataSource={trainings}
-        renderRow={(training,sectionId, index)=>{
+        dataSource={games}
+        renderRow={(game,sectionId, index)=>{
           return (
-            <TouchableOpacity index={index} onPress={()=>onPress(training._id)} >
-              <View style={[objects.listitems.container, checkUneven(index)]} >
+            <TouchableOpacity index={index} onPress={()=>onPress(game._id,game.ended,game.players.length)} >
+              <View style={[objects.listitems.container, {height: 64}, checkUneven(index)]} >
                 <View style={{flexDirection:'row', alignItems: 'center'}} >
-                  <Icon name="fitness-center"
-                    size={metrics.icons.small}
+                  <Icon name="directions-run"
+                    size={metrics.icons.medium}
                     style={objects.listitems.icon}
                   />
-                  <Text style={objects.listitems.text} >{ moment(training.date).format('D/M, dddd HH:mm') }</Text>
+                  <View>
+                    <Text style={[objects.listitems.text,objects.listitems.biggerText]} >
+                      { game.opponent.toUpperCase() }, <Text style={[objects.listitems.smallerText,{fontSize:12}]}> {game.venue}</Text>
+                    </Text>
+                  <Text style={objects.listitems.smallerText} >{ moment(game.date).format('dddd D MMMM HH:mm') }</Text>
+                  </View>
                 </View>
               </View>
             </TouchableOpacity>
@@ -43,4 +48,4 @@ function checkUneven(i) {
   return i % 2 !== 0 ? objects.listitems.green : objects.listitems.white;
 }
 
-export default TrainingList;
+export default GameList;

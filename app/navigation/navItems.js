@@ -12,10 +12,18 @@ const openDrawer = () => {
   });
 };
 
+function refreshOnPop(){ 
+  console.log('alskdjfalskdjfl')
+  NavigationActions.pop(); 
+  setTimeout(()=>{
+    NavigationActions.refresh({'pip':'pop'});
+  },10);
+}
+
 export default {
   backButton () {
     return (
-      <TouchableOpacity onPress={NavigationActions.pop}>
+      <TouchableOpacity onPress={refreshOnPop}>
         <Icon name="keyboard-backspace"
           size={metrics.icons.medium}
           style={styles.leftButton}

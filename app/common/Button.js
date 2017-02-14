@@ -1,8 +1,8 @@
 // Dependencies
-import React, {Component} from 'react';
-import {View,Text,TextInput,TouchableOpacity} from 'react-native';
+import React from 'react';
+import {View,Text,TouchableOpacity} from 'react-native';
 // Styles
-import {objects, fonts} from '../themes';
+import {objects} from '../themes';
 
 export default function Button({ text, buttonType, onPress }) {
   return (

@@ -7,6 +7,7 @@ const colors = {
   black: '#130A01',
   semiTransparentBlack: 'rgba(0,0,0,0.6)',
   offWhite: '#FEFFF9',
+  offBlack: '#26252D',
   transparent: 'rgba(0,0,0,0)',
   semiTransparent: 'rgba(255,255,255,0.95)',
   snow: '#FFFFFF'

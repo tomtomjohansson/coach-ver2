@@ -1,17 +1,35 @@
 // Dependencies
 import React, {Component} from 'React';
-import {View,Text} from 'react-native';
+import {connect} from 'react-redux';
+import {ScrollView,Text} from 'react-native';
+// Components
+import MatchStats from './MatchStats';
+import IndividualStats from './IndividualStats';
 // Styles
 import {objects} from '../../themes';
 
 class MatchStatsContainer extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    const {game,club} = this.props;
     return (
-      <View style={[objects.screen.mainContainer, objects.screen.container]}>
-        <Text>Match Stats container</Text>
-      </View>
+      <ScrollView style={[objects.screen.scrollViewContainer]}>
+        <MatchStats game={game} club={club} />
+        <IndividualStats players={game.players} />
+      </ScrollView>
     );
   }
 }
 
-export default MatchStatsContainer;
+function mapStateToProps(state,ownProps) {
+  const game = state.games.find(g => g._id === ownProps.id);
+  const club = state.user.club;
+  return {
+    game,
+    club
+  };
+}
+
+export default connect(mapStateToProps)(MatchStatsContainer);

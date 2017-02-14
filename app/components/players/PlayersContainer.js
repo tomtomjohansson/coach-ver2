@@ -16,14 +16,12 @@ class PlayerContainer extends Component {
     this.goToSinglePlayer = this.goToSinglePlayer.bind(this);
     this.openModal = this.openModal.bind(this);
   }
-
   goToSinglePlayer(id) {
     goToRoute('singlePlayer',{id:id}, false);
   }
   openModal() {
     goToRoute('addPlayer',{}, false);
   }
-
   render() {
     const {players} = this.props;
     return (

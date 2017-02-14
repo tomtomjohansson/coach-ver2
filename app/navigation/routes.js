@@ -12,6 +12,7 @@ import Players from '../components/players/PlayersContainer';
 import AddPlayer from '../components/players/AddPlayer';
 import SinglePlayer from '../components/singlePlayer/SinglePlayerContainer';
 import Games from '../components/games/GamesContainer';
+import AddGame from '../components/games/AddGame';
 import Trainings from '../components/training/TrainingContainer';
 import AddTraining from '../components/training/AddTraining';
 import SingleTraining from '../components/singleTraining/SingleTrainingContainer';
@@ -19,6 +20,8 @@ import TeamStats from '../components/teamStats/TeamStatsContainer';
 import MatchStats from '../components/matchStats/MatchStatsContainer';
 import StartingEleven from '../components/startingEleven/StartingElevenContainer';
 import PlayingMatch from '../components/playingMatch/PlayingMatchContainer';
+import AddStat from '../components/playingMatch/AddStat';
+import SubPlayer from '../components/playingMatch/SubPlayer';
 
 import NavigationDrawer from './NavigationDrawer';
 import NavItems from './navItems';
@@ -48,7 +51,7 @@ class Routes extends Component {
             <Scene  key="login"
             component={Login}
             title="Logga in"
-             />
+            renderBackButton={()=>false} />
             <Scene  key="register"
             component={Register}
             title="Registrera lag"
@@ -71,6 +74,9 @@ class Routes extends Component {
             <Scene key="games"
             component={Games}
             title="Matcher" />
+            <Scene key="addGame" direction="vertical">
+              <Scene title="Lägg till match" duration={1} renderBackButton={NavItems.closeButton} key="addGameModal" component={AddGame} />
+            </Scene>
             <Scene key="trainings"
             component={Trainings}
             title="Träningar" />
@@ -85,7 +91,7 @@ class Routes extends Component {
             tabs
             tabBarStyle={{ backgroundColor: 'black', borderTopWidth: 2, borderTopColor: colors.transparent }}
             >
-              <Scene key="SE" title="people" icon={this.TabIcon}>
+              <Scene key="SE" title="people" titleStyle={{color:'white'}} icon={this.TabIcon}>
                 <Scene key="eleven"
                 component={StartingEleven}
                 title="Ta ut startelva"
@@ -98,6 +104,12 @@ class Routes extends Component {
                 title="Pågående match"
                 type={ActionConst.RESET}
                 renderBackButton={NavItems.backButton}/>
+                <Scene key="addStatModal" direction="vertical"  >
+                  <Scene hideTabBar title="Uppdatera statistik" duration={1} renderBackButton={NavItems.closeButton} key="addStats" component={AddStat} />
+                </Scene>
+                <Scene key="subPlayerModal" direction="vertical"  >
+                  <Scene hideTabBar title="Byt spelare" duration={1} renderBackButton={NavItems.closeButton} key="subPlayer" component={SubPlayer} />
+                </Scene>
               </Scene>
               <Scene key="MS" title="info" icon={this.TabIcon}>
                 <Scene key="matchStats"

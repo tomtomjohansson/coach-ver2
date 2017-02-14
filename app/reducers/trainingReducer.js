@@ -11,6 +11,21 @@ export default function trainingReducer(state = initialState.trainings, action) 
       return [
         ...initialState.trainings
       ];
+    case types.ADD_TRAINING_SUCCESS:
+      return [
+        ...action.trainings
+      ];
+    case types.DELETE_TRAINING_SUCCESS:
+      return [
+        ...state.filter( training => training._id !== action.trainingID )
+      ];
+    case types.UPDATE_TRAINING_SUCCESS:
+      const index = state.indexOf(action.training);
+      return [
+        ...state.slice(0,index),
+        {...action.training, attending: action.attending},
+        ...state.slice(index + 1)
+      ];
     default:
       return state;
   }

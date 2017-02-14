@@ -129,7 +129,7 @@ const objects = {
       height: 48,
       flex: 1,
       flexDirection: 'row',
-      justifyContent: 'flex-start',
+      justifyContent: 'space-between',
       alignItems: 'center',
       borderBottomWidth: 1,
       borderBottomColor: colors.greyishBlue,
@@ -141,17 +141,33 @@ const objects = {
       backgroundColor: colors.offWhite
     },
     header: {
-      backgroundColor: colors.greyishBlue,
+      backgroundColor: colors.offBlack,
       padding: metrics.baseMargin,
     },
     headerText: {
-      color: colors.snow
+      color: colors.snow,
+      fontWeight: '600'
+    },
+    matchStats: {
+      height: 64,
+      paddingHorizontal: metrics.baseMargin,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center'
     },
     text: {
       fontSize: 14,
       fontWeight: '600',
-      color: colors.black,
+      color: colors.offBlack,
       paddingHorizontal: metrics.baseMargin
+    },
+    smallerText: {
+      fontWeight: '400',
+      fontStyle: 'italic',
+      paddingHorizontal: metrics.baseMargin
+    },
+    biggerText: {
+      fontSize: 16
     },
     icon: {
       color: colors.darkBlue,

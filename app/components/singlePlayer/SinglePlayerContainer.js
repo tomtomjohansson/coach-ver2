@@ -6,7 +6,7 @@ import {deletePlayer} from '../../actions/playerActions';
 import {goToRoute} from '../../actions/routeActions';
 // Components
 import PlayerStats from './PlayerStats';
-import Button from '../../common/Button.js'
+import UpdateDelete from '../../common/UpdateDelete.js'
 // Styles
 import {objects} from '../../themes';
 
@@ -32,14 +32,12 @@ class SinglePlayerContainer extends Component {
     return (
       <View style={[objects.screen.topContainer]} >
         { player && <PlayerStats player={player} /> } 
-        <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between'} ]} >
-          <View style={{flex:1, marginRight: 10}} >       
-            <Button buttonType="cta" text="Uppdatera spelare" onPress={this.deletePlayer} />
-          </View>
-          <View style={{flex:1}} >
-            <Button buttonType="alert" text="Radera spelare" onPress={this.deletePlayer} />
-          </View>
-        </View>
+        <UpdateDelete
+          updateText="Uppdatera spelare"
+          deleteText="Radera spelare"
+          onDeleteAction={this.deletePlayer} 
+          onUpdateAction={this.deletePlayer} 
+        />
       </View>
     );
   }
