@@ -8,7 +8,7 @@ import {objects, metrics} from '../themes';
 export default function PlayerItem({index, player, onPress, checkArray = null }) {
   let checkIcon = null;
   if (checkArray) {
-    checkIcon = <Icon name={getCheckIcon(player._id, checkArray)} size={metrics.icons.medium} style={objects.listitems.icon}/>
+    checkIcon = <Icon name={getCheckIcon(player._id, checkArray)} size={metrics.icons.medium} style={objects.listitems.icon}/>;
   }
   return (
     <TouchableOpacity index={index} onPress={()=>onPress(player._id)} >

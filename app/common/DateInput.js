@@ -4,7 +4,7 @@ import {View,Text} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles
-import {objects,fonts, metrics, colors} from '../themes';
+import {objects, metrics} from '../themes';
 
 export default function DateInput({
     date = Date.now(),

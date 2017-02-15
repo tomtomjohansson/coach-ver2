@@ -82,7 +82,7 @@ export function updateTraining(training,attending) {
         body: JSON.stringify({training,attending})
       });
       const json = await response.json();
-      console.log(json)
+      console.log(json);
       if (json.success) {
         await dispatch(updateTrainingSuccess(training,attending));
         return { success: json.success };

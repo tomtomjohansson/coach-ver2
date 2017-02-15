@@ -5,7 +5,6 @@ import * as RNRF from 'react-native-router-flux';
 const {Scene, ActionConst, Modal} = RNRF;
 const Router = connect()(RNRF.Router);
 // Components, containers
-import LoginHandler from '../LoginHandler';
 import Login from '../components/login/LoginContainer';
 import Register from '../components/login/RegisterContainer';
 import Players from '../components/players/PlayersContainer';

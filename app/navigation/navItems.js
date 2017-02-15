@@ -12,9 +12,8 @@ const openDrawer = () => {
   });
 };
 
-function refreshOnPop(){ 
-  console.log('alskdjfalskdjfl')
-  NavigationActions.pop(); 
+function refreshOnPop(){
+  NavigationActions.pop();
   setTimeout(()=>{
     NavigationActions.refresh({'pip':'pop'});
   },10);

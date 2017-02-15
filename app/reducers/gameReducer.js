@@ -26,7 +26,7 @@ export default function gameReducer(state = initialState.games, action) {
       return [
         ...state.filter(game => game._id !== action.game._id),
         {...action.game}
-      ]
+      ];
     default:
       return state;
   }

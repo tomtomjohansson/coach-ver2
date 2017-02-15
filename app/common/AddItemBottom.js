@@ -1,5 +1,5 @@
 // Dependencies
-import React, {Component} from 'React';
+import React from 'React';
 import {View,Text, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles

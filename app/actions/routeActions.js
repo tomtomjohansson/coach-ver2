@@ -1,4 +1,3 @@
-import * as types from './actionTypes';
 import storage from 'react-native-simple-store';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 

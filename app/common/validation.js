@@ -80,7 +80,7 @@ function validateEmail(value) {
 function validateNumber(value) {
   if (!validator.isNumeric(value) && !validator.isEmpty(value)) {
     return 'Får bara innehålla siffror';
-  } else if(validator.isEmpty(value)) {
+  } else if (validator.isEmpty(value)) {
     return 'Fältet får inte vara tomt';
   } else {
     return false;
@@ -93,4 +93,8 @@ function validateString(value) {
   } else {
     return false;
   }
+}
+
+function validateDate(value) {
+  return false;
 }

@@ -6,6 +6,9 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 import Routes from './navigation/routes';
 import { logoutUser } from './actions/userActions';
 import {goToRoute} from './actions/routeActions';
+if (!global.atob) {
+  global.atob = require('base-64').decode;
+}
 
 class LoginHandler extends Component {
   constructor (props) {
@@ -44,7 +47,7 @@ class LoginHandler extends Component {
   }
 
   checkForExpiration (user) {
-    const info = user.split(".");
+    const info = user.split('.');
     const decodedInfo = JSON.parse(global.atob(info[1]));
     if (decodedInfo.exp > Date.now() / 1000) {
       return true;

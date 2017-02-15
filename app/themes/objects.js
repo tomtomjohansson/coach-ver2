@@ -118,6 +118,9 @@ const objects = {
     cta: {
       backgroundColor: colors.grassy,
     },
+    active: {
+      backgroundColor: colors.darkBlue,
+    },
     text: {
       color: colors.offWhite,
       fontFamily: fonts.type.buttons,
@@ -131,8 +134,12 @@ const objects = {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      borderBottomWidth: 1,
+      borderBottomWidth: 0.5,
       borderBottomColor: colors.greyishBlue,
+    },
+    narrow: {
+      height: 36,
+      justifyContent: 'flex-start'
     },
     green: {
       backgroundColor: colors.lightGreen
@@ -146,7 +153,8 @@ const objects = {
     },
     headerText: {
       color: colors.snow,
-      fontWeight: '600'
+      fontWeight: '600',
+      fontFamily: fonts.type.title
     },
     matchStats: {
       height: 64,

@@ -15,13 +15,14 @@ class TeamStatsContainer extends Component {
     this.state = {
       teamStats: [{}]
     };
-
+    this.active = 'all';
     this.setStats = this.setStats.bind(this);
   }
   componentDidMount() {
     this.setStats('all');
   }
   async setStats(venue) {
+    this.active = venue;
     const url = `${rootUrl}/api/teamStats/${this.props.username}/${venue}`;
     const headers = await getHeaders();
     const response = await fetch(url,{
@@ -42,13 +43,13 @@ class TeamStatsContainer extends Component {
         <TeamStats teamStats={teamStats[0]} />
         <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between'} ]} >
           <View style={{flex:1, marginRight: 10}} >
-            <Button buttonType="cta" text="Alla" onPress={()=> this.setStats('all') } />
+            <Button buttonType={this.active === 'all' ? 'active' : 'cta'} text="Alla" onPress={()=> this.setStats('all') } />
           </View>
           <View style={{flex:1, marginRight: 10}} >
-            <Button buttonType="cta" text="Hemma"  onPress={()=> this.setStats('home') } />
+            <Button buttonType={this.active === 'home' ? 'active' : 'cta'} text="Hemma"  onPress={()=> this.setStats('home') } />
           </View>
           <View style={{flex:1}} >
-            <Button buttonType="cta" text="Borta" onPress={()=> this.setStats('away') } />
+            <Button buttonType={this.active === 'away' ? 'active' : 'cta'} text="Borta" onPress={()=> this.setStats('away') } />
           </View>
         </View>
       </ScrollView>

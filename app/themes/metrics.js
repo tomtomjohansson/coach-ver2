@@ -18,6 +18,7 @@ const metrics = {
   icons: {
     tiny: 15,
     small: 20,
+    mediumsmall: 25,
     medium: 30,
     large: 45,
     xl: 60
