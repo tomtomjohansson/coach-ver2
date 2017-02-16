@@ -12,7 +12,7 @@ import Button from '../../common/Button';
 // Styles
 import {objects} from '../../themes';
 
-class AddPlayer extends Component {
+export class AddPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +52,7 @@ class AddPlayer extends Component {
     if (response.success) {
       goToRoute('players',{},true);
     } else {
-      Alert.alert("Spelaren lades inte till", response.message);
+      Alert.alert('Spelaren lades inte till', response.message);
     }
   }
   render() {

@@ -50,12 +50,15 @@ class Routes extends Component {
             <Scene  key="login"
             component={Login}
             title="Logga in"
+            hideNavBar={true}
             renderBackButton={()=>false} />
             <Scene  key="register"
+            hideNavBar={true}
             component={Register}
             title="Registrera lag"
             renderBackButton={()=>false} />
             <Scene key="players"
+            hideNavBar={false}
             component={Players}
             title="Välj Spelare"
             initial/>

@@ -45,7 +45,7 @@ function PlayerStats({player,playerStats}) {
         </View>
         <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
           <Text style={[objects.listitems.text, {flex:1}]} >Gula kort: <Text style={{fontWeight:'400'}} >{ exists ? stats.yellow : 0 }</Text></Text>
-          <Text style={[objects.listitems.text, {flex:1}]} >Gula kort: <Text style={{fontWeight:'400'}} >{ exists ? stats.red : 0 }</Text></Text>
+          <Text style={[objects.listitems.text, {flex:1}]} >Röda kort: <Text style={{fontWeight:'400'}} >{ exists ? stats.red : 0 }</Text></Text>
         </View>
         <View style={[objects.listitems.container, {justifyContent:'flex-start'}]} >
           <Text style={[objects.listitems.text, {flex:1, color:colors.grassy}]} >SPELTID</Text>
