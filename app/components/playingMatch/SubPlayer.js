@@ -88,7 +88,7 @@ function mapStateToProps(state,ownProps) {
   const playing = game.players.filter(player => player.minutes.out === 90);
   const bench = state.players.filter(player => {
     var onField = true;
-    for (var p of playing){
+    for (var p of game.players){
 			if (player._id === p._id){
 				onField = false;
 			}

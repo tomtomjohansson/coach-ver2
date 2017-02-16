@@ -10,7 +10,8 @@ import {objects,metrics} from '../../themes';
 
 function TrainingList({trainings,onPress}) {
   return (
-      <ListView style={[objects.screen.scrollViewContainer]} 
+      <ListView style={[objects.screen.scrollViewContainer]}
+        enableEmptySections
         dataSource={trainings}
         renderRow={(training,sectionId, index)=>{
           return (

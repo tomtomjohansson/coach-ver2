@@ -82,7 +82,6 @@ export function updateTraining(training,attending) {
         body: JSON.stringify({training,attending})
       });
       const json = await response.json();
-      console.log(json);
       if (json.success) {
         await dispatch(updateTrainingSuccess(training,attending));
         return { success: json.success };
@@ -108,7 +107,6 @@ export function getTrainings() {
         headers
       });
       const json = await response.json();
-      console.log(json);
       return { success: json.success, message: json.message, trainings: json.trainings };
     }
     catch (e) {

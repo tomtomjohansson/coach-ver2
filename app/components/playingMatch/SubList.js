@@ -1,10 +1,10 @@
 // Dependencies
 import React from 'React';
-import {View,Text,TouchableOpacity,ScrollView} from 'react-native';
+import {View,Text,ScrollView} from 'react-native';
 // Components
 import PlayerItem from '../../common/PlayerItem';
 // Styles
-import {objects,colors,metrics} from '../../themes';
+import {objects} from '../../themes';
 
 export default function SubList({playing,bench,selectedIn,selectedOut,onPressIn,onPressOut}) {
     return (

@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import {rootUrl,getHeaders,saveToken} from './ajaxConfig';
+import {rootUrl,getHeaders} from './ajaxConfig';
 
 export function addPlayerSuccess(players) {
   return {

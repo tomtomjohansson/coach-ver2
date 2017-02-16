@@ -10,7 +10,8 @@ import {objects,metrics} from '../../themes';
 
 function GameList({games,onPress}) {
   return (
-      <ListView style={[objects.screen.scrollViewContainer]} 
+      <ListView style={[objects.screen.scrollViewContainer]}
+        enableEmptySections
         dataSource={games}
         renderRow={(game,sectionId, index)=>{
           return (

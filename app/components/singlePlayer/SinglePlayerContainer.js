@@ -17,8 +17,9 @@ class SinglePlayerContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerStats: [{}]
-    }
+      playerStats: [{}],
+      change: false
+    };
     this.active = 'game';
     this.setStats = this.setStats.bind(this);
     this.deletePlayer = this.deletePlayer.bind(this);
@@ -37,6 +38,8 @@ class SinglePlayerContainer extends Component {
     });
     const json = await response.json();
     if (json.success) {
+      const change = !this.state.change;
+      this.setState({change});
       if (json.playerStats.length) {
         this.setState({playerStats:json.playerStats});
       }
@@ -51,7 +54,7 @@ class SinglePlayerContainer extends Component {
     if (response.success) {
       goToRoute('players',{},true);
     } else {
-      Alert.alert("Spelaren raderades inte", response.message);
+      Alert.alert('Spelaren raderades inte', response.message);
     }
   }
   showGameOrTraining() {
@@ -64,7 +67,6 @@ class SinglePlayerContainer extends Component {
     }
   }
   render() {
-    console.log(this.state.playerStats);
     return (
       <ScrollView style={[objects.screen.scrollViewContainer, {marginBottom:10}]}>
         {this.showGameOrTraining()}

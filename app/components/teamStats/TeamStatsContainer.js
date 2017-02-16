@@ -31,16 +31,19 @@ class TeamStatsContainer extends Component {
     });
     const json = await response.json();
     if (json.success) {
-      this.setState({teamStats:json.team});
+      if (json.team.length) {
+        this.setState({teamStats:json.team});
+      }
     } else {
       Alert.alert('Något gick fel',json.message);
     }
   }
   render() {
     const {teamStats} = this.state;
+    const {club} = this.props;
     return (
       <ScrollView style={[objects.screen.scrollViewContainer, {marginBottom:10}]}>
-        <TeamStats teamStats={teamStats[0]} />
+        <TeamStats teamStats={teamStats} club={club} />
         <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between'} ]} >
           <View style={{flex:1, marginRight: 10}} >
             <Button buttonType={this.active === 'all' ? 'active' : 'cta'} text="Alla" onPress={()=> this.setStats('all') } />
@@ -59,8 +62,10 @@ class TeamStatsContainer extends Component {
 
 function mapStateToProps(state) {
   const username = state.user.username;
+  const club = state.user.club;
   return {
-    username
+    username,
+    club
   };
 }
 

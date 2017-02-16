@@ -7,7 +7,7 @@ import {objects,colors,metrics} from '../../themes';
 
 function PlayerStats({player,playerStats}) {
   const stats = playerStats[0];
-  const exists = Object.keys(stats).length !== 0
+  const exists = stats.hasOwnProperty('goalsAvg');
   return (
       <View>
         <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}]} >
