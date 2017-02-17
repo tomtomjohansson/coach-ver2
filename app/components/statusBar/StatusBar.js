@@ -1,5 +1,5 @@
 // Dependencies
-import React, {Component} from 'react';
+import React from 'react';
 import { View, StatusBar } from 'react-native';
 // styles
 import styles from './styles/statusBarStyle';

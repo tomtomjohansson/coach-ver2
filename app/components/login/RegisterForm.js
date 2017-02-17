@@ -22,7 +22,7 @@ function RegisterForm({username,email,password,club,submitted,onChangeUsername,o
         <Input
           label="Lösenord*"
           placeholder="Minst sex tecken..."
-          onChangeText={onChangePassword} 
+          onChangeText={onChangePassword}
           error={password.error}
           value={password.value}
           secureTextEntry
@@ -31,7 +31,7 @@ function RegisterForm({username,email,password,club,submitted,onChangeUsername,o
         />
         <Input
           label="Email*"
-          onChangeText={onChangeEmail} 
+          onChangeText={onChangeEmail}
           error={email.error}
           value={email.value}
           submitted={submitted}

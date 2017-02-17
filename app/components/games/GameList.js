@@ -13,7 +13,7 @@ function GameList({games,onPress}) {
       <ListView style={[objects.screen.scrollViewContainer]}
         enableEmptySections
         dataSource={games}
-        renderRow={(game,sectionId, index)=>{
+        renderRow={(game,sectionId, index)=>{ // eslint-disable-line
           return (
             <TouchableOpacity index={index} onPress={()=>onPress(game._id,game.ended,game.players.length)} >
               <View style={[objects.listitems.container, {height: 64}, checkUneven(index)]} >
@@ -34,7 +34,7 @@ function GameList({games,onPress}) {
             );
           }
         }
-        renderSectionHeader={(sectionData,category)=>{
+        renderSectionHeader={(sectionData,category)=>{ // eslint-disable-line
           return (
             <View style={[objects.listitems.header]} >
               <Text style={[objects.listitems.headerText]} >{category.toUpperCase()}</Text>

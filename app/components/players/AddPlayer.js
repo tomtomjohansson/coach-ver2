@@ -6,12 +6,14 @@ import {goToRoute} from '../../actions/routeActions';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 import {createValidator,checkValidation} from '../../common/validation.js';
 import {addPlayer} from '../../actions/playerActions';
+import autobind from 'autobind-decorator';
 // Components
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 // Styles
 import {objects} from '../../themes';
 
+@autobind
 export class AddPlayer extends Component {
   constructor(props) {
     super(props);
@@ -21,13 +23,8 @@ export class AddPlayer extends Component {
       submitted: false
     };
     this.validators = {name: false ,phone: true };
-    this.closeModal = this.closeModal.bind(this);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangePhone = this.onChangePhone.bind(this);
-    this.submitPlayer = this.submitPlayer.bind(this);
     this.createValidator = createValidator.bind(this);
     this.checkValidation = checkValidation.bind(this);
-    this.handleAJAXResponse = this.handleAJAXResponse.bind(this);
   }
   closeModal() {
     NavigationActions.pop();
@@ -44,7 +41,7 @@ export class AddPlayer extends Component {
       const player = {
         name: this.state.name.value,
         phone: this.state.phone.value
-      }
+      };
       this.props.dispatch(addPlayer(player)).then(this.handleAJAXResponse);
     }
   }
@@ -75,7 +72,7 @@ export class AddPlayer extends Component {
           error={phone.error}
           value={phone.value}
           submitted={submitted}
-          keyboardType='phone-pad'
+          keyboardType="phone-pad"
           maxLength={20}
         />
         <View style={[objects.screen.marginContainer]}>

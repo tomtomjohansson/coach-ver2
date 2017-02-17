@@ -1,8 +1,10 @@
 // Dependencies
 import React from 'react';
 import {View,Text,TextInput} from 'react-native';
+// Components
+import ErrorLabel from './ErrorLabel';
 // Styles
-import {objects, fonts,colors} from '../themes';
+import {objects, fonts} from '../themes';
 
 export default function Input({
     placeholder = '',
@@ -23,7 +25,7 @@ export default function Input({
     <View style={[objects.inputs.container, checkErrorForContainer(submitted,error)]} >
       <Text style={[objects.inputs.label, fonts.style.description]}>
         <Text>{label.toUpperCase()}     </Text>
-        { checkErrorForLabel(submitted,error) }
+        <ErrorLabel submitted={submitted} error={error} />
       </Text>
       <TextInput
         style={[objects.inputs.input]}
@@ -40,14 +42,6 @@ export default function Input({
       />
     </View>
   );
-}
-
-function checkErrorForLabel (submitted, error) {
-  if (submitted && error) {
-    return <Text style={{color:colors.danger}}>{error}</Text>;
-  } else if (submitted && error === undefined ) {
-    return <Text style={{color:colors.danger, textAlign: 'right'}}>Fältet får inte vara tomt</Text>;
-  }
 }
 
 function checkErrorForContainer (submitted, error) {

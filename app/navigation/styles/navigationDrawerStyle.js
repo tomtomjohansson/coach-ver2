@@ -11,7 +11,7 @@ export const drawer = {
     backgroundColor: colors.black,
     paddingLeft: 3
   }
-}
+};
 export const overlay = {
   overlay: {
     flex: 1,

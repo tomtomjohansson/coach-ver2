@@ -9,14 +9,14 @@ import styles from './styles/styles';
 export default function VenueChoice({venue,onChangeVenue}) {
   return (
     <View style={[styles.venueContainer]} >
-      <TouchableOpacity style={[styles.venueChoice]} onPress={()=> onChangeVenue('Hemma') } >
+      <TouchableOpacity style={[styles.venueChoice]} onPress={()=> onChangeVenue('Hemma')} >
           <Text>Hemma</Text>
           <Icon name={getCheckIcon(venue,'Hemma')}
           size={metrics.icons.medium}
           style={[objects.listitems.icon]}
         />
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.venueChoice]} onPress={()=> onChangeVenue('Borta') } >
+      <TouchableOpacity style={[styles.venueChoice]} onPress={()=> onChangeVenue('Borta')} >
           <Text>Borta</Text>
           <Icon name={getCheckIcon(venue,'Borta')}
           size={metrics.icons.medium}

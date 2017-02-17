@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
 import {metrics, colors,fonts} from '../../../themes/';
-import {Platform} from 'react-native';
 
 export default StyleSheet.create({
   drawerHeader: {

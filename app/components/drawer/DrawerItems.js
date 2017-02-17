@@ -1,10 +1,10 @@
 // Dependencies
 import React, {Component} from 'React';
-import {Text,Image,View,TouchableHighlight} from 'react-native';
+import {Text,View,TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles
 import styles from './styles/styles';
-import {metrics} from '../../themes'
+import {metrics} from '../../themes';
 
 class DrawerItems extends Component {
   render() {

@@ -1,14 +1,16 @@
 // Dependencies
 import React, {Component} from 'React';
 import {connect} from 'react-redux';
-import {ScrollView,View,Text,Alert} from 'react-native';
+import {ScrollView,View,Alert} from 'react-native';
 import {rootUrl,getHeaders} from '../../actions/ajaxConfig';
+import autobind from 'autobind-decorator';
 // Components
 import TeamStats from './TeamStats';
 import Button from '../../common/Button';
 // Styles
 import {objects} from '../../themes';
 
+@autobind
 class TeamStatsContainer extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,6 @@ class TeamStatsContainer extends Component {
       teamStats: [{}]
     };
     this.active = 'all';
-    this.setStats = this.setStats.bind(this);
   }
   componentDidMount() {
     this.setStats('all');
@@ -46,13 +47,13 @@ class TeamStatsContainer extends Component {
         <TeamStats teamStats={teamStats} club={club} />
         <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between'} ]} >
           <View style={{flex:1, marginRight: 10}} >
-            <Button buttonType={this.active === 'all' ? 'active' : 'cta'} text="Alla" onPress={()=> this.setStats('all') } />
+            <Button buttonType={this.active === 'all' ? 'active' : 'cta'} text="Alla" onPress={()=> this.setStats('all')} />
           </View>
           <View style={{flex:1, marginRight: 10}} >
-            <Button buttonType={this.active === 'home' ? 'active' : 'cta'} text="Hemma"  onPress={()=> this.setStats('home') } />
+            <Button buttonType={this.active === 'home' ? 'active' : 'cta'} text="Hemma"  onPress={()=> this.setStats('home')} />
           </View>
           <View style={{flex:1}} >
-            <Button buttonType={this.active === 'away' ? 'active' : 'cta'} text="Borta" onPress={()=> this.setStats('away') } />
+            <Button buttonType={this.active === 'away' ? 'active' : 'cta'} text="Borta" onPress={()=> this.setStats('away')} />
           </View>
         </View>
       </ScrollView>

@@ -1,25 +1,23 @@
 // Dependencies
 import React, {Component} from 'React';
-import {Alert, View, Text, ScrollView} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import {deleteTraining, updateTraining} from '../../actions/trainingActions';
 import {goToRoute} from '../../actions/routeActions';
+import autobind from 'autobind-decorator';
 // Components
 import UpdateDelete from '../../common/UpdateDelete';
 import PlayerItem from '../../common/PlayerItem';
 // Styles
 import {objects} from '../../themes';
 
+@autobind
 class SingleTrainingContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       attending: [...this.props.training.attending]
     };
-    this.deleteTraining = this.deleteTraining.bind(this);
-    this.updateTraining = this.updateTraining.bind(this);
-    this.checkPlayer = this.checkPlayer.bind(this);
-    this.handleAJAXresponse = this.handleAJAXresponse.bind(this);
   }
   checkPlayer(id) {
     const {attending} = this.state;
@@ -48,10 +46,10 @@ class SingleTrainingContainer extends Component {
         <UpdateDelete
           updateText="Spara närvaro"
           deleteText="Radera träning"
-          onDeleteAction={this.deleteTraining} 
-          onUpdateAction={this.updateTraining} 
+          onDeleteAction={this.deleteTraining}
+          onUpdateAction={this.updateTraining}
         />
-        {players.map((player,i) => 
+        {players.map((player,i) =>
           <PlayerItem key={i} index={i} player={player} onPress={this.checkPlayer} checkArray={attending} />
         )}
       </ScrollView>
@@ -59,12 +57,12 @@ class SingleTrainingContainer extends Component {
   }
 }
 
-function mapStateToProps(state,ownProps) { 
+function mapStateToProps(state,ownProps) {
   const training = state.trainings.find(t => ownProps.id === t._id);
   const {players} = state;
   return {
     training,
     players
-  }
-}  
+  };
+}
 export default connect(mapStateToProps)(SingleTrainingContainer);

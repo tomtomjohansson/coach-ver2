@@ -54,7 +54,7 @@ export function loginUser(credentials) {
     }
     catch (e) {
       // dispatch(ajaxCallError)
-      console.error(e);
+      return { success: false, message: e };
     }
   };
 }
@@ -86,7 +86,7 @@ export function registerUser (credentials) {
     }
     catch (e) {
       // dispatch(ajaxCallError)
-      console.error(e);
+      return { success: false, message: e };
     }
   };
 }

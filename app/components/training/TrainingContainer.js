@@ -1,9 +1,8 @@
 // Dependencies
 import React, {Component} from 'React';
 import {connect} from 'react-redux';
-import {ListView,Alert,View,Text} from 'react-native';
+import {ListView,View} from 'react-native';
 import {Actions as NavigationActions} from 'react-native-router-flux';
-import {getTrainings} from '../../actions/trainingActions';
 import {goToRoute} from '../../actions/routeActions';
 // Components
 import AddItemBottom from '../../common/AddItemBottom';
@@ -23,7 +22,7 @@ class TrainingContainer extends Component {
     };
   }
   componentWillMount() {
-    this.sortTrainings(this.props.trainings)
+    this.sortTrainings(this.props.trainings);
   }
   sortTrainings(trainings) {
     const upcoming = trainings

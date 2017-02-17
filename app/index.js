@@ -2,22 +2,14 @@
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { View, Text, StatusBar, AsyncStorage } from 'react-native';
+import { View, Text, AsyncStorage } from 'react-native';
 import {persistStore} from 'redux-persist';
-import storage from 'react-native-simple-store';
 // Containers, Components
-
 import LoginHandler from './LoginHandler';
 import AppStatusBar from './components/statusBar/StatusBar';
 // Styles
-import {colors} from './themes'
+import {colors} from './themes';
 
-async function setItem() {
-  const user2 = await storage.get('reduxPersist:user');
-  console.log(user2);
-}
-setItem();
-// AsyncStorage.clear();
 const store = configureStore();
 
 class App extends Component {
@@ -42,7 +34,7 @@ class App extends Component {
   }
   wrapGlobalHandler (error, isFatal) {
     if (isFatal && !__DEV__) {AsyncStorage.clear(); }
-    if (this.defaultHandler) {this.defaultHandler(error, isFatal)};
+    if (this.defaultHandler) {this.defaultHandler(error, isFatal);}
   }
   render() {
     if (!this.state.rehydrated) {
@@ -59,7 +51,7 @@ class App extends Component {
           <LoginHandler />
         </View>
       </Provider>
-    )
+    );
   }
 }
 

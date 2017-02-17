@@ -5,6 +5,7 @@ import {View,Alert} from 'react-native';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 import {subPlayer} from '../../actions/gameActions';
 import {createValidator,checkValidation} from '../../common/validation.js';
+import autobind from 'autobind-decorator';
 // Components
 import Button from '../../common/Button';
 import SubList from './SubList';
@@ -12,6 +13,7 @@ import Input from '../../common/Input';
 // Styles
 import {objects} from '../../themes';
 
+@autobind
 class SubPlayer extends Component {
   constructor(props) {
     super(props);
@@ -22,10 +24,6 @@ class SubPlayer extends Component {
       submitted: false
     };
     this.validators = {minute: false };
-    this.checkSubOut = this.checkSubOut.bind(this);
-    this.checkSubIn = this.checkSubIn.bind(this);
-    this.makeSubstitution = this.makeSubstitution.bind(this);
-    this.onChangeMinute = this.onChangeMinute.bind(this);
     this.createValidator = createValidator.bind(this);
     this.checkValidation = checkValidation.bind(this);
   }
@@ -54,7 +52,7 @@ class SubPlayer extends Component {
     if (response.success) {
       NavigationActions.pop();
     } else {
-      Alert.alert("Bytet genomfördes inte", response.message);
+      Alert.alert('Bytet genomfördes inte', response.message);
     }
   }
   render() {

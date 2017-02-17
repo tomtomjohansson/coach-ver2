@@ -36,7 +36,7 @@ export function addPlayer(player) {
     }
     catch (e) {
       // dispatch(ajaxCallError)
-      console.error(e);
+      return { success: false, message: e };
     }
   };
 }
@@ -61,7 +61,7 @@ export function deletePlayer(playerID) {
     }
     catch (e) {
       // dispatch(ajaxCallError)
-      console.error(e);
+      return { success: false, message: e };
     }
   };
 }

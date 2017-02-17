@@ -1,6 +1,5 @@
 // Dependencies
-import React, {Component} from 'React';
-import {connect} from 'react-redux';
+import React from 'React';
 import {View,Text,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles
@@ -54,7 +53,7 @@ export default function StatItem({title,stat,statName,onPress,club,opponent}) {
           </TouchableOpacity>
         </View>
       </View>
-    )
+    );
   }
-  
+
 }

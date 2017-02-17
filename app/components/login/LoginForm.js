@@ -20,9 +20,9 @@ function LoginForm({username,password,submitted,onChangeUsername,onChangePasswor
           autoCapitalize={'none'}
         />
         <Input
-          label='Lösenord*'
+          label="Lösenord*"
           placeholder="Minst sex tecken..."
-          onChangeText={onChangePassword} 
+          onChangeText={onChangePassword}
           error={password.error}
           value={password.value}
           secureTextEntry

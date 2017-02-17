@@ -4,11 +4,13 @@ import { Alert, View, Image } from 'react-native';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import {createValidator,checkValidation} from '../../common/validation.js';
 import { registerUser } from '../../actions/userActions';
+import autobind from 'autobind-decorator';
 // Components
 import RegisterForm from './RegisterForm';
 // Styles
 import {objects} from '../../themes';
 
+@autobind
 class RegisterContainer extends Component {
   constructor(props) {
     super(props);
@@ -20,11 +22,6 @@ class RegisterContainer extends Component {
       submitted: false
     };
     this.validators = {password: false ,username: false, email: false, club: false };
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangeClub = this.onChangeClub.bind(this);
-    this.submitRegistration = this.submitRegistration.bind(this);
     this.createValidator = createValidator.bind(this);
     this.checkValidation = checkValidation.bind(this);
   }
@@ -51,12 +48,12 @@ class RegisterContainer extends Component {
         password: this.state.password.value,
         email: this.state.email.value,
         club: this.state.club.value,
-      }
+      };
       this.props.dispatch(registerUser(user)).then(this.handleRegistrationResponse);
     }
   }
   handleRegistrationResponse(response) {
-    !response.success && Alert.alert("Registreringen misslyckades", response.message);
+    !response.success && Alert.alert('Registreringen misslyckades', response.message);
   }
   render() {
     const {password,username,email,club,submitted} = this.state;
@@ -64,10 +61,10 @@ class RegisterContainer extends Component {
       <View style={{flex:1}} >
       <Image source={require('../../images/pitch.jpg')} style={[objects.screen.backgroundImage]} />
       <RegisterForm
-        password={password} 
-        username={username} 
-        email={email} 
-        club={club} 
+        password={password}
+        username={username}
+        email={email}
+        club={club}
         submitted={submitted}
         onChangePassword={this.onChangePassword}
         onChangeUsername={this.onChangeUsername}

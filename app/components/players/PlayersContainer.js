@@ -1,20 +1,19 @@
 // Dependencies
 import React, {Component} from 'React';
-import {View,Text,Image} from 'react-native';
+import {View} from 'react-native';
 import {connect} from 'react-redux';
 import {goToRoute} from '../../actions/routeActions';
+import autobind from 'autobind-decorator';
 // Components
 import PlayerList from './PlayerList';
 import AddItemBottom from '../../common/AddItemBottom';
 // Styles
 import {objects} from '../../themes';
 
+@autobind
 class PlayerContainer extends Component {
   constructor(props) {
     super(props);
-
-    this.goToSinglePlayer = this.goToSinglePlayer.bind(this);
-    this.openModal = this.openModal.bind(this);
   }
   goToSinglePlayer(id) {
     goToRoute('singlePlayer',{id:id}, false);

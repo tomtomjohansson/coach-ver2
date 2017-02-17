@@ -1,13 +1,13 @@
 // Dependencies
 import React from 'React';
-import {View,Text,TouchableOpacity,ScrollView} from 'react-native';
+import {View,Text,ScrollView} from 'react-native';
 // Components
 import PlayerItem from '../../common/PlayerItem';
 // Styles
-import {objects,colors,metrics} from '../../themes';
+import {objects} from '../../themes';
 
 export default function AddStatList({stat,players,selected,selectedAss,onPress,onPressAss}) {
-  if(stat === "goals") {
+  if (stat === 'goals') {
     return (
     <ScrollView style={[objects.screen.scrollViewContainer, {marginBottom:10}]}>
       <View style={[objects.listitems.header]} >
@@ -23,7 +23,7 @@ export default function AddStatList({stat,players,selected,selectedAss,onPress,o
         <PlayerItem key={i} index={i} player={player} onPress={onPressAss} checkArray={selectedAss} />
       )}
     </ScrollView>
-  );  
+  );
   } else {
     return (
       <ScrollView style={[objects.screen.scrollViewContainer, {marginBottom:10}]}>
@@ -40,10 +40,10 @@ export default function AddStatList({stat,players,selected,selectedAss,onPress,o
 
 function getType(stat) {
   if (stat === 'shots') {
-    return "AVSLUTARE";
+    return 'AVSLUTARE';
   } else if (stat === 'yellow') {
-    return "VARNAD SPELARE";
+    return 'VARNAD SPELARE';
   } else {
-    return "UTVISAD SPELARE";
+    return 'UTVISAD SPELARE';
   }
 }

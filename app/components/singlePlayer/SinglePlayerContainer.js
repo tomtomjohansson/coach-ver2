@@ -5,14 +5,15 @@ import {connect} from 'react-redux';
 import {deletePlayer} from '../../actions/playerActions';
 import {goToRoute} from '../../actions/routeActions';
 import {rootUrl,getHeaders} from '../../actions/ajaxConfig';
+import autobind from 'autobind-decorator';
 // Components
 import PlayerStats from './PlayerStats';
 import TrainingStats from './TrainingStats';
-import UpdateDelete from '../../common/UpdateDelete.js'
 import Button from '../../common/Button';
 // Styles
 import {objects} from '../../themes';
 
+@autobind
 class SinglePlayerContainer extends Component {
   constructor(props) {
     super(props);
@@ -21,9 +22,6 @@ class SinglePlayerContainer extends Component {
       change: false
     };
     this.active = 'game';
-    this.setStats = this.setStats.bind(this);
-    this.deletePlayer = this.deletePlayer.bind(this);
-    this.handleAJAXresponse = this.handleAJAXresponse.bind(this);
   }
   componentDidMount() {
     this.setStats('game');
@@ -73,15 +71,15 @@ class SinglePlayerContainer extends Component {
         {/*<UpdateDelete
           updateText="Uppdatera spelare"
           deleteText="Radera spelare"
-          onDeleteAction={this.deletePlayer} 
-          onUpdateAction={this.deletePlayer} 
+          onDeleteAction={this.deletePlayer}
+          onUpdateAction={this.deletePlayer}
         />*/}
         <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between'} ]} >
           <View style={{flex:1, marginRight: 10}} >
-            <Button buttonType={this.active === 'game' ? 'active' : 'cta'} text="Matcher"  onPress={()=> this.setStats('game') } />
+            <Button buttonType={this.active === 'game' ? 'active' : 'cta'} text="Matcher"  onPress={()=> this.setStats('game')} />
           </View>
           <View style={{flex:1}} >
-            <Button buttonType={this.active === 'training' ? 'active' : 'cta'} text="Träningar" onPress={()=> this.setStats('training') } />
+            <Button buttonType={this.active === 'training' ? 'active' : 'cta'} text="Träningar" onPress={()=> this.setStats('training')} />
           </View>
         </View>
       </ScrollView>
@@ -89,11 +87,11 @@ class SinglePlayerContainer extends Component {
   }
 }
 
-function mapStateToProps(state,ownProps) { 
+function mapStateToProps(state,ownProps) {
   const player = state.players.find(p => ownProps.id === p._id);
   return {
     player
-  }
+  };
 }
 
 export default connect(mapStateToProps)(SinglePlayerContainer);

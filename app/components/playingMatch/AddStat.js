@@ -4,12 +4,14 @@ import {connect} from 'react-redux';
 import {View} from 'react-native';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 import {updateStat} from '../../actions/gameActions';
+import autobind from 'autobind-decorator';
 // Components
 import AddStatList from './AddStatList';
 import Button from '../../common/Button';
 // Styles
 import {objects} from '../../themes';
 
+@autobind
 class AddStat extends Component {
   constructor(props) {
     super(props);
@@ -17,10 +19,6 @@ class AddStat extends Component {
       selected: [],
       selectedAss:[]
     };
-
-    this.checkPlayer = this.checkPlayer.bind(this);
-    this.checkPlayerAssist = this.checkPlayerAssist.bind(this);
-    this.submitStat = this.submitStat.bind(this);
   }
   checkPlayer(id) {
     this.setState({selected:[id]});
@@ -40,7 +38,7 @@ class AddStat extends Component {
     newPlayer[stat]++;
     if (stat === 'goals') {
       newPlayer.shots++;
-      newGame.shots[team]++;  
+      newGame.shots[team]++;
       const assPlayer = newGame.players.find(player => player._id === selectedAss[0]);
       assPlayer.assists++;
     }

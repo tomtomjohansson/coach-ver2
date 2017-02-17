@@ -6,11 +6,13 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "watch:test": "npm run test -- --watch",
-    "lint": "esw app/**/*.js tools/**/*.js index.ios.js index.android.js --fix --color --ignore-pattern 'node_modules/'",
+    "lint": "esw 'app/**/*.js' 'tools/**/*.js' index.ios.js index.android.js --fix --color --ignore-pattern 'node_modules/'",
     "watch:lint": "npm run lint -- --watch",
     "dev": "npm-run-all --parallel watch:*"
   },
   "dependencies": {
+    "autobind-decorator": "1.3.4",
+    "babel-plugin-transform-decorators-legacy": "1.3.4",
     "base-64": "0.1.0",
     "moment": "2.17.1",
     "react": "~15.4.0-rc.4",

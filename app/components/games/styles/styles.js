@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {metrics, colors,fonts} from '../../../themes/';
+import {metrics, colors} from '../../../themes/';
 
 export default StyleSheet.create({
   venueContainer: {

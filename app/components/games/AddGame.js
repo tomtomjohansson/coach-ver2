@@ -2,18 +2,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Alert, View} from 'react-native';
-import {goToRoute} from '../../actions/routeActions';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 import {createValidator,checkValidation} from '../../common/validation.js';
 import {addGame} from '../../actions/gameActions';
+import autobind from 'autobind-decorator';
 // Components
 import Input from '../../common/Input';
 import DateInput from '../../common/DateInput';
 import Button from '../../common/Button';
-import VenueChoice from './VenueChoice'
+import VenueChoice from './VenueChoice';
 // Styles
 import {objects} from '../../themes';
 
+@autobind
 class AddGame extends Component {
   constructor(props) {
     super(props);
@@ -24,14 +25,8 @@ class AddGame extends Component {
       submitted: false
     };
     this.validators = {opponent: false};
-    this.closeModal = this.closeModal.bind(this);
-    this.onChangeOpponent = this.onChangeOpponent.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
-    this.onChangeVenue = this.onChangeVenue.bind(this);
-    this.submitGame = this.submitGame.bind(this);
     this.createValidator = createValidator.bind(this);
     this.checkValidation = checkValidation.bind(this);
-    this.handleAJAXResponse = this.handleAJAXResponse.bind(this);
   }
   componentWillMount(){
     const today = new Date();
@@ -45,10 +40,10 @@ class AddGame extends Component {
     this.createValidator('opponent','username')(value);
   }
   onChangeDate(value) {
-    this.setState({date:value})
+    this.setState({date:value});
   }
   onChangeVenue(value) {
-    this.setState({venue:value})
+    this.setState({venue:value});
   }
   submitGame() {
     this.setState({submitted: true});

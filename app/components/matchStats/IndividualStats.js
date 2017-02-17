@@ -1,5 +1,5 @@
 // Dependencies
-import React, {Component} from 'React';
+import React from 'React';
 import {View,Text} from 'react-native';
 // Styles
 import {objects} from '../../themes';

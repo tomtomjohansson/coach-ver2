@@ -50,12 +50,14 @@ class Routes extends Component {
             <Scene  key="login"
             component={Login}
             title="Logga in"
-            hideNavBar={true}
+            hideNavBar
+            // eslint-disable-next-line
             renderBackButton={()=>false} />
             <Scene  key="register"
-            hideNavBar={true}
+            hideNavBar
             component={Register}
             title="Registrera lag"
+            // eslint-disable-next-line
             renderBackButton={()=>false} />
             <Scene key="players"
             hideNavBar={false}
@@ -72,6 +74,7 @@ class Routes extends Component {
             <Scene key="teamStats"
             component={TeamStats}
             title="Lagstatistik"
+            // eslint-disable-next-line
             renderRightButton={()=>false} />
             <Scene key="games"
             component={Games}

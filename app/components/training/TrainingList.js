@@ -13,7 +13,7 @@ function TrainingList({trainings,onPress}) {
       <ListView style={[objects.screen.scrollViewContainer]}
         enableEmptySections
         dataSource={trainings}
-        renderRow={(training,sectionId, index)=>{
+        renderRow={(training,sectionId, index)=>{ // eslint-disable-line
           return (
             <TouchableOpacity index={index} onPress={()=>onPress(training._id)} >
               <View style={[objects.listitems.container, checkUneven(index)]} >
@@ -29,7 +29,7 @@ function TrainingList({trainings,onPress}) {
             );
           }
         }
-        renderSectionHeader={(sectionData,category)=>{
+        renderSectionHeader={(sectionData,category)=>{ // eslint-disable-line
           return (
             <View style={[objects.listitems.header]} >
               <Text style={[objects.listitems.headerText]} >{category.toUpperCase()}</Text>

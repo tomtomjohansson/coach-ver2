@@ -40,7 +40,7 @@ export function addTraining(training) {
     }
     catch (e) {
       // dispatch(ajaxCallError)
-      console.error(e);
+      return { success: false, message: e };
     }
   };
 }
@@ -65,7 +65,7 @@ export function deleteTraining(trainingID) {
     }
     catch (e) {
       // dispatch(ajaxCallError)
-      console.error(e);
+      return { success: false, message: e };
     }
   };
 }
@@ -91,7 +91,7 @@ export function updateTraining(training,attending) {
     }
     catch (e) {
       // dispatch(ajaxCallError)
-      console.error(e);
+      return { success: false, message: e };
     }
   };
 }
@@ -111,7 +111,7 @@ export function getTrainings() {
     }
     catch (e) {
       // dispatch(ajaxCallError)
-      console.error(e);
+      return { success: false, message: e };
     }
   };
 }

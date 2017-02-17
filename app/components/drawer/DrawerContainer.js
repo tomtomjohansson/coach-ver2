@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import storage from 'react-native-simple-store';
 import { logoutUser } from '../../actions/userActions';
 import {goToRoute} from '../../actions/routeActions';
+import autobind from 'autobind-decorator';
 // Components
 import DrawerItems from './DrawerItems';
 // Styles
@@ -36,10 +37,6 @@ class DrawerContainer extends Component {
         icon: 'fitness-center'
       }
     ];
-
-    this.logOut = this.logOut.bind(this);
-    this.toggleDrawer = this.toggleDrawer.bind(this);
-    this.navigateToRoute = this.navigateToRoute.bind(this);
   }
 
   async componentWillMount() {
@@ -48,15 +45,18 @@ class DrawerContainer extends Component {
     this.setState({active:route.route});
   }
 
+  @autobind
   logOut() {
     this.toggleDrawer();
     this.props.dispatch(logoutUser());
   }
 
+  @autobind
   toggleDrawer() {
     this.context.drawer.toggle();
   }
 
+  @autobind
   navigateToRoute(key,index) {
     this.setState({active: key});
     this.toggleDrawer();
@@ -74,7 +74,7 @@ class DrawerContainer extends Component {
           <View style={{flex:1}} >
             <Image source={require('../../images/grass.jpg')} style={[styles.drawerImage]} />
             <View style={[styles.drawerHeaderClub]} >
-              <Icon name='verified-user' size={metrics.icons.medium} style={{color:colors.snow}} />
+              <Icon name="verified-user" size={metrics.icons.medium} style={{color:colors.snow}} />
               <Text style={[styles.drawerHeaderClubText]} > {this.props.club}</Text>
             </View>
             { email }

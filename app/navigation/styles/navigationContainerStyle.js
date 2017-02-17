@@ -1,4 +1,4 @@
-import {metrics, colors,fonts} from '../../themes/';
+import {colors,fonts} from '../../themes/';
 import {Platform} from 'react-native';
 import {StyleSheet} from 'react-native';
 

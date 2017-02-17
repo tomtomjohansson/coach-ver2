@@ -3,7 +3,6 @@ import React, {Component} from 'React';
 import {View,ListView} from 'react-native';
 import {connect} from 'react-redux';
 import {goToRoute} from '../../actions/routeActions';
-import {Actions as NavigationActions} from 'react-native-router-flux';
 // Components
 import AddItemBottom from '../../common/AddItemBottom';
 import GameList from './GameList';

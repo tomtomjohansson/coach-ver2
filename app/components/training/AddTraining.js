@@ -1,24 +1,23 @@
 // Dependencies
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Alert, Text, View} from 'react-native';
+import {Alert, View} from 'react-native';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 import {addTraining} from '../../actions/trainingActions';
+import autobind from 'autobind-decorator';
 // Components
 import Button from '../../common/Button';
 import DateInput from '../../common/DateInput';
 // Styles
-import {objects, colors, metrics} from '../../themes';
+import {objects} from '../../themes';
 
+@autobind
 class AddTraining extends Component {
   constructor(props) {
     super(props);
     this.state = {
       date: ''
     };
-    this.closeModal = this.closeModal.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
-    this.submitTraining = this.submitTraining.bind(this);
   }
   componentWillMount(){
     const today = new Date();
@@ -29,7 +28,7 @@ class AddTraining extends Component {
     NavigationActions.pop();
   }
   onChangeDate(value) {
-    this.setState({date:value})
+    this.setState({date:value});
   }
   submitTraining() {
     const training = {date: this.state.date, attending: []};
@@ -39,11 +38,10 @@ class AddTraining extends Component {
     if (response.success) {
       NavigationActions.trainings();
     } else {
-      Alert.alert("Träningen lades inte till", response.message);
+      Alert.alert('Träningen lades inte till', response.message);
     }
   }
   render() {
-    const {name,phone,submitted} = this.state;
     return (
       <View style={[objects.screen.topContainer]} >
         <DateInput date={this.state.date} onChangeDate={this.onChangeDate} />

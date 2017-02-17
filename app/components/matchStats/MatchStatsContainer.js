@@ -1,7 +1,7 @@
 // Dependencies
 import React, {Component} from 'React';
 import {connect} from 'react-redux';
-import {ScrollView,Text} from 'react-native';
+import {ScrollView} from 'react-native';
 // Components
 import MatchStats from './MatchStats';
 import IndividualStats from './IndividualStats';
