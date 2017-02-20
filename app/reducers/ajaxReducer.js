@@ -9,7 +9,6 @@ export default function ajaxStatusReducer(state = initialState.numAjaxCallsInPro
   if (action.type === types.BEGIN_AJAX_CALL) {
     return state + 1;
   } else if (action.type === types.LOGOUT_USER_SUCCESS) {
-    console.log('loggar ut där');
     return initialState.numAjaxCallsInProgress;
   } else if (action.type === 'AJAX_CALL_ERROR' || actionTypeEndsInSuccess(action.type)) {
     return state - 1;

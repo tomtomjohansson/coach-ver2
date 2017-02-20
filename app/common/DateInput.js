@@ -19,10 +19,9 @@ export default function DateInput({
     <View style={[objects.inputs.container]} >
       <Text style={[objects.inputs.label]} >Välj Datum*</Text>
       <DatePicker
-        style={{width: undefined, height: 10}}
+        style={{width: 300, height: 30}}
         date={date}
         mode={mode}
-        placeholder="Välj datum"
         format={format}
         minDate={minDate}
         maxDate={maxDate}
@@ -33,19 +32,11 @@ export default function DateInput({
         is24Hour
         customStyles={{
           dateInput: {
-            flex:1,
-            marginHorizontal: 10,
-            marginVertical: 5,
-            paddingVertical: 0,
-            borderRadius: 4,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            marginTop:-10,
             borderWidth: 0,
           },
           dateText: {
-            margin:0,
-            padding:0,
+            padding:10,
             fontSize: 16,
             fontStyle: 'italic'
           }

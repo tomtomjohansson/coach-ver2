@@ -1,6 +1,13 @@
 import storage from 'react-native-simple-store';
+import {Platform} from 'react-native';
 
-const rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://something.com';
+let rootUrl;
+if (Platform.OS === 'ios') {
+  rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://something.com';
+} else {
+  rootUrl = __DEV__ ? 'http://10.0.2.3:3000' : 'http://something.com';
+}
+
 
 const getHeaders = async () => {
   const userToken = await storage.get('user_token');

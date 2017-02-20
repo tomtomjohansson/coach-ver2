@@ -25,6 +25,8 @@ class LoginHandler extends Component {
       this.handleLogin();
     } else if (isLoggingOut) {
       this.handleLogout();
+    } else {
+      this.checkForUser();
     }
   }
   async handleLogin() {
