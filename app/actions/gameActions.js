@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import {rootUrl,getHeaders} from './ajaxConfig';
+import {beginAjaxCall, ajaxCallError} from './ajaxActions';
 
 export function addGameSuccess(games) {
   return {
@@ -33,7 +34,7 @@ export function addGame(game) {
   const url = `${rootUrl}/api/games`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'POST',
@@ -49,7 +50,7 @@ export function addGame(game) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError)
       return { success: false, message: e };
     }
   };
@@ -59,7 +60,7 @@ export function saveEleven(game,eleven) {
   const url = `${rootUrl}/api/games/eleven`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'PUT',
@@ -75,7 +76,7 @@ export function saveEleven(game,eleven) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError)
       return { success: false, message: e };
     }
   };
@@ -85,7 +86,7 @@ export function saveGameAsFinished(game) {
   const url = `${rootUrl}/api/games`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'PUT',
@@ -101,7 +102,7 @@ export function saveGameAsFinished(game) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError)
       return { success: false, message: e };
     }
   };
@@ -111,7 +112,7 @@ export function subPlayer(game,playerOut,playerIn,minute) {
   const url = `${rootUrl}/api/games/sub`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'PUT',
@@ -127,7 +128,7 @@ export function subPlayer(game,playerOut,playerIn,minute) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError)
       return { success: false, message: e };
     }
   };

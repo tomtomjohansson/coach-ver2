@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import {rootUrl,getHeaders} from './ajaxConfig';
+import {beginAjaxCall, ajaxCallError} from './ajaxActions';
 
 export function addPlayerSuccess(players) {
   return {
@@ -19,7 +20,7 @@ export function addPlayer(player) {
   const url = `${rootUrl}/api/players/add`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'POST',
@@ -35,7 +36,7 @@ export function addPlayer(player) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
@@ -45,7 +46,7 @@ export function deletePlayer(playerID) {
   const url = `${rootUrl}/api/players/${playerID}`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'DELETE',
@@ -60,7 +61,7 @@ export function deletePlayer(playerID) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };

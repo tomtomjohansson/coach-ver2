@@ -3,5 +3,6 @@ export default {
   games: [],
   user: {isLoggedIn: false},
   trainings: [],
-  route: 'login'
+  route: 'login',
+  numAjaxCallsInProgress: 0
 };

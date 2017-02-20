@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import {rootUrl,getHeaders} from './ajaxConfig';
+import {beginAjaxCall, ajaxCallError} from './ajaxActions';
 
 export function addTrainingSuccess(trainings) {
   return {
@@ -27,7 +28,7 @@ export function addTraining(training) {
   const url = `${rootUrl}/api/trainings`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'POST',
@@ -39,7 +40,7 @@ export function addTraining(training) {
       return { success: json.success, message: json.message };
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
@@ -49,7 +50,7 @@ export function deleteTraining(trainingID) {
   const url = `${rootUrl}/api/trainings/${trainingID}`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'DELETE',
@@ -64,7 +65,7 @@ export function deleteTraining(trainingID) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
@@ -74,7 +75,7 @@ export function updateTraining(training,attending) {
   const url = `${rootUrl}/api/trainings`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'PUT',
@@ -90,7 +91,7 @@ export function updateTraining(training,attending) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
@@ -100,7 +101,7 @@ export function getTrainings() {
   const url = `${rootUrl}/api/trainings`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'GET',
@@ -110,7 +111,7 @@ export function getTrainings() {
       return { success: json.success, message: json.message, trainings: json.trainings };
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };

@@ -6,6 +6,7 @@ const colors = {
   danger: '#F33501',
   black: '#130A01',
   semiTransparentBlack: 'rgba(0,0,0,0.6)',
+  semiPlusTransparentBlack: 'rgba(0,0,0,0.8)',
   offWhite: '#FEFFF9',
   offBlack: '#26252D',
   transparent: 'rgba(0,0,0,0)',

@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import {rootUrl,getHeaders,saveToken} from './ajaxConfig';
+import {beginAjaxCall, ajaxCallError} from './ajaxActions';
 
 export function loginUserSuccess(response) {
   return {
@@ -31,7 +32,7 @@ export function loginUser(credentials) {
   const url = `${rootUrl}/api/authenticate/login`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'POST',
@@ -53,7 +54,7 @@ export function loginUser(credentials) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
@@ -63,7 +64,7 @@ export function registerUser (credentials) {
   const url = `${rootUrl}/api/authenticate/register`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    // dispatch(beginAjaxCall());
+    dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'POST',
@@ -85,7 +86,7 @@ export function registerUser (credentials) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
