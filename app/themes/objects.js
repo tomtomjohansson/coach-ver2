@@ -1,3 +1,4 @@
+import { Dimensions } from 'react-native';
 import fonts from './fonts';
 import metrics from './metrics';
 import colors from './colors';
@@ -44,6 +45,14 @@ const objects = {
     },
     marginContainer: {
       margin: metrics.baseMargin,
+    },
+    field: {
+      marginTop: metrics.navBarHeight,
+      marginBottom: 50,
+      width: Dimensions.get('window').width + 6,
+      flex: 1,
+      resizeMode: 'stretch',
+      flexDirection: 'column'
     }
   },
   addingForm: {

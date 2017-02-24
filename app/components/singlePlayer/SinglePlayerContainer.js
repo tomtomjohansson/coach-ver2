@@ -42,6 +42,7 @@ class SinglePlayerContainer extends Component {
         this.setState({playerStats:json.playerStats});
       }
     } else {
+      console.log(json);
       Alert.alert('Något gick fel',json.message);
     }
   }

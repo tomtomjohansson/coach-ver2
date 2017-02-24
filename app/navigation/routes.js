@@ -101,7 +101,8 @@ class Routes extends Component {
                 component={StartingEleven}
                 title="Ta ut startelva"
                 type={ActionConst.RESET}
-                renderBackButton={NavItems.backButton}/>
+                renderBackButton={NavItems.backButton}
+                />
               </Scene>
               <Scene key="PM" title="directions-run" icon={this.TabIcon}>
                 <Scene key="playingMatch"

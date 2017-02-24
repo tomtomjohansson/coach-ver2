@@ -1,22 +1,26 @@
 // Dependencies
-import React, {Component} from 'React';
-import {connect} from 'react-redux';
-import {Alert,ScrollView} from 'react-native';
-import {goToRoute} from '../../actions/routeActions';
-import {saveEleven} from '../../actions/gameActions';
+import React, { Component } from 'React';
+import { connect } from 'react-redux';
+import { Alert, ScrollView, View, Image, Text } from 'react-native';
+import { goToRoute } from '../../actions/routeActions';
+import { saveEleven } from '../../actions/gameActions';
 import autobind from 'autobind-decorator';
 // Components
 import UpdateDelete from '../../common/UpdateDelete';
-import PlayerItem from '../../common/PlayerItem';
+import Player from './Player';
 // Styles
-import {objects} from '../../themes';
+import { objects } from '../../themes';
 
 @autobind
 class StartingElevenContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startingEleven: [...this.props.game.players]
+      startingEleven: [...this.props.game.players],
+      imageSize: null,
+      system: '4-4-2',
+      shirtColor: '#A3132A',
+      shortsColor: '#172347'
     };
   }
   componentWillMount() {
@@ -52,21 +56,40 @@ class StartingElevenContainer extends Component {
       Alert.alert('Något gick fel', response.message);
     }
   }
+  getImageSize(e) {
+    this.setState({
+      imageSize: e.nativeEvent.layout
+    });
+  }
+  getPlayers() {
+    const { system, imageSize, shirtColor, shortsColor } = this.state;
+    if (imageSize === null) {
+      setTimeout(() => this.getPlayers(),100);
+    } else {
+      return (
+        <View>
+          <Player name="Jimmy" position="GK" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Anton" position="LCB" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Martin" position="RCB" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Johan" position="LB" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Shivan" position="RB" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Christian" position="LCM" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Magnus" position="RCM" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Linus" position="LM" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Olle" position="RM" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Markus" position="LST" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+          <Player name="Andreas" position="RST" system={system} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />
+        </View>
+      );
+    }
+  }
   render() {
     const {players} = this.props;
     const {startingEleven} = this.state;
     return (
-      <ScrollView style={[objects.screen.scrollViewContainer]}>
-        <UpdateDelete
-          updateText="Spara startelva"
-          deleteText="Nollställ startelva"
-          onDeleteAction={this.removeAllFromEleven}
-          onUpdateAction={this.saveEleven}
-        />
-        {players.map((player,i) =>
-          <PlayerItem key={i} index={i} player={player} onPress={this.checkPlayer} checkArray={startingEleven} />
-        )}
-      </ScrollView>
+      <Image source={require('../../images/field.png')} style={[objects.screen.field]} onLayout={(e) => this.getImageSize(e) }>
+        {this.getPlayers()}
+      </Image>
     );
   }
 }
