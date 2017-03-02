@@ -104,7 +104,13 @@ class Routes extends Component {
                 type={ActionConst.RESET}
                 renderBackButton={NavItems.backButton}
                 />
-                <Scene title="Lägg till spelare" duration={1} renderBackButton={NavItems.closeButton} key="addPlayerToEleven" component={AddPlayerToEleven} />
+                <Scene key="addPlayerToEleven"
+                title="Lägg till spelare"
+                duration={1}
+                renderBackButton={NavItems.closeButton}
+                component={AddPlayerToEleven}
+                direction="vertical"
+                />
               </Scene>
               <Scene key="PM" title="directions-run" icon={this.TabIcon}>
                 <Scene key="playingMatch"
