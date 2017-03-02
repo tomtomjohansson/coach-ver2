@@ -189,6 +189,10 @@ const objects = {
     icon: {
       color: colors.darkBlue,
       paddingHorizontal: metrics.baseMargin
+    },
+    iconDelete: {
+      color: colors.danger,
+      paddingHorizontal: metrics.baseMargin
     }
   }
 };

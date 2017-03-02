@@ -1,5 +1,6 @@
 import React from 'React';
 import {ListView,View,Text,TouchableOpacity} from 'react-native';
+import { removeGame } from '../../actions/gameActions';
 import moment from 'moment';
 import 'moment/locale/sv.js';
 moment.locale('sv');
@@ -8,7 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles
 import {objects,metrics} from '../../themes';
 
-function GameList({games,onPress}) {
+function GameList({ games, onPress, user, dispatch }) {
   return (
       <ListView style={[objects.screen.scrollViewContainer]}
         enableEmptySections
@@ -29,6 +30,11 @@ function GameList({games,onPress}) {
                   <Text style={objects.listitems.smallerText} >{ moment(game.date).format('dddd D MMMM HH:mm') }</Text>
                   </View>
                 </View>
+                <Icon name="delete"
+                    size={metrics.icons.medium}
+                    style={objects.listitems.iconDelete}
+                    onPress={() => deleteGame(game._id, user.id, dispatch)}
+                  />
               </View>
             </TouchableOpacity>
             );
@@ -47,6 +53,10 @@ function GameList({games,onPress}) {
 
 function checkUneven(i) {
   return i % 2 !== 0 ? objects.listitems.green : objects.listitems.white;
+}
+
+function deleteGame(gameID, userID, dispatch) {
+  dispatch(removeGame(gameID, userID));
 }
 
 export default GameList;

@@ -35,6 +35,7 @@ class SinglePlayerContainer extends Component {
       headers
     });
     const json = await response.json();
+    console.log(json);
     if (json.success) {
       const change = !this.state.change;
       this.setState({change});

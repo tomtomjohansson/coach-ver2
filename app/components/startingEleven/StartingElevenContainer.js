@@ -1,13 +1,13 @@
 // Dependencies
 import React, { Component } from 'React';
 import { connect } from 'react-redux';
-import { Alert, View, Image, Modal, ScrollView } from 'react-native';
+import { Alert, View, Image } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { goToRoute } from '../../actions/routeActions';
 import { saveEleven } from '../../actions/gameActions';
 import autobind from 'autobind-decorator';
 // Components
 import UpdateDelete from '../../common/UpdateDelete';
-import PlayerItem from '../../common/PlayerItem';
 import Player from './Player';
 // Styles
 import { objects } from '../../themes';
@@ -36,26 +36,17 @@ class StartingElevenContainer extends Component {
       goToRoute(this.props.route,{id: this.props.id},false);
     }
   }
-  checkPlayer(id) {
-    const { startingEleven } = this.state;
-    const { players } = this.props;
-    const position = this.state.pickingPosition;
-    const i = startingEleven.indexOf(id);
-    const currentPlayer = players.filter((player) => player._id === id);
-    const newArr = (i + 1)  ? [ ...startingEleven.slice(0, i), ...startingEleven.slice(i + 1)] : [ ...startingEleven, { id, name: currentPlayer[0].name, position } ];
-    this.setState({ startingEleven: newArr, modalVisible: false, pickingPosition: null });
-  }
   removeAllFromEleven() {
     this.setState({ startingEleven: [] });
   }
   saveEleven() {
-    const getFullInfoOnEleven = this.props.players.filter(player => this.state.startingEleven.indexOf(player._id) >= 0 );
-    if (getFullInfoOnEleven.length < 11) {
-      Alert.alert('För få spelare', `Du har bara tagit ut ${getFullInfoOnEleven.length} spelare.`);
-    } else if (getFullInfoOnEleven.length > 11) {
-      Alert.alert('För många spelare', `Du har tagit ut ${getFullInfoOnEleven.length - 11} spelare för mycket`);
+    const { startingEleven } = this.state;
+    if (startingEleven.length < 11) {
+      Alert.alert('För få spelare', `Du har bara tagit ut ${startingEleven.length} spelare.`);
+    } else if (startingEleven.length > 11) {
+      Alert.alert('För många spelare', `Du har tagit ut ${startingEleven.length - 11} spelare för mycket`);
     } else {
-      this.props.dispatch(saveEleven(this.props.game, getFullInfoOnEleven)).then(this.handleAJAXresponse);
+      this.props.dispatch(saveEleven(this.props.game, startingEleven)).then(this.handleAJAXresponse);
     }
   }
   handleAJAXresponse(response) {
@@ -71,10 +62,12 @@ class StartingElevenContainer extends Component {
     });
   }
   pickPlayer(pos) {
+    const { startingEleven } = this.state;
+    const { players } = this.props;
     this.setState({
-      modalVisible: true,
       pickingPosition: pos
     });
+    goToRoute('addPlayerToEleven', { startingEleven, players, checkPlayer: this.checkPlayer }, false);
   }
   playerAdded(pos) {
     const { startingEleven } = this.state;
@@ -105,35 +98,28 @@ class StartingElevenContainer extends Component {
       );
     }
   }
-  render() {
+  checkPlayer(id) {
+    Actions.pop();
     const { players } = this.props;
-    const { startingEleven } = this.state;
-    let playerList = [];
-    players.forEach(function(e) {
-        if (!startingEleven.some(s => s.name === e.name)) {
-            playerList.push(e);
-        }
-    });
-    if (this.state.modalVisible) {
+    const { startingEleven, pickingPosition } = this.state;
+    const i = startingEleven.indexOf(id);
+    // findIndex för att peta ut föregående spelare på pos
+    const currentPlayer = players.filter((player) => player._id === id);
+    const newArr = (i + 1)  ? [ ...startingEleven.slice(0, i), ...startingEleven.slice(i + 1)] : [ ...startingEleven, { _id: id, name: currentPlayer[0].name, position: pickingPosition } ];
+    this.setState({ startingEleven: newArr, pickingPosition: null });
+  }
+  render() {
       return (
-        <Modal
-          animationType={'slide'}
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => console.log('modal closed')}
-        >
-          <ScrollView style={{ flex: 1 }}>
-            {playerList.map((player,i) => <PlayerItem key={i} index={i} player={player} onPress={this.checkPlayer} />)}
-          </ScrollView>
-        </Modal>
-      );
-    } else {
-      return (
-        <Image source={require('../../images/field.png')} style={[objects.screen.field]} onLayout={(e) => this.getImageSize(e) }>
+        <Image source={require('../../images/field.png')} style={[objects.screen.field]} onLayout={(e) => this.getImageSize(e)}>
           {this.getPlayers()}
+          <UpdateDelete
+            updateText="Spara startelva"
+            deleteText="Nollställ startelva"
+            onDeleteAction={this.removeAllFromEleven}
+            onUpdateAction={this.saveEleven}
+          />
         </Image>
       );
-    }
   }
 }
 
@@ -141,8 +127,8 @@ function mapStateToProps(state,ownProps) {
   const { players } = state;
   const game = state.games.find(g => g._id === ownProps.id);
   return {
-    players,
-    game
+    game,
+    players
   };
 }
 

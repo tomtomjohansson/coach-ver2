@@ -15,7 +15,7 @@ export default function Player ({ name, position, size, system, shirtColor, shor
 		FBy: null, // Full Back
 		CMy: null, // Central Midfield
 		OMy: null, // Outer Midfield
-		STy: null // Striker
+		STy: null  // Striker
 	};
 
 	switch (system) {

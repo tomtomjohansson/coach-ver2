@@ -18,6 +18,7 @@ import SingleTraining from '../components/singleTraining/SingleTrainingContainer
 import TeamStats from '../components/teamStats/TeamStatsContainer';
 import MatchStats from '../components/matchStats/MatchStatsContainer';
 import StartingEleven from '../components/startingEleven/StartingElevenContainer';
+import AddPlayerToEleven from '../components/startingEleven/AddPlayerToEleven';
 import PlayingMatch from '../components/playingMatch/PlayingMatchContainer';
 import AddStat from '../components/playingMatch/AddStat';
 import SubPlayer from '../components/playingMatch/SubPlayer';
@@ -103,6 +104,7 @@ class Routes extends Component {
                 type={ActionConst.RESET}
                 renderBackButton={NavItems.backButton}
                 />
+                <Scene title="Lägg till spelare" duration={1} renderBackButton={NavItems.closeButton} key="addPlayerToEleven" component={AddPlayerToEleven} />
               </Scene>
               <Scene key="PM" title="directions-run" icon={this.TabIcon}>
                 <Scene key="playingMatch"

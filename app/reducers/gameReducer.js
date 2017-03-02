@@ -27,6 +27,10 @@ export default function gameReducer(state = initialState.games, action) {
         ...state.filter(game => game._id !== action.game._id),
         {...action.game}
       ];
+    case types.DELETE_GAME_SUCCESS:
+      console.log('gamesReducer', action.gameID);
+      // Ta bort delete:at id ur state här.
+      return state;
     default:
       return state;
   }
