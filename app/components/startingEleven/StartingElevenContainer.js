@@ -103,13 +103,9 @@ class StartingElevenContainer extends Component {
     const { players } = this.props;
     const { startingEleven, pickingPosition } = this.state;
     const i = startingEleven.findIndex(o => o.position === pickingPosition);
-    console.log(i);
-    // findIndex för att peta ut föregående spelare på pos
     const currentPlayer = players.filter((player) => player._id === id);
     const newArr = (i + 1) ? [ ...startingEleven.slice(0, i), ...startingEleven.slice(i + 1), { _id: id, name: currentPlayer[0].name, position: pickingPosition } ] : [ ...startingEleven, { _id: id, name: currentPlayer[0].name, position: pickingPosition } ];
     this.setState({ startingEleven: newArr, pickingPosition: null });
-    console.log('before:', startingEleven);
-    console.log('after:', newArr);
   }
   render() {
       return (
