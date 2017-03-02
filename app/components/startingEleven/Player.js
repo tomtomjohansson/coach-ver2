@@ -85,7 +85,7 @@ export default function Player ({ name, position, size, system, shirtColor, shor
 	};
 
 	const styles = {
-		shirt: {
+		player: {
 			alignItems: 'flex-start',
 			justifyContent: 'flex-start',
 			position: 'absolute',
@@ -96,7 +96,7 @@ export default function Player ({ name, position, size, system, shirtColor, shor
 
 	return (
 		<View>
-			<Svg height={playerHeight} width={playerWidth} style={styles.shirt} viewBox="-18 12 80 70">
+			<Svg height={playerHeight} width={playerWidth} style={styles.player} viewBox="-18 12 80 70">
 				<G
 					onPress={() => onPress(position)}
 				>

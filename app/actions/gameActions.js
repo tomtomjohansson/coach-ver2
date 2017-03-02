@@ -134,9 +134,8 @@ export function subPlayer(game,playerOut,playerIn,minute) {
   };
 }
 
-export function removeGame(gameID, userID) {
-  const url = `${rootUrl}/api/games/${gameID}/${userID}`;
-  console.log('removeGame url', url);
+export function removeGame(gameID) {
+  const url = `${rootUrl}/api/games/${gameID}`;
   return async (dispatch) => {
     const headers = await getHeaders();
     dispatch(beginAjaxCall());
@@ -146,10 +145,9 @@ export function removeGame(gameID, userID) {
         headers
       });
       const json = await response.json();
-      console.log(json);
       if (json) {
         await dispatch(removeGameSuccess(gameID));
-        return { success: json.success };
+        return { success: json.success, message: json.message };
       } else {
         return { success: json.success, message: json.message };
       }

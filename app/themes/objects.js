@@ -110,7 +110,7 @@ const objects = {
   },
   buttons: {
     button: {
-      height:40,
+      height: 40,
       marginBottom: metrics.baseMargin,
       paddingVertical: metrics.baseMargin,
       alignItems: 'center',
@@ -120,6 +120,30 @@ const objects = {
       shadowOpacity: 0.3,
       shadowOffset: {width:1,height:1},
       elevation: 2
+    },
+    round: {
+      height: 50,
+      width: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 50,
+      shadowColor: colors.black,
+      shadowOpacity: 0.3,
+      shadowOffset: {width:1,height:1},
+      elevation: 2
+
+    },
+    ctaRound: {
+      backgroundColor: colors.grassy,
+      height: 48,
+      width: 48,
+      borderRadius: 50
+    },
+    alertRound: {
+      backgroundColor: colors.danger,
+      height: 48,
+      width: 48,
+      borderRadius: 50
     },
     alert: {
       backgroundColor: colors.danger

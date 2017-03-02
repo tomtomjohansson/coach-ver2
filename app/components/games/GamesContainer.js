@@ -23,8 +23,8 @@ class GamesContainer extends Component {
   componentWillMount() {
     this.sortGames(this.props.games);
   }
-  componentWillReceiveProps(){
-    this.sortGames(this.props.games);
+  componentWillReceiveProps(nextProps){
+    this.sortGames(nextProps.games);
   }
   sortGames(games){
     const upcoming = games
@@ -53,10 +53,9 @@ class GamesContainer extends Component {
   }
   render() {
     const { games } = this.state;
-    const { user } = this.props;
     return (
       <View style={[objects.screen.mainContainer]}>
-        <GameList games={games} onPress={this.goToGame} user={user} dispatch={this.props.dispatch} />
+        <GameList games={games} onPress={this.goToGame} dispatch={this.props.dispatch} />
         <AddItemBottom text="Lägg till match" openModal={this.openModal} />
       </View>
     );
@@ -64,10 +63,9 @@ class GamesContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const { games, user } = state;
+  const { games } = state;
   return {
-    games,
-    user
+    games
   };
 }
 
