@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import PlayerItem from '../../common/PlayerItem';
+import { objects } from '../../themes';
 
 function AddPlayerToEleven ({ startingEleven, players, checkPlayer }) {
   let playerList = [];
@@ -10,7 +11,7 @@ function AddPlayerToEleven ({ startingEleven, players, checkPlayer }) {
       }
   });
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={objects.screen.scrollViewContainer}>
       {playerList.map((player,i) => <PlayerItem key={i} index={i} player={player} onPress={checkPlayer} />)}
     </ScrollView>
   );
