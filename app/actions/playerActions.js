@@ -44,7 +44,6 @@ export function addPlayer(player) {
 
 export function deletePlayer(playerID) {
   const url = `${rootUrl}/api/players/${playerID}`;
-  console.log(url);
   return async (dispatch,getState) => {
     const headers = await getHeaders();
     dispatch(beginAjaxCall());
