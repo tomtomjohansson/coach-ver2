@@ -10,6 +10,7 @@ import autobind from 'autobind-decorator';
 import PlayerStats from './PlayerStats';
 import TrainingStats from './TrainingStats';
 import Button from '../../common/Button';
+import UpdateDelete from '../../common/UpdateDelete';
 // Styles
 import {objects} from '../../themes';
 
@@ -26,6 +27,11 @@ class SinglePlayerContainer extends Component {
   componentDidMount() {
     this.setStats('game');
   }
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.player) {
+      goToRoute('players',{},true);
+    }
+  }
   async setStats(type) {
     this.active = type;
     const url = `${rootUrl}/api/playerStats/${type}/${this.props.player._id}/`;
@@ -35,7 +41,6 @@ class SinglePlayerContainer extends Component {
       headers
     });
     const json = await response.json();
-    console.log(json);
     if (json.success) {
       const change = !this.state.change;
       this.setState({change});
@@ -43,7 +48,6 @@ class SinglePlayerContainer extends Component {
         this.setState({playerStats:json.playerStats});
       }
     } else {
-      console.log(json);
       Alert.alert('Något gick fel',json.message);
     }
   }
@@ -51,6 +55,7 @@ class SinglePlayerContainer extends Component {
     this.props.dispatch(deletePlayer(this.props.player._id)).then(this.handleAJAXresponse);
   }
   handleAJAXresponse(response) {
+    console.log(response);
     if (response.success) {
       goToRoute('players',{},true);
     } else {
@@ -70,12 +75,12 @@ class SinglePlayerContainer extends Component {
     return (
       <ScrollView style={[objects.screen.scrollViewContainer, {marginBottom:10}]}>
         {this.showGameOrTraining()}
-        {/*<UpdateDelete
+        <UpdateDelete
           updateText="Uppdatera spelare"
           deleteText="Radera spelare"
           onDeleteAction={this.deletePlayer}
-          onUpdateAction={this.deletePlayer}
-        />*/}
+          onUpdateAction={() => Alert.alert('Funktionen finns ej', 'Kommer snart...')}
+        />
         <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between'} ]} >
           <View style={{flex:1, marginRight: 10}} >
             <Button buttonType={this.active === 'game' ? 'active' : 'cta'} text="Matcher"  onPress={()=> this.setStats('game')} />

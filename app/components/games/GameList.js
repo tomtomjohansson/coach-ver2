@@ -61,9 +61,15 @@ function deleteGame(gameID, dispatch) {
     'Data som raderas går inte att återfås.',
     [
       { text: 'Avbryt'},
-      { text: 'Ta bort match', onPress: () => dispatch(removeGame(gameID)) },
+      { text: 'Ta bort match', onPress: () => dispatch(removeGame(gameID)).then((res) => handleAJAXresponse(res)) },
     ]
   );
+}
+
+function handleAJAXresponse(response) {
+  if (!response.success) {
+    Alert.alert('Matchen raderades inte', response.message);
+  }
 }
 
 export default GameList;
