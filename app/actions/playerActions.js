@@ -17,7 +17,7 @@ export function removePlayerSuccess(playerID) {
 }
 
 export function addPlayer(player) {
-  const url = `${rootUrl}/api/players/add`;
+  const url = `${rootUrl}/api/players`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
     dispatch(beginAjaxCall());

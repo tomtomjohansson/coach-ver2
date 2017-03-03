@@ -50,10 +50,10 @@ function validateInput(value, type) {
 }
 
 function validatePassword(value) {
-  if (!validator.isLength(value,{min:6,max:20})) {
-    return 'Måste bestå av minst sex tecken';
-  } else if (!/^(?:[A-ZÅÄÖa-zåäö0-9 _]+)(?:[A-ZÅÄÖa-zåäö0-9 _]*)$/.test(value)) {
-    return 'Endast bokstäver och siffror tillåts';
+  if (!validator.isLength(value,{min:8,max:20})) {
+    return 'Måste bestå av minst åtta tecken';
+  } else if (/[`~<>;:"/[\]|{}()=+*]/.test(value)) {
+    return 'Du har använt ett otillåtet tecken';
   } else {
     return false;
   }
@@ -62,8 +62,8 @@ function validatePassword(value) {
 function validateUsername(value) {
   if (validator.isEmpty(value)) {
     return 'Fältet får inte vara tomt.';
-  } else if (!/^(?:[A-ZÅÄÖa-zåäö0-9 _]+)(?:[A-ZÅÄÖa-zåäö0-9 _]*)$/.test(value)) {
-    return 'Endast bokstäver och siffror tillåts';
+  } else if (/[`~<>;:"/[\]|{}()=+*]/.test(value)) {
+    return 'Du har använt ett otillåtet tecken';
   } else {
     return false;
   }
@@ -90,6 +90,8 @@ function validateNumber(value) {
 function validateString(value) {
   if (validator.isEmpty(value)) {
     return 'Fältet får inte vara tomt';
+  } else if (/[`~<>;:"/[\]|{}()=+*]/.test(value)) {
+    return 'Du har använt ett otillåtet tecken';
   } else {
     return false;
   }
