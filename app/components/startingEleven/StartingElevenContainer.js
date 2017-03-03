@@ -102,14 +102,11 @@ class StartingElevenContainer extends Component {
     if (imageSize === null) {
       setTimeout(() => this.getPlayers(),100);
     } else {
-      return (
-        <View>
-          {system.positions.map((pos,i) => {
-            const name = this.playerAdded(pos);
-            return <Player onPress={this.pickPlayer} key={i} name={name} position={pos} system={system.name} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} />;
-          })}
-        </View>
-      );
+      const positions = system.positions.map((pos,i) => {
+        const name = this.playerAdded(pos);
+        return <Player onPress={this.pickPlayer} key={i} name={name} position={pos} system={system.name} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} style={{ width: 80, height: 90 }} />;
+      });
+      return positions;
     }
   }
   checkPlayer(id) {
