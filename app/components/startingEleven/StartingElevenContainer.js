@@ -5,13 +5,13 @@ import { Alert, View, Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { goToRoute } from '../../actions/routeActions';
 import { saveEleven } from '../../actions/gameActions';
-import Svg, { Path, Text, G } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 import autobind from 'autobind-decorator';
 // Components
 import UpdateDelete from '../../common/UpdateDelete';
 import Player from './Player';
 // Styles
-import { objects } from '../../themes';
+import { objects, colors } from '../../themes';
 
 @autobind
 class StartingElevenContainer extends Component {
@@ -24,8 +24,8 @@ class StartingElevenContainer extends Component {
         name: '4-4-2',
         positions: ['GK','LCB','RCB','LB','RB','LCM','RCM','LM','RM','LST','RST']
       },
-      shirtColor: '#A3132A',
-      shortsColor: '#172347',
+      shirtColor: this.getTeamColors('primary'),
+      shortsColor: this.getTeamColors('secondary'),
       modalVisible: false,
       pickingPosition: null
     };
@@ -36,6 +36,19 @@ class StartingElevenContainer extends Component {
     } else {
       goToRoute(this.props.route,{id: this.props.id},false);
     }
+  }
+  getTeamColors(color) {
+    const { primary, secondary } = this.props.teamColors;
+    if (color === 'primary' && primary[0] === '#') {
+      return primary;
+    } else if (color === 'secondary' && secondary[0] === '#') {
+      return secondary;
+    } else if (color === 'primary') {
+      return colors[primary];
+    } else if (color === 'secondary') {
+      return colors[secondary];
+    }
+    return colors.black;
   }
   removeAllFromEleven() {
     this.setState({ startingEleven: [] });
@@ -137,11 +150,13 @@ class StartingElevenContainer extends Component {
 }
 
 function mapStateToProps(state,ownProps) {
-  const { players } = state;
+  const { players, user } = state;
+  const { teamColors } = user;
   const game = state.games.find(g => g._id === ownProps.id);
   return {
     game,
-    players
+    players,
+    teamColors
   };
 }
 
