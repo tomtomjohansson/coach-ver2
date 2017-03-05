@@ -47,12 +47,15 @@ const objects = {
       margin: metrics.baseMargin,
     },
     field: {
+      marginLeft: 3,
+      marginRight: 3,
       marginTop: metrics.navBarHeight,
       marginBottom: 50,
-      width: Dimensions.get('window').width + 6,
+      width: Dimensions.get('window').width,
       flex: 1,
-      resizeMode: 'stretch',
-      flexDirection: 'column'
+      resizeMode: 'contain',
+      flexDirection: 'column',
+      backgroundColor: colors.lightGreen
     }
   },
   addingForm: {

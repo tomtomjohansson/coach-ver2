@@ -1,7 +1,7 @@
 // Dependencies
 import React, { Component } from 'React';
 import { connect } from 'react-redux';
-import { Alert, View, Image, TouchableOpacity } from 'react-native';
+import { Alert, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { goToRoute } from '../../actions/routeActions';
 import { saveEleven } from '../../actions/gameActions';
@@ -90,7 +90,7 @@ class StartingElevenContainer extends Component {
       startingEleven.forEach((player) => {
         if (player.position === pos) {
           const shortName = player.name.split(' ');
-          shortName[1] = shortName[1].substring(0, 1);
+          shortName[0] = shortName[0].substring(0, 1);
           result = shortName.join(' ');
         }
       });
@@ -104,7 +104,8 @@ class StartingElevenContainer extends Component {
     } else {
       const positions = system.positions.map((pos,i) => {
         const name = this.playerAdded(pos);
-        return <Player onPress={this.pickPlayer} key={i} name={name} position={pos} system={system.name} size={imageSize} shirtColor={shirtColor} shortsColor={shortsColor} style={{ width: 80, height: 90 }} />;
+        const shirt = (pos === 'GK') ? 'deeppink' : shirtColor;
+        return <Player onPress={this.pickPlayer} key={i} name={name} position={pos} system={system.name} size={imageSize} shirtColor={shirt} shortsColor={shortsColor} style={{ width: 80, height: 90 }} />;
       });
       return positions;
     }
@@ -120,7 +121,7 @@ class StartingElevenContainer extends Component {
   }
   render() {
       return (
-        <Image source={require('../../images/field.png')} style={[objects.screen.field]} onLayout={(e) => this.getImageSize(e)}>
+        <Image source={require('../../images/field2.png')} style={[objects.screen.field]} onLayout={(e) => this.getImageSize(e)}>
           {this.getPlayers()}
           <UpdateDelete
             updateText={'\u2713'}
@@ -129,7 +130,7 @@ class StartingElevenContainer extends Component {
             onUpdateAction={this.saveEleven}
             roundButton
           />
-          <View style={{backgroundColor:'maroon', position: 'absolute', bottom: 10, left: 10, borderRadius: 50}}>
+          <View style={{backgroundColor:'maroon', position: 'absolute', top: 10, left: Dimensions.get('window').width / 2 - 25, borderRadius: 50}}>
             <TouchableOpacity onPress={() => console.log('BENCH CLICK')}>
               <Svg height="50" width="50">
                 <Path
