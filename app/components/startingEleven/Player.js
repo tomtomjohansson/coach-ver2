@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Dimensions } from 'react-native';
 import Svg, { Path, Text } from 'react-native-svg';
 import { colors } from '../../themes';
 
-export default function Player ({ name, position, size, system, shirtColor, shortsColor, onPress }) {
+export default function Player ({ name, position, x, y, size, system, shirtColor, shortsColor, onPress }) {
 
 	const { width, height } = size;
 	const 	playerHeight = '50',
@@ -13,49 +13,16 @@ export default function Player ({ name, position, size, system, shirtColor, shor
 			screenH = Dimensions.get('window').height * 2 + 96,
 			ratio = (screenH / screenW === 0.5625) ? 0 : 5;
 
-	let y = {
-		GK: null,
-		LCB: null,
-		RCB: null,
-		LB: null,
-		RB: null,
-		LCM: null,
-		RCM: null,
-		LM: null,
-		RM: null,
-		RST: null,
-		LST: null
-	};
+	function getYPosition () {
+		if (position === 'GK') { return (height / y) + ratio + 5; }
+		else if (['LST','ST','RST','LW','RW'].includes(position)) { return (height / y) + ratio; }
+		else { return height / y; }
+	}
 
-	const x = {
-		GK: width / 2 - (playerWidth / 2),
-		LCB: width / 4.5,
-		RCB: (width - (width / 4.5) - playerWidth),
-		LB: width / 30,
-		RB: (width - (width / 30) - playerWidth),
-		LM: width / 11,
-		LCM: width / 4.1,
-		RCM: (width - (width / 4.1) - playerWidth),
-		RM: (width - (width / 11) - playerWidth),
-		LST: width / 4.5,
-		RST: (width - (width / 4.5) - playerWidth)
-	};
-
-	switch (system) {
-		case '4-4-2':
-			y = {
-				GK: height / 1.4 + ratio + 5,
-				LCB: height / 1.75,
-				RCB: height / 1.75,
-				LB: height / 1.85,
-				RB: height / 1.85,
-				LCM: height / 2.65,
-				RCM: height / 2.65,
-				LM: height / 3.2,
-				RM: height / 3.2,
-				RST: height / 6 + ratio,
-				LST: height / 6 + ratio
-			};
+	function getXPosition () {
+		if (['GK','CDM','CAM','CM','ST'].includes(position)) { return (width / x) - (playerWidth / x); }
+		else if (['LCB','LB','LM','LCM','LW','LST'].includes(position)) { return width / x; }
+		else { return (width - (width / x) - playerWidth); }
 	}
 
 	const styles = {
@@ -63,8 +30,8 @@ export default function Player ({ name, position, size, system, shirtColor, shor
 			alignItems: 'flex-start',
 			justifyContent: 'flex-start',
 			position: 'absolute',
-			top: y[position],
-			left: x[position]
+			top: getYPosition(),
+			left: getXPosition()
 		}
 	};
 
@@ -86,7 +53,7 @@ export default function Player ({ name, position, size, system, shirtColor, shor
 						y="44"
 						x="20"
 						textAnchor="middle"
-					>{name.toUpperCase() || 'LÄGG TILL'}</Text>
+					>{name.toUpperCase() || position}</Text>
 				</Svg>
 			</TouchableOpacity>
 		</View>

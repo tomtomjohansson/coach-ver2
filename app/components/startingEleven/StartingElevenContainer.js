@@ -12,18 +12,18 @@ import UpdateDelete from '../../common/UpdateDelete';
 import Player from './Player';
 // Styles
 import { objects, colors } from '../../themes';
+// Temp
+import systems from './systems';
 
 @autobind
 class StartingElevenContainer extends Component {
   constructor(props) {
     super(props);
+    const i = systems.findIndex((system) => system.name === this.props.system);
     this.state = {
       startingEleven: [ ...this.props.game.players ],
       imageSize: null,
-      system: {
-        name: '4-4-2',
-        positions: ['GK','LCB','RCB','LB','RB','LCM','RCM','LM','RM','LST','RST']
-      },
+      system: systems[i],
       shirtColor: this.getTeamColors('primary'),
       shortsColor: this.getTeamColors('secondary'),
       modalVisible: false,
@@ -103,9 +103,9 @@ class StartingElevenContainer extends Component {
       setTimeout(() => this.getPlayers(),100);
     } else {
       const positions = system.positions.map((pos,i) => {
-        const name = this.playerAdded(pos);
-        const shirt = (pos === 'GK') ? 'deeppink' : shirtColor;
-        return <Player onPress={this.pickPlayer} key={i} name={name} position={pos} system={system.name} size={imageSize} shirtColor={shirt} shortsColor={shortsColor} style={{ width: 80, height: 90 }} />;
+        const name = this.playerAdded(pos.name);
+        const shirt = (pos.name === 'GK') ? 'deeppink' : shirtColor;
+        return <Player onPress={this.pickPlayer} key={i} name={name} position={pos.name} x={pos.x} y={pos.y} system={system.name} size={imageSize} shirtColor={shirt} shortsColor={shortsColor} style={{ width: 100, height: 50 }} />;
       });
       return positions;
     }
@@ -150,11 +150,13 @@ class StartingElevenContainer extends Component {
 function mapStateToProps(state,ownProps) {
   const { players, user } = state;
   const { teamColors } = user;
+  const system = '4-4-2';
   const game = state.games.find(g => g._id === ownProps.id);
   return {
     game,
     players,
-    teamColors
+    teamColors,
+    system
   };
 }
 
