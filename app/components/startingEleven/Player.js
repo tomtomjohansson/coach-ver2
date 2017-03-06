@@ -20,8 +20,8 @@ export default function Player ({ name, position, x, y, size, system, shirtColor
 	}
 
 	function getXPosition () {
-		if (['GK','CDM','CAM','CM','ST'].includes(position)) { return (width / x) - (playerWidth / x); }
-		else if (['LCB','LB','LM','LCM','LW','LST'].includes(position)) { return width / x; }
+		if (['GK','CB','CDM','CAM','CM','ST'].includes(position)) { return (width / x) - (playerWidth / x); }
+		else if (['LCB','LB','LCDM','LM','LCM','LW','LST'].includes(position)) { return width / x; }
 		else { return (width - (width / x) - playerWidth); }
 	}
 
