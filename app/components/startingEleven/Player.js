@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Dimensions } from 'react-native';
 import Svg, { Path, Text } from 'react-native-svg';
 import { colors } from '../../themes';
 
-export default function Player ({ name, position, x, y, size, system, shirtColor, shortsColor, onPress }) {
+export default function Player ({ name, position, x, y, size, shirtColor, shortsColor, onPress }) {
 
 	const { width, height } = size;
 	const 	playerHeight = '50',

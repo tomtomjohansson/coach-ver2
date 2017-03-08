@@ -10,6 +10,7 @@ import autobind from 'autobind-decorator';
 // Components
 import UpdateDelete from '../../common/UpdateDelete';
 import Player from './Player';
+import Stats from './Stats';
 // Styles
 import { objects, colors } from '../../themes';
 // Temp
@@ -21,12 +22,12 @@ class StartingElevenContainer extends Component {
     super(props);
     const i = formations.findIndex((formation) => formation.name === this.props.formation);
     this.state = {
-      startingEleven: [ ...this.props.game.players ],
+      startingEleven: [ ...this.props.startingEleven ],
+      bench: [ ...this.props.bench ],
       imageSize: null,
       formation: formations[i],
       shirtColor: this.getTeamColors('primary'),
       shortsColor: this.getTeamColors('secondary'),
-      modalVisible: false,
       pickingPosition: null
     };
   }
@@ -119,6 +120,43 @@ class StartingElevenContainer extends Component {
     const newArr = (i + 1) ? [ ...startingEleven.slice(0, i), ...startingEleven.slice(i + 1), { _id: id, name: currentPlayer[0].name, position: pickingPosition } ] : [ ...startingEleven, { _id: id, name: currentPlayer[0].name, position: pickingPosition } ];
     this.setState({ startingEleven: newArr, pickingPosition: null });
   }
+  updateFormation(newFormation) {
+    const { startingEleven } = this.state;
+    let playersMismatch = [];
+    let positionsTaken = [];
+    startingEleven.forEach((player) => {
+      const playerHasPositionInNewFormation = newFormation.positions.findIndex(position => position.name === player.position);
+      if (playerHasPositionInNewFormation === -1) {
+        playersMismatch.push(player);
+      } else {
+        positionsTaken.push(player.position);
+      }
+    });
+    const positionsFree = newFormation.positions.filter(pos => {
+      if (positionsTaken.includes(pos.name)) {
+        return false;
+      }
+      return pos;
+    }).map(pos => pos.name);
+    const updatedPlayers = playersMismatch.map((mismatch, i) => {
+      return { ...mismatch, position: positionsFree[i] || 'BENCH' };
+    });
+    const newEleven = startingEleven.map(player => {
+      const i = updatedPlayers.findIndex(updated => player._id === updated._id);
+      if (i === -1) {
+        return player;
+      }
+      return updatedPlayers[i];
+    });
+    this.setState({
+      formation: newFormation,
+      startingEleven: newEleven
+    });
+    Actions.pop();
+  }
+  changeFormation(currentFormation) {
+    goToRoute('pickFormation', { formations, updateFormation: this.updateFormation }, false);
+  }
   render() {
       return (
         <Image source={require('../../images/field2.png')} style={[objects.screen.field]} onLayout={(e) => this.getImageSize(e)}>
@@ -131,7 +169,7 @@ class StartingElevenContainer extends Component {
             roundButton
           />
           <View style={{backgroundColor:'maroon', position: 'absolute', top: 10, left: Dimensions.get('window').width / 2 - 25, borderRadius: 50}}>
-            <TouchableOpacity onPress={() => console.log('BENCH CLICK')}>
+            <TouchableOpacity onPress={() => Alert.alert('Kommer snart...')}>
               <Svg height="50" width="50">
                 <Path
                   fill="#fff"
@@ -142,6 +180,7 @@ class StartingElevenContainer extends Component {
               </Svg>
             </TouchableOpacity>
           </View>
+          <Stats onButton={this.changeFormation} eleven={this.state.startingEleven} bench={this.state.bench} formation={this.state.formation.name} />
         </Image>
       );
   }
@@ -152,11 +191,15 @@ function mapStateToProps(state,ownProps) {
   const { teamColors } = user;
   const formation = '4-4-2';
   const game = state.games.find(g => g._id === ownProps.id);
+  const startingEleven = game.players.filter(p => p.position !== 'BENCH');
+  const bench = game.players.filter(p => p.position === 'BENCH');
   return {
     game,
     players,
     teamColors,
-    formation
+    formation,
+    startingEleven,
+    bench
   };
 }
 

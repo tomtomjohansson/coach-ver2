@@ -19,6 +19,7 @@ import TeamStats from '../components/teamStats/TeamStatsContainer';
 import MatchStats from '../components/matchStats/MatchStatsContainer';
 import StartingEleven from '../components/startingEleven/StartingElevenContainer';
 import AddPlayerToEleven from '../components/startingEleven/AddPlayerToEleven';
+import PickFormation from '../components/startingEleven/PickFormation';
 import PlayingMatch from '../components/playingMatch/PlayingMatchContainer';
 import AddStat from '../components/playingMatch/AddStat';
 import SubPlayer from '../components/playingMatch/SubPlayer';
@@ -109,6 +110,13 @@ class Routes extends Component {
                 duration={1}
                 renderBackButton={NavItems.closeButton}
                 component={AddPlayerToEleven}
+                direction="vertical"
+                />
+                <Scene key="pickFormation"
+                title="Välj formation"
+                duration={1}
+                renderBackButton={NavItems.closeButton}
+                component={PickFormation}
                 direction="vertical"
                 />
               </Scene>
