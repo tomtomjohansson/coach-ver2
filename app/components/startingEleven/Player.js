@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Dimensions } from 'react-native';
+import ExtraDimensions from 'react-native-extra-dimensions-android';
 import Svg, { Path, Text } from 'react-native-svg';
 import { colors } from '../../themes';
 
@@ -11,11 +12,12 @@ export default function Player ({ name, position, x, y, size, shirtColor, shorts
 			fontSize = '16',
 			screenW = Dimensions.get('window').width * 2,
 			screenH = Dimensions.get('window').height * 2 + 96,
-			ratio = (screenH / screenW === 0.5625) ? 0 : 5;
+			ratio = (screenH / screenW === 0.5625) ? 0 : 5,
+			androidSoftBar = (ExtraDimensions.get('SOFT_MENU_BAR_HEIGHT') >= 1) ? 0 : 15;
 
 	function getYPosition () {
-		if (position === 'GK') { return (height / y) + ratio + 5; }
-		else if (['LST','ST','RST','LW','RW'].includes(position)) { return (height / y) + ratio; }
+		if (position === 'GK') { return (height / y) + ratio + 5 - androidSoftBar; }
+		else if (['LST','ST','RST','LW','RW'].includes(position)) { return (height / y) + ratio + androidSoftBar; }
 		else { return height / y; }
 	}
 
