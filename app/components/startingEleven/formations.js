@@ -30,7 +30,7 @@ export default [
 			{
 				name: 'LM',
 				x: 11,
-				y: 3.2
+				y: 3
 			},
 			{
 				name: 'LCM',
@@ -45,7 +45,7 @@ export default [
 			{
 				name: 'RM',
 				x: 11,
-				y: 3.2
+				y: 3
 			},
 			{
 				name: 'LST',
@@ -155,22 +155,22 @@ export default [
 			{
 				name: 'LM',
 				x: 11,
-				y: 3.2
+				y: 3
 			},
 			{
 				name: 'LCM',
 				x: 4.1,
-				y: 2.9
+				y: 2.75
 			},
 			{
 				name: 'RCM',
 				x: 4.1,
-				y: 2.9
+				y: 2.75
 			},
 			{
 				name: 'RM',
 				x: 11,
-				y: 3.2
+				y: 3
 			},
 			{
 				name: 'ST',
@@ -330,7 +330,7 @@ export default [
 			{
 				name: 'LM',
 				x: 11,
-				y: 3
+				y: 2.8
 			},
 			{
 				name: 'LCM',
@@ -345,12 +345,12 @@ export default [
 			{
 				name: 'RM',
 				x: 11,
-				y: 3
+				y: 2.8
 			},
 			{
 				name: 'CAM',
 				x: 2,
-				y: 3.5
+				y: 3.6
 			},
 			{
 				name: 'ST',

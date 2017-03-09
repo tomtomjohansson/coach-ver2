@@ -17,7 +17,7 @@ export default function Player ({ name, position, x, y, size, shirtColor, shorts
 
 	function getYPosition () {
 		if (position === 'GK') { return (height / y) + ratio + 5 - androidSoftBar; }
-		else if (['LST','ST','RST','LW','RW'].includes(position)) { return (height / y) + ratio + androidSoftBar; }
+		else if (['LST','ST','RST','LW','RW','CAM'].includes(position)) { return (height / y) + ratio + androidSoftBar; }
 		else { return height / y; }
 	}
 
