@@ -39,7 +39,7 @@ class Routes extends Component {
     return (
       <Icon name={title}
         size={metrics.icons.medium}
-        style={{color: selected ? colors.grassy : 'white', borderTopWidth: 4, borderTopColor: colors.grassy}}
+        style={{color: selected ? colors.grassy : 'white'}}
       />
     );
   }
