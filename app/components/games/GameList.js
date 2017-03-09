@@ -25,7 +25,8 @@ function GameList({ games, onPress, dispatch }) {
                   />
                   <View>
                     <Text style={[objects.listitems.text,objects.listitems.biggerText]} >
-                      { game.opponent.toUpperCase() }, <Text style={[objects.listitems.smallerText,{fontSize:12}]}> {game.venue}</Text>
+                      <Text>{ game.opponent.toUpperCase() },</Text>
+                      <Text style={[objects.listitems.smallerText,{fontSize:12}]}> { game.venue }</Text>
                     </Text>
                   <Text style={objects.listitems.smallerText} >{ moment(game.date).format('dddd D MMMM HH:mm') }</Text>
                   </View>

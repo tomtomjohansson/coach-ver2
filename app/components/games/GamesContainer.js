@@ -34,7 +34,7 @@ class GamesContainer extends Component {
       .filter(game => game.ended)
       .sort((a,b) => new Date(b.date) - new Date(a.date));
     const gamesMap = {
-      'Kommande':upcoming,
+      'Kommande': upcoming,
       'Spelade': done
     };
     this.setState({games: this.ds.cloneWithRowsAndSections(gamesMap)});
