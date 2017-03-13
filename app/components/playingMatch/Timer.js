@@ -10,7 +10,6 @@ class Timer extends Component {
     super(props);
     this.state = {
       timerRunning: false,
-      timer: null,
       startTime: null,
       buttonText: 'Starta',
       buttonText2: 'Halvlek',
@@ -32,7 +31,6 @@ class Timer extends Component {
             this.setState({
               start: { minute: 0, second: 0 },
               buttonText: 'Starta',
-              timer: null,
               startTime: null,
               btn2Disabled: false,
               timerRunning: false
@@ -53,11 +51,8 @@ class Timer extends Component {
     });
 
     this.interval = setInterval(() => {
-      const { start, startTime } = this.state;
-      const diff = moment().diff(startTime, 'seconds'); // ökar med 1 för varje sekund som går från att man startar
-      const minus = moment(startTime).diff(start, 'seconds'); // skillnaden mellan 00:00 och startTime, i sekunder
       this.setState({
-        timer: moment(startTime).add(diff, 'seconds').subtract(minus, 'seconds')
+        timerRunning: true
       });
     }, 1000);
 
@@ -71,17 +66,22 @@ class Timer extends Component {
       start: { minute: 45, second: 0 },
       startTime: moment(),
       timerRunning: false,
-      timer: moment({ minute: 45, second: 0 }),
       btn2Disabled: true
     });
   }
   render() {
+    const { start, startTime } = this.state;
+    const diff = moment().diff(startTime); // ökar med 1 för varje sekund som går från att man startar
+    const minus = moment(startTime).diff(start); // skillnaden mellan 00:00/45:00 och startTime, i sekunder
+    const min = moment(startTime).add(diff).subtract(minus).format('HH:mm');
+    const minutes = moment.duration(min).asMinutes().toString();
+    const seconds = moment(startTime).add(diff).subtract(minus).format('ss');
     return (
       <View style={{ flex: 1, marginTop: 10 }}>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
           <Icon name="timer" size={metrics.icons.medium} style={{ flex: 1, textAlign: 'right', color: colors.greyishBlue }} />
           <Text style={{ textAlign: 'center', fontSize: 32, color: colors.darkBlue }}>
-            {(this.state.timer) ? moment(this.state.timer).format('mm:ss') : '00:00'}
+            {(startTime) ? `${(minutes.length === 1) ? `0${minutes}` : minutes }:${seconds}` : '00:00'}
           </Text>
           <View style={{ flex: 1 }} />
         </View>
