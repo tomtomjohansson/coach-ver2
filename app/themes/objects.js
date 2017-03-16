@@ -221,6 +221,37 @@ const objects = {
       color: colors.danger,
       paddingHorizontal: metrics.baseMargin
     }
+  },
+  stats: {
+    header: {
+      backgroundColor: colors.offBlack,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingVertical: metrics.baseMargin,
+      marginBottom: metrics.baseMargin
+    },
+    barContainer: {
+      height: 35,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    barText: {
+      textAlign: 'center',
+      color: colors.black
+    },
+    leftText: {
+      fontSize: 10,
+      textAlign: 'left',
+      marginLeft: 10,
+      textAlignVertical: 'center'
+    },
+    rightText: {
+      fontSize: 10,
+      textAlign: 'right',
+      marginRight: 10,
+      textAlignVertical: 'center'
+    }
   }
 };
 

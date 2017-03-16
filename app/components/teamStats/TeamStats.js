@@ -1,53 +1,127 @@
-// Dependencies
 import React from 'React';
-import {View,Text} from 'react-native';
-// Components
-// Styles
-import {objects,colors} from '../../themes';
+import { View, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { objects, colors, metrics } from '../../themes';
 
-export default function TeamStats({teamStats, club}) {
+export default function TeamStats({teamStats, club, size}) {
   const stats = teamStats[0];
   const exists = stats.hasOwnProperty('totalGoalsFor');
-  return (
-    <View>
-      <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'flex-end'}]} >
-        <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ club }</Text>
-        <Text style={[objects.listitems.headerText, {flex:1}]} >Spelade matcher: { exists ? stats.count : 0 }</Text>
+  console.log(stats);
+  if (exists && size) {
+    const { width } = size;
+    const {
+      totalGoalsFor, totalGoalsAgainst,
+      shotConversionFor, shotConversionAgainst,
+      avgCornerFor, avgCornerAgainst,
+      avgGoalsFor, avgGoalsAgainst,
+      avgYellowFor, avgRedFor,
+      avgShotsFor, avgShotsAgainst
+    } = stats;
+    
+    const cornersTotal = avgCornerFor + avgCornerAgainst;
+    const cornerFor =  avgCornerFor / cornersTotal * 100;
+    const cornerAgainst = avgCornerAgainst / cornersTotal * 100;
+    
+    const totalGoals = totalGoalsFor + totalGoalsAgainst;
+    const goalsFor = totalGoalsFor / totalGoals * 100;
+    const goalsAgainst = totalGoalsAgainst / totalGoals * 100;
+
+    return (
+      <View>
+
+        <View style={objects.stats.header}>
+          <Text style={[objects.listitems.headerText,objects.stats.leftText,{fontSize: 16}]}>{ club }</Text>
+          <Text style={[objects.listitems.headerText,objects.stats.rightText]}>Spelade matcher: { exists ? stats.count : 0 }</Text>
+        </View>
+
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: metrics.baseMargin}}>
+          <Text style={[objects.stats.leftText, objects.listitems.headerText, {fontSize: 14,color:colors.grassy}]} >OFFENSIVT</Text>
+          <Text style={[objects.stats.rightText, objects.listitems.headerText, {fontSize: 14,color:colors.grassy} ]} >DEFENSIVT</Text>
+        </View>
+
+        <View>
+          <Text style={objects.stats.barText}>{totalGoalsFor} ({avgGoalsFor.toFixed(1)} per match) - Mål totalt - {totalGoalsAgainst} ({avgGoalsAgainst.toFixed(1)} per match)</Text>
+          <View style={[objects.stats.barContainer,{ width }]}>
+            <View style={{ backgroundColor: colors.grassy, width: (goalsFor / 100) * width - metrics.marginHorizontal, height: 15, borderTopLeftRadius: 15, borderBottomLeftRadius: 15 }}>
+              <Text style={objects.stats.leftText}>{goalsFor.toFixed(1)}%</Text>
+            </View>
+            <View style={{ backgroundColor: colors.danger, width: (goalsAgainst / 100) * width - metrics.marginHorizontal, height: 15, borderTopRightRadius: 15, borderBottomRightRadius: 15 }}>
+              <Text style={objects.stats.rightText}>{goalsAgainst.toFixed(1)}%</Text>
+            </View>
+          </View>
+        </View>
+
+        <View>
+          <Text style={objects.stats.barText}>{avgShotsFor.toFixed(1)}% - Avslut i snitt - {avgShotsAgainst.toFixed(1)}%</Text>
+          <View style={[objects.stats.barContainer,{ width }]}>
+            <View style={{ backgroundColor: colors.grassy, width: ((avgShotsFor / (avgShotsFor + avgShotsAgainst) * 100) / 100) * width - metrics.marginHorizontal, height: 15, borderTopLeftRadius: 15, borderBottomLeftRadius: 15 }}>
+              <Text style={objects.stats.leftText}>{(avgShotsFor / (avgShotsFor + avgShotsAgainst) * 100).toFixed(1)}%</Text>
+            </View>
+            <View style={{ backgroundColor: colors.danger, width: ((avgShotsAgainst / (avgShotsFor + avgShotsAgainst) * 100) / 100) * width - metrics.marginHorizontal, height: 15, borderTopRightRadius: 15, borderBottomRightRadius: 15 }}>
+              <Text style={objects.stats.rightText}>{(avgShotsAgainst / (avgShotsFor + avgShotsAgainst) * 100).toFixed(1)}%</Text>
+            </View>
+          </View>
+        </View>
+
+        <View>
+          <Text style={objects.stats.barText}>{(shotConversionFor * 100).toFixed(1)}% - Avslut i mål - {(shotConversionAgainst * 100).toFixed(1)}%</Text>
+          <View style={[objects.stats.barContainer,{ width }]}>
+            <View style={{ backgroundColor: colors.grassy, width: ((shotConversionFor / (shotConversionFor + shotConversionAgainst) * 100) / 100) * width - metrics.marginHorizontal, height: 15, borderTopLeftRadius: 15, borderBottomLeftRadius: 15 }}>
+              <Text style={objects.stats.leftText}>{(shotConversionFor / (shotConversionFor + shotConversionAgainst) * 100).toFixed(1)}%</Text>
+            </View>
+            <View style={{ backgroundColor: colors.danger, width: ((shotConversionAgainst / (shotConversionFor + shotConversionAgainst) * 100) / 100) * width - metrics.marginHorizontal, height: 15, borderTopRightRadius: 15, borderBottomRightRadius: 15 }}>
+              <Text style={objects.stats.rightText}>{(shotConversionAgainst / (shotConversionFor + shotConversionAgainst) * 100).toFixed(1)}%</Text>
+            </View>
+          </View>
+        </View>
+
+        <View>
+          <Text style={objects.stats.barText}>{avgCornerFor.toFixed(1)} - Hörnor i snitt - {avgCornerAgainst.toFixed(1)}</Text>
+          <View style={[objects.stats.barContainer,{ width }]}>
+            <View style={{ backgroundColor: colors.grassy, width: (cornerFor / 100) * width - metrics.marginHorizontal, height: 15, borderTopLeftRadius: 15, borderBottomLeftRadius: 15 }}>
+              <Text style={objects.stats.leftText}>{cornerFor.toFixed(1)}%</Text>
+            </View>
+            <View style={{ backgroundColor: colors.danger, width: (cornerAgainst / 100) * width - metrics.marginHorizontal, height: 15, borderTopRightRadius: 15, borderBottomRightRadius: 15 }}>
+              <Text style={objects.stats.rightText}>{cornerAgainst.toFixed(1)}%</Text>
+            </View>
+          </View>
+        </View>
+
+        {/*avgYellowFor avgRedFor (ikon - book)*/}
+        <View style={{marginBottom: metrics.baseMargin}}>
+          <Text style={[objects.stats.leftText, objects.listitems.headerText, {fontSize: 14,color:colors.grassy}]} >DISCIPLIN</Text>
+        </View>
+
+        <View>
+          <Text style={[objects.stats.leftText,objects.stats.headerText,{fontSize: 14,color:colors.black}]}>
+            <Icon
+              name="book"
+              size={metrics.icons.small}
+              style={[objects.listitems.icon,{color:'gold'}]}
+            />
+            Gula kort per match: {avgYellowFor.toFixed(1)}
+          </Text>
+        </View>
+
+        <View>
+          <Text style={[objects.stats.leftText,objects.stats.headerText,{fontSize: 14,color:colors.black}]}>
+            <Icon
+              name="book"
+              size={metrics.icons.small}
+              style={[objects.listitems.icon,{color:colors.danger}]}
+            />
+            Röda kort per match: {avgRedFor.toFixed(1)}
+          </Text>
+        </View>
+
       </View>
-      <View style={[objects.listitems.container, {justifyContent:'flex-start'}]} >
-        <Text style={[objects.listitems.text, {flex:1, color:colors.grassy}]} >OFFENSIVT</Text>
-        <Text style={[objects.listitems.text, {flex:1, color:colors.grassy} ]} >DEFENSIVT</Text>
+    );
+  } else {
+    return (
+      <View>
+        <Text>Kunde inte ladda data.</Text>
       </View>
-      <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-        <Text style={[objects.listitems.text, {flex:1}]} >Mål totalt: <Text style={{fontWeight:'400'}} >{ exists ? stats.totalGoalsFor : 0 }</Text></Text>
-        <Text style={[objects.listitems.text, {flex:1} ]} >Insläppta totalt: <Text style={{fontWeight:'400'}} >{ exists ? stats.totalGoalsAgainst : 0 }</Text></Text>
-      </View>
-      <View style={[objects.listitems.container,objects.listitems.narrow]} >
-        <Text style={[objects.listitems.text, {flex:1}]} >Mål i snitt: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.avgGoalsFor * 100) / 100 : 0 }</Text></Text>
-        <Text style={[objects.listitems.text, {flex:1}]} >Insläppta i snitt: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.avgGoalsAgainst * 100) / 100 : 0 }</Text></Text>
-      </View>
-      <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-        <Text style={[objects.listitems.text, {flex:1}]} >Avslut i snitt: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.avgShotsFor * 100) / 100 : 0 }</Text></Text>
-        <Text style={[objects.listitems.text, {flex:1}]} >Avslut mot i snitt: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.avgShotsAgainst * 100) / 100 : 0 }</Text></Text>
-      </View>
-      <View style={[objects.listitems.container, objects.listitems.narrow]} >
-        <Text style={[objects.listitems.text, {flex:1}]} >Avslut i mål: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.shotConversionFor * 1000) / 10 : 0 }%</Text></Text>
-        <Text style={[objects.listitems.text, {flex:1}]} >Avslut mot i mål: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.shotConversionAgainst * 1000) / 10 : 0 }%</Text></Text>
-      </View>
-      <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-        <Text style={[objects.listitems.text, {flex:1}]} >Hörnor i snitt: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.avgCornerFor * 100) / 100 : 0 }</Text></Text>
-        <Text style={[objects.listitems.text, {flex:1}]} >Hörnor mot i snitt: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.avgCornerAgainst * 100) / 100 : 0 }</Text></Text>
-      </View>
-      <View style={[objects.listitems.container, {justifyContent:'flex-start',borderBottomWidth:0.5}]} >
-        <Text style={[objects.listitems.text, {flex:1, color:colors.grassy}]} >DISCIPLIN</Text>
-      </View>
-      <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-        <Text style={[objects.listitems.text]} >Gula kort per match: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.avgYellowFor * 100) / 100 : 0 }</Text></Text>
-      </View>
-      <View style={[objects.listitems.container, objects.listitems.narrow, {borderBottomWidth:0}]} >
-        <Text style={[objects.listitems.text]} >Röda kort per match: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.avgRedFor * 100) / 100 : 0 }</Text></Text>
-      </View>
-    </View>
-  );
+    );
+  }
 }
 

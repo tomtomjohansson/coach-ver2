@@ -15,7 +15,8 @@ class TeamStatsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamStats: [{}]
+      teamStats: [{}],
+      size: null
     };
     this.active = 'all';
   }
@@ -39,13 +40,20 @@ class TeamStatsContainer extends Component {
       Alert.alert('Något gick fel',json.message);
     }
   }
+  getTeamStatsSize(e) {
+    this.setState({
+      size: e.nativeEvent.layout
+    });
+  }
   render() {
-    const {teamStats} = this.state;
-    const {club} = this.props;
+    const { teamStats, size } = this.state;
+    const { club } = this.props;
     return (
-      <ScrollView style={[objects.screen.scrollViewContainer, {marginBottom:10}]}>
-        <TeamStats teamStats={teamStats} club={club} />
-        <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between'} ]} >
+      <View style={objects.screen.mainContainer}>
+        <View style={[objects.screen.mainContainer,{marginTop: 56}]} onLayout={(e) => this.getTeamStatsSize(e)}>
+          <TeamStats teamStats={teamStats} club={club} size={size} />
+        </View>
+        <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
           <View style={{flex:1, marginRight: 10}} >
             <Button buttonType={this.active === 'all' ? 'active' : 'cta'} text="Alla" onPress={()=> this.setStats('all')} />
           </View>
@@ -56,7 +64,7 @@ class TeamStatsContainer extends Component {
             <Button buttonType={this.active === 'away' ? 'active' : 'cta'} text="Borta" onPress={()=> this.setStats('away')} />
           </View>
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
