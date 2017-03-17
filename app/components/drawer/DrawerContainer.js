@@ -42,7 +42,9 @@ class DrawerContainer extends Component {
   async componentWillMount() {
     this.props.email = '';
     const route = await storage.get('route');
-    this.setState({active:route.route});
+    if (route) {
+      this.setState({active:route.route});
+    }
   }
 
   @autobind

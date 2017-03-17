@@ -50,7 +50,7 @@ export function addGame(game) {
       }
     }
     catch (e) {
-      dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
@@ -76,7 +76,7 @@ export function saveEleven(game,eleven) {
       }
     }
     catch (e) {
-      dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
@@ -102,7 +102,7 @@ export function saveGameAsFinished(game) {
       }
     }
     catch (e) {
-      dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
@@ -128,7 +128,7 @@ export function subPlayer(game,playerOut,playerIn,minute) {
       }
     }
     catch (e) {
-      dispatch(ajaxCallError)
+      dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };

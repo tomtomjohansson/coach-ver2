@@ -40,6 +40,8 @@ function validateInput(value, type) {
       return validateEmail(value);
     case 'number':
       return validateNumber(value);
+    case 'numberOptional':
+      return validateNumberOptional(value);
     case 'date':
       return validateDate(value);
     case 'string':
@@ -82,6 +84,14 @@ function validateNumber(value) {
     return 'Får bara innehålla siffror';
   } else if (validator.isEmpty(value)) {
     return 'Fältet får inte vara tomt';
+  } else {
+    return false;
+  }
+}
+
+function validateNumberOptional(value) {
+  if (!validator.isNumeric(value) && !validator.isEmpty(value)) {
+    return 'Får bara innehålla siffror';
   } else {
     return false;
   }
