@@ -21,7 +21,7 @@ function LoginForm({username,password,submitted,onChangeUsername,onChangePasswor
         />
         <Input
           label="Lösenord*"
-          placeholder="Minst sex tecken..."
+          placeholder="Minst åtta tecken..."
           onChangeText={onChangePassword}
           error={password.error}
           value={password.value}
