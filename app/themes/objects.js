@@ -148,6 +148,12 @@ const objects = {
       width: 48,
       borderRadius: 50
     },
+    benchRound: {
+      backgroundColor: 'maroon',
+      height: 48,
+      width: 48,
+      borderRadius: 50
+    },
     alert: {
       backgroundColor: colors.danger
     },
@@ -227,27 +233,51 @@ const objects = {
       backgroundColor: colors.offBlack,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      paddingVertical: metrics.baseMargin,
-      marginBottom: metrics.baseMargin
+      paddingVertical: metrics.baseMargin
     },
     barContainer: {
-      height: 35,
+      height: 40,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center'
     },
+    barFor: {
+      height: 20,
+      backgroundColor: colors.grassy,
+      borderTopLeftRadius: 15,
+      borderBottomLeftRadius: 15
+    },
+    barTies: {
+      height: 20,
+      backgroundColor: colors.neutral
+    },
+    barAgainst: {
+      height: 20,
+      backgroundColor: colors.danger,
+      borderTopRightRadius: 15,
+      borderBottomRightRadius: 15
+    },
     barText: {
       textAlign: 'center',
-      color: colors.black
+      color: colors.black,
+      fontWeight: '600'
     },
     leftText: {
-      fontSize: 10,
+      fontWeight: '600',
+      fontSize: 14,
       textAlign: 'left',
       marginLeft: 10,
       textAlignVertical: 'center'
     },
+    centerText: {
+      fontWeight: '600',
+      fontSize: 14,
+      textAlign: 'center',
+      textAlignVertical: 'center'
+    },
     rightText: {
-      fontSize: 10,
+      fontWeight: '600',
+      fontSize: 14,
       textAlign: 'right',
       marginRight: 10,
       textAlignVertical: 'center'
