@@ -152,7 +152,6 @@ export default class TeamStats extends Component {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     const { teamStats } = this.props;
     const { club } = this.state;
-    const exists = teamStats.hasOwnProperty('totalGoalsFor'); // Ta bort denna sen, finns redan en i render som kollar. Ta också bort alla exists i return-funktionen.
     const { width } = Dimensions.get('window');
     const {
       totalGoalsFor, totalGoalsAgainst,
@@ -257,10 +256,10 @@ export default class TeamStats extends Component {
             <Text style={objects.stats.barText}>Hörnor i snitt</Text>
             <View style={[objects.stats.barContainer,{ width }]}>
               <View style={[objects.stats.barFor, (avgCornerAgainst === 0) ? objects.stats.showFor : null, { width: (avgCornerAgainst !== 0) ? ((avgCornerFor / (avgCornerFor + avgCornerAgainst) * 100) / 100) * width - metrics.marginHorizontal : width - (metrics.marginHorizontal * 2) }, (avgCornerFor === 0) ? objects.stats.hide : null ]}>
-                <Text style={objects.stats.leftText}>{ exists ? Math.round(avgCornerFor * 100) / 100 : 0 }</Text>
+                <Text style={objects.stats.leftText}>{ avgCornerFor > 0 ? Math.round(avgCornerFor * 100) / 100 : null }</Text>
               </View>
               <View style={[objects.stats.barAgainst, (avgCornerFor === 0) ? objects.stats.showAgainst : null, { width: (avgCornerFor !== 0) ? ((avgCornerAgainst / (avgCornerFor + avgCornerAgainst) * 100) / 100) * width - metrics.marginHorizontal : width - (metrics.marginHorizontal * 2) }, (avgCornerAgainst === 0) ? objects.stats.hide : null ]}>
-                <Text style={objects.stats.rightText}>{ exists ? Math.round(avgCornerAgainst * 100) / 100 : 0 }</Text>
+                <Text style={objects.stats.rightText}>{ avgCornerAgainst > 0 ? Math.round(avgCornerAgainst * 100) / 100 : null }</Text>
               </View>
             </View>
           </View>
