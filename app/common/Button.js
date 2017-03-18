@@ -8,7 +8,7 @@ export default function Button({ text, buttonType, onPress, disabled = false }) 
   return (
     <TouchableOpacity onPress={onPress} disabled={disabled}>
       <View style={[objects.buttons.button, objects.buttons[buttonType], { opacity: (disabled) ? 0.3 : 1 } ]} >
-        <Text style={[objects.buttons.text]} >{ text.toUpperCase() }</Text>
+        <Text style={[objects.buttons.text]} >{ (typeof text === 'string') ? text.toUpperCase() : text }</Text>
       </View>
     </TouchableOpacity>
   );
