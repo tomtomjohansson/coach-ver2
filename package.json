@@ -9,7 +9,7 @@
     "lint": "esw 'app/**/*.js' 'tools/**/*.js' index.ios.js index.android.js --fix --color --ignore-pattern 'node_modules/'",
     "watch:lint": "npm run lint -- --watch",
     "dev": "npm-run-all --parallel watch:*",
-    "bundle-android": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.map --assets-dest android/app/src/main/res/ && cd android && ./gradlew assembleDebug"
+    "bundle-android": "curl http://localhost:8081/index.android.bundle?platform=android -o android/app/src/main/assets/index.android.bundle && cd android && sudo ./gradlew clean && ./gradlew assembleDebug"
   },
   "dependencies": {
     "autobind-decorator": "1.3.4",
