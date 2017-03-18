@@ -34,13 +34,14 @@ class TeamStatsContainer extends Component {
     const json = await response.json();
     if (json.success) {
       if (json.team.length) {
-        this.setState({teamStats:json.team});
+        this.setState({ teamStats: json.team });
       }
     } else {
-      Alert.alert('Något gick fel',json.message);
+      Alert.alert('Något gick fel', json.message);
     }
   }
   getTeamStatsSize(e) {
+    if (this.state.size) { return; }
     this.setState({
       size: e.nativeEvent.layout
     });
@@ -50,10 +51,10 @@ class TeamStatsContainer extends Component {
     const { club } = this.props;
     return (
       <View style={objects.screen.mainContainer}>
-        <View style={[objects.screen.mainContainer,{marginTop: 56}]} onLayout={(e) => this.getTeamStatsSize(e)}>
-          <TeamStats teamStats={teamStats} club={club} size={size} />
-        </View>
-        <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
+        <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]} onLayout={(e) => this.getTeamStatsSize(e)}>
+          <TeamStats teamStats={teamStats[0]} club={club} size={size} />
+        </ScrollView>
+        <View style={[objects.screen.marginContainer,{ flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
           <View style={{flex:1, marginRight: 10}} >
             <Button buttonType={this.active === 'all' ? 'active' : 'cta'} text="Alla" onPress={()=> this.setStats('all')} />
           </View>
@@ -70,8 +71,7 @@ class TeamStatsContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const username = state.user.username;
-  const club = state.user.club;
+  const { username, club } = state.user;
   return {
     username,
     club

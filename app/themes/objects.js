@@ -281,6 +281,18 @@ const objects = {
       textAlign: 'right',
       marginRight: 10,
       textAlignVertical: 'center'
+    },
+    showFor: {
+      borderTopRightRadius: 15,
+      borderBottomRightRadius: 15
+    },
+    hide: {
+      width: 0,
+      opacity: 0
+    },
+    showAgainst: {
+      borderTopLeftRadius: 15,
+      borderBottomLeftRadius: 15
     }
   }
 };
