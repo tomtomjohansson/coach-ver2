@@ -14,6 +14,9 @@ import {objects} from '../../themes';
 class PlayerContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      players: [ ...this.props.players ]
+    };
   }
   goToSinglePlayer(id) {
     goToRoute('singlePlayer',{id:id}, false);
@@ -21,8 +24,13 @@ class PlayerContainer extends Component {
   openModal() {
     goToRoute('addPlayer',{}, false);
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      players: nextProps.players
+    });
+  }
   render() {
-    const {players} = this.props;
+    const {players} = this.state;
     return (
       <View style={[objects.screen.mainContainer]}>
         <PlayerList players={players} goToSinglePlayer={this.goToSinglePlayer} />

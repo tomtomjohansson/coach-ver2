@@ -45,16 +45,38 @@ class AddStat extends Component {
     this.props.dispatch(updateStat(newGame));
     NavigationActions.pop();
   }
+  sortPlayers(players) {
+    const fwdTypes = ['LW','RW','ST','RST','LST'];
+    const midTypes = ['CM','RCM','LCM','CDM','RCDM','LCDM','LM','RM','CAM'];
+    const backTypes = ['CB','RCB','LCB','LB','RB'];
+    let attackers = [];
+    let midfielders = [];
+    let backs = [];
+    let gk = [];
+    players.forEach((player) => {
+      if (fwdTypes.includes(player.position)) {
+        attackers.push(player);
+      } else if (midTypes.includes(player.position)) {
+        midfielders.push(player);
+      } else if (backTypes.includes(player.position)) {
+        backs.push(player);
+      } else {
+        gk.push(player);
+      }
+    });
+    return attackers.concat(midfielders, backs, gk);
+  }
   render() {
     const {selected,selectedAss} = this.state;
     const {players,stat} = this.props;
+    const sortedPlayers = this.sortPlayers(players);
     return (
       <View style={{flex:1}} >
-      <AddStatList stat={stat} players={players} selected={selected} selectedAss={selectedAss} onPress={this.checkPlayer} onPressAss={this.checkPlayerAssist} />
-      <View style={[objects.screen.marginContainer]}>
-        <Button onPress={this.submitStat} buttonType="cta" text="Uppdatera matchen" />
-        <Button onPress={this.closeModal} buttonType="alert" text="Avbryt" />
-      </View>
+        <AddStatList stat={stat} players={sortedPlayers} selected={selected} selectedAss={selectedAss} onPress={this.checkPlayer} onPressAss={this.checkPlayerAssist} />
+        <View style={[objects.screen.marginContainer]}>
+          <Button onPress={this.submitStat} buttonType="cta" text="Uppdatera matchen" />
+          <Button onPress={this.closeModal} buttonType="alert" text="Avbryt" />
+        </View>
       </View>
     );
   }

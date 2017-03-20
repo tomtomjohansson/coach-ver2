@@ -29,6 +29,10 @@ build/
 .gradle
 local.properties
 *.iml
+android/app/src/main/assets
+android/app/src/main/res
+haste-map-react-native-packager*
+react-native-packager-cache*
 
 # node.js
 #

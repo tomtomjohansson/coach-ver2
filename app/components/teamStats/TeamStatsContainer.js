@@ -33,19 +33,21 @@ class TeamStatsContainer extends Component {
     const json = await response.json();
     if (json.success) {
       if (json.team.length) {
-        this.setState({teamStats:json.team});
+        this.setState({ teamStats: json.team });
       }
     } else {
-      Alert.alert('Något gick fel',json.message);
+      Alert.alert('Något gick fel', json.message);
     }
   }
   render() {
-    const {teamStats} = this.state;
-    const {club} = this.props;
+    const { teamStats } = this.state;
+    const { club } = this.props;
     return (
-      <ScrollView style={[objects.screen.scrollViewContainer, {marginBottom:10}]}>
-        <TeamStats teamStats={teamStats} club={club} />
-        <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between'} ]} >
+      <View style={objects.screen.mainContainer}>
+        <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]}>
+          <TeamStats teamStats={teamStats[0]} club={club} />
+        </ScrollView>
+        <View style={[objects.screen.marginContainer,{ flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
           <View style={{flex:1, marginRight: 10}} >
             <Button buttonType={this.active === 'all' ? 'active' : 'cta'} text="Alla" onPress={()=> this.setStats('all')} />
           </View>
@@ -56,14 +58,13 @@ class TeamStatsContainer extends Component {
             <Button buttonType={this.active === 'away' ? 'active' : 'cta'} text="Borta" onPress={()=> this.setStats('away')} />
           </View>
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const username = state.user.username;
-  const club = state.user.club;
+  const { username, club } = state.user;
   return {
     username,
     club

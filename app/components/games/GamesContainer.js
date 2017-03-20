@@ -23,8 +23,8 @@ class GamesContainer extends Component {
   componentWillMount() {
     this.sortGames(this.props.games);
   }
-  componentWillReceiveProps(){
-    this.sortGames(this.props.games);
+  componentWillReceiveProps(nextProps){
+    this.sortGames(nextProps.games);
   }
   sortGames(games){
     const upcoming = games
@@ -34,7 +34,7 @@ class GamesContainer extends Component {
       .filter(game => game.ended)
       .sort((a,b) => new Date(b.date) - new Date(a.date));
     const gamesMap = {
-      'Kommande':upcoming,
+      'Kommande': upcoming,
       'Spelade': done
     };
     this.setState({games: this.ds.cloneWithRowsAndSections(gamesMap)});
@@ -52,10 +52,10 @@ class GamesContainer extends Component {
     }
   }
   render() {
-    const {games} = this.state;
+    const { games } = this.state;
     return (
       <View style={[objects.screen.mainContainer]}>
-        <GameList games={games} onPress={this.goToGame} />
+        <GameList games={games} onPress={this.goToGame} dispatch={this.props.dispatch} />
         <AddItemBottom text="Lägg till match" openModal={this.openModal} />
       </View>
     );
@@ -63,7 +63,7 @@ class GamesContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const {games} = state;
+  const { games } = state;
   return {
     games
   };

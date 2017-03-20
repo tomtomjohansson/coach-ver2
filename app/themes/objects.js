@@ -1,3 +1,4 @@
+import { Dimensions } from 'react-native';
 import fonts from './fonts';
 import metrics from './metrics';
 import colors from './colors';
@@ -44,6 +45,17 @@ const objects = {
     },
     marginContainer: {
       margin: metrics.baseMargin,
+    },
+    field: {
+      marginLeft: 3,
+      marginRight: 3,
+      marginTop: metrics.navBarHeight,
+      marginBottom: 50,
+      width: Dimensions.get('window').width,
+      flex: 1,
+      resizeMode: 'contain',
+      flexDirection: 'column',
+      backgroundColor: colors.lightGreen
     }
   },
   addingForm: {
@@ -101,7 +113,7 @@ const objects = {
   },
   buttons: {
     button: {
-      height:40,
+      height: 40,
       marginBottom: metrics.baseMargin,
       paddingVertical: metrics.baseMargin,
       alignItems: 'center',
@@ -111,6 +123,36 @@ const objects = {
       shadowOpacity: 0.3,
       shadowOffset: {width:1,height:1},
       elevation: 2
+    },
+    round: {
+      height: 50,
+      width: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 50,
+      shadowColor: colors.black,
+      shadowOpacity: 0.3,
+      shadowOffset: {width:1,height:1},
+      elevation: 2
+
+    },
+    ctaRound: {
+      backgroundColor: colors.grassy,
+      height: 48,
+      width: 48,
+      borderRadius: 50
+    },
+    alertRound: {
+      backgroundColor: colors.danger,
+      height: 48,
+      width: 48,
+      borderRadius: 50
+    },
+    benchRound: {
+      backgroundColor: 'maroon',
+      height: 48,
+      width: 48,
+      borderRadius: 50
     },
     alert: {
       backgroundColor: colors.danger
@@ -180,6 +222,77 @@ const objects = {
     icon: {
       color: colors.darkBlue,
       paddingHorizontal: metrics.baseMargin
+    },
+    iconDelete: {
+      color: colors.danger,
+      paddingHorizontal: metrics.baseMargin
+    }
+  },
+  stats: {
+    header: {
+      backgroundColor: colors.offBlack,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingVertical: metrics.baseMargin
+    },
+    barContainer: {
+      height: 40,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    barFor: {
+      height: 20,
+      backgroundColor: colors.grassy,
+      borderTopLeftRadius: 15,
+      borderBottomLeftRadius: 15
+    },
+    barTies: {
+      height: 20,
+      backgroundColor: colors.neutral
+    },
+    barAgainst: {
+      height: 20,
+      backgroundColor: colors.danger,
+      borderTopRightRadius: 15,
+      borderBottomRightRadius: 15
+    },
+    barText: {
+      textAlign: 'center',
+      color: colors.black,
+      fontWeight: '600'
+    },
+    leftText: {
+      fontWeight: '600',
+      fontSize: 14,
+      textAlign: 'left',
+      marginLeft: 10,
+      textAlignVertical: 'center'
+    },
+    centerText: {
+      fontWeight: '600',
+      fontSize: 14,
+      textAlign: 'center',
+      textAlignVertical: 'center'
+    },
+    rightText: {
+      fontWeight: '600',
+      fontSize: 14,
+      textAlign: 'right',
+      marginRight: 10,
+      textAlignVertical: 'center'
+    },
+    showFor: {
+      borderTopRightRadius: 15,
+      borderBottomRightRadius: 15
+    },
+    hide: {
+      width: 0,
+      opacity: 0
+    },
+    showAgainst: {
+      borderTopLeftRadius: 15,
+      borderBottomLeftRadius: 15
     }
   }
 };

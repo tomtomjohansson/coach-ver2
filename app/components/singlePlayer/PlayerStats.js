@@ -8,16 +8,18 @@ import {objects,colors,metrics} from '../../themes';
 function PlayerStats({player,playerStats}) {
   const stats = playerStats[0];
   const exists = stats.hasOwnProperty('goalsAvg');
+  const name = (player) ? player.name.toUpperCase() : null;
+  const phone = (player) ? player.phone : null;
   return (
       <View>
         <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}]} >
-          <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ player.name.toUpperCase() }</Text>
+          <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ name }</Text>
           <View style={[objects.buttons.button,objects.buttons.cta,{marginBottom:0,flexDirection:'row'}]} >
             <Icon name="phone"
             size={metrics.icons.medium}
             style={[objects.listitems.icon,{color:colors.offWhite}]}
           />
-          <Text style={{color:colors.offWhite,paddingRight:10}} >{player.phone}</Text>
+          <Text style={{color:colors.offWhite,paddingRight:10}} >{ phone }</Text>
           </View>
         </View>
         <View style={[objects.listitems.container, {justifyContent:'flex-start'}]} >

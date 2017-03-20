@@ -1,12 +1,13 @@
 import storage from 'react-native-simple-store';
-import {Platform} from 'react-native';
+// import {Platform} from 'react-native';
 
-let rootUrl;
-if (Platform.OS === 'ios') {  
-  rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://something.com';
-} else {
-  rootUrl = __DEV__ ? 'http://10.0.3.2:3000' : 'http://something.com';
-}
+// let rootUrl;
+// if (Platform.OS === 'ios') {
+//   rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://37.139.10.122:3000';
+// } else {
+//   rootUrl = __DEV__ ? 'http://10.0.3.2:3000' : 'http://37.139.10.122:3000';
+// }
+const rootUrl = 'http://37.139.10.122:3000';
 
 
 const getHeaders = async () => {

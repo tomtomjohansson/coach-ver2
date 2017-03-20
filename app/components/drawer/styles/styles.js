@@ -34,7 +34,7 @@ export default StyleSheet.create({
     fontSize: fonts.size.small
   },
   drawerImage: {
-    flex:1,
+    flex: 1,
     width: undefined,
     height: undefined
   },

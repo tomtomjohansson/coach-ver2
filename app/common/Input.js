@@ -32,7 +32,7 @@ export default function Input({
         placeholder={placeholder}
         autoFocus={autoFocus}
         keyboardType={keyboardType}
-        underlineColorAndroid='transparent'
+        underlineColorAndroid="transparent"
         maxLength={maxLength}
         onChangeText={onChangeText}
         onChange={onChange}
