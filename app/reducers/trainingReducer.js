@@ -20,10 +20,10 @@ export default function trainingReducer(state = initialState.trainings, action) 
         ...state.filter( training => training._id !== action.trainingID )
       ];
     case types.UPDATE_TRAINING_SUCCESS:
-      const index = state.indexOf(action.training);
+      const index = state.findIndex(training => training._id === action.training._id);
       return [
         ...state.slice(0,index),
-        {...action.training, attending: action.attending},
+        {...action.training},
         ...state.slice(index + 1)
       ];
     default:

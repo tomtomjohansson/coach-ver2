@@ -16,11 +16,10 @@ export function deleteTrainingSuccess(trainingID) {
   };
 }
 
-export function updateTrainingSuccess(training,attending) {
+export function updateTrainingSuccess(training) {
   return {
     type: types.UPDATE_TRAINING_SUCCESS,
-    training,
-    attending
+    training
   };
 }
 
@@ -71,7 +70,7 @@ export function deleteTraining(trainingID) {
   };
 }
 
-export function updateTraining(training,attending) {
+export function updateTraining(training,attending,attendance) {
   const url = `${rootUrl}/api/trainings`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
@@ -80,11 +79,11 @@ export function updateTraining(training,attending) {
       const response = await fetch(url,{
         method: 'PUT',
         headers,
-        body: JSON.stringify({training,attending})
+        body: JSON.stringify({training,attending,attendance})
       });
       const json = await response.json();
       if (json.success) {
-        await dispatch(updateTrainingSuccess(training,attending));
+        await dispatch(updateTrainingSuccess(json.training));
         return { success: json.success };
       } else {
         return { success: json.success, message: json.message };

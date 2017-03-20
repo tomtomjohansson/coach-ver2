@@ -24,7 +24,7 @@ class TeamStatsContainer extends Component {
   }
   async setStats(venue) {
     this.active = venue;
-    const url = `${rootUrl}/api/teamStats/${this.props.username}/${venue}`;
+    const url = `${rootUrl}/api/teamStats/${venue}`;
     const headers = await getHeaders();
     const response = await fetch(url,{
       method: 'GET',
@@ -33,6 +33,7 @@ class TeamStatsContainer extends Component {
     const json = await response.json();
     if (json.success) {
       if (json.team.length) {
+        console.log(json)
         this.setState({teamStats:json.team});
       }
     } else {
