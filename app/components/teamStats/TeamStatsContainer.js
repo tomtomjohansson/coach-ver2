@@ -15,8 +15,7 @@ class TeamStatsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamStats: [{}],
-      size: null
+      teamStats: [{}]
     };
     this.active = 'all';
   }
@@ -40,19 +39,13 @@ class TeamStatsContainer extends Component {
       Alert.alert('Något gick fel', json.message);
     }
   }
-  getTeamStatsSize(e) {
-    if (this.state.size) { return; }
-    this.setState({
-      size: e.nativeEvent.layout
-    });
-  }
   render() {
-    const { teamStats, size } = this.state;
+    const { teamStats } = this.state;
     const { club } = this.props;
     return (
       <View style={objects.screen.mainContainer}>
-        <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]} onLayout={(e) => this.getTeamStatsSize(e)}>
-          <TeamStats teamStats={teamStats[0]} club={club} size={size} />
+        <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]}>
+          <TeamStats teamStats={teamStats[0]} club={club} />
         </ScrollView>
         <View style={[objects.screen.marginContainer,{ flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
           <View style={{flex:1, marginRight: 10}} >
