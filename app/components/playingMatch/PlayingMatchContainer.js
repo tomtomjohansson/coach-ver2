@@ -22,9 +22,11 @@ class PlayingMatchContainer extends Component {
       goToRoute('addStatModal',{id: this.props.id,stat,team},false);
     } else {
       const newGame = JSON.parse(JSON.stringify(this.props.game));
+      newGame.events.push({type:stat,team});
       newGame[stat][team]++;
       if (stat === 'goals') {
         newGame.shots[team]++;
+        newGame.events.push({type:"shots",team});
       }
       this.props.dispatch(updateStat(newGame));
     }

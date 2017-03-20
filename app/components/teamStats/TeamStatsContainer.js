@@ -24,7 +24,7 @@ class TeamStatsContainer extends Component {
   }
   async setStats(venue) {
     this.active = venue;
-    const url = `${rootUrl}/api/teamStats/${this.props.username}/${venue}`;
+    const url = `${rootUrl}/api/teamStats/${venue}`;
     const headers = await getHeaders();
     const response = await fetch(url,{
       method: 'GET',

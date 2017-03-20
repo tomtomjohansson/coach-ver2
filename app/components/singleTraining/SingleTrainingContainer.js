@@ -29,7 +29,8 @@ class SingleTrainingContainer extends Component {
     this.props.dispatch(deleteTraining(this.props.training._id)).then(this.handleAJAXresponse);
   }
   updateTraining() {
-    this.props.dispatch(updateTraining(this.props.training, this.state.attending)).then(this.handleAJAXresponse);
+    const attendance =  Math.round((this.state.attending.length / this.props.players.length) * 1000) / 10;
+    this.props.dispatch(updateTraining(this.props.training, this.state.attending,attendance)).then(this.handleAJAXresponse);
   }
   handleAJAXresponse(response) {
     if (response.success) {
