@@ -50,7 +50,7 @@ function validateInput(value, type) {
 }
 
 function validatePassword(value) {
-  if (!validator.isLength(value,{min:6,max:20})) {
+  if (!validator.isLength(value,{min:8,max:20})) {
     return 'Måste bestå av minst åtta tecken';
   } else if (/[`~<>;:"/[\]|{}()=+*]/.test(value)) {
     return 'Du har använt ett otillåtet tecken';
