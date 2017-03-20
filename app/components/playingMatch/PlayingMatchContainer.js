@@ -8,6 +8,7 @@ import autobind from 'autobind-decorator';
 // Components
 import StatItem from './StatItem';
 import Button from '../../common/Button';
+import Timer from './Timer';
 // Styles
 import {objects} from '../../themes';
 
@@ -47,6 +48,7 @@ class PlayingMatchContainer extends Component {
     const {game,club} = this.props;
     return (
       <ScrollView style={[objects.screen.scrollViewContainer]}>
+        <Timer />
         <StatItem title="MÅL" statName="goals" stat={game.goals} club={club} opponent={game.opponent} onPress={this.submitStat} />
         <StatItem title="AVSLUT" statName="shots" stat={game.shots} onPress={this.submitStat} />
         <StatItem title="HÖRNOR" statName="corners" stat={game.corners} onPress={this.submitStat} />

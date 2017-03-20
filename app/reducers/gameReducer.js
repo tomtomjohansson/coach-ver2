@@ -27,6 +27,11 @@ export default function gameReducer(state = initialState.games, action) {
         ...state.filter(game => game._id !== action.game._id),
         {...action.game}
       ];
+    case types.DELETE_GAME_SUCCESS:
+      const i = state.findIndex(game => game._id === action.gameID);
+      return [
+        ...state.filter(game => game._id !== action.gameID)
+      ];
     default:
       return state;
   }
