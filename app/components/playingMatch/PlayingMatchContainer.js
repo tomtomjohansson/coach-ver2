@@ -26,7 +26,7 @@ class PlayingMatchContainer extends Component {
       newGame[stat][team]++;
       if (stat === 'goals') {
         newGame.shots[team]++;
-        newGame.events.push({type:"shots",team});
+        newGame.events.push({type:'shots',team});
       }
       this.props.dispatch(updateStat(newGame));
     }

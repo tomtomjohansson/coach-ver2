@@ -19,6 +19,7 @@ import TeamStats from '../components/teamStats/TeamStatsContainer';
 import MatchStats from '../components/matchStats/MatchStatsContainer';
 import StartingEleven from '../components/startingEleven/StartingElevenContainer';
 import AddPlayerToEleven from '../components/startingEleven/AddPlayerToEleven';
+import AddPlayerToBench from '../components/startingEleven/AddPlayerToBench';
 import PickFormation from '../components/startingEleven/PickFormation';
 import PlayingMatch from '../components/playingMatch/PlayingMatchContainer';
 import AddStat from '../components/playingMatch/AddStat';
@@ -106,10 +107,17 @@ class Routes extends Component {
                 renderBackButton={NavItems.backButton}
                 />
                 <Scene key="addPlayerToEleven"
-                title="Lägg till spelare"
+                title="Lägg till startspelare"
                 duration={1}
                 renderBackButton={NavItems.closeButton}
                 component={AddPlayerToEleven}
+                direction="vertical"
+                />
+                <Scene key="addPlayerToBench"
+                title="Lägg till bänkspelare"
+                duration={1}
+                renderBackButton={NavItems.closeButton}
+                component={AddPlayerToBench}
                 direction="vertical"
                 />
                 <Scene key="pickFormation"
