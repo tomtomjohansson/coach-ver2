@@ -22,6 +22,8 @@ class SubPlayer extends Component {
       selectedIn:[],
       minute: {},
       submitted: false,
+      bench: [ ...this.props.bench ],
+      playing: [ ...this.props.playing ]
     };
     this.validators = {minute: false };
     this.createValidator = createValidator.bind(this);
@@ -41,9 +43,17 @@ class SubPlayer extends Component {
   }
   makeSubstitution() {
     this.setState({submitted: true});
-    const {selectedOut,selectedIn,minute} = this.state;
-    const {game} = this.props;
+    const { selectedOut, selectedIn, minute, bench, playing } = this.state;
+    const { game } = this.props;
+    const newPlayer = bench.filter(b => b._id === selectedIn[0]);
+    const findNewPlayer = bench.findIndex(p => p._id === selectedIn[0]);
+    const oldPlayer = playing.filter(p => p._id === selectedOut[0]);
+    const findOldPlayer = playing.findIndex(p => p._id === selectedOut[0]);
     if (this.checkValidation() && selectedOut.length && selectedIn.length) {
+      this.setState({
+        playing: [ ...playing.filter((e, i) => i !== findOldPlayer), newPlayer[0] ],
+        bench: [ ...bench.filter((e, i) => i !== findNewPlayer), oldPlayer[0] ]
+      });
       this.props.dispatch(subPlayer(game,selectedOut[0],selectedIn[0],minute.value)).then(this.handleAJAXResponse);
     }
   }
@@ -55,8 +65,7 @@ class SubPlayer extends Component {
     }
   }
   render() {
-    const {submitted,minute,selectedIn,selectedOut} = this.state;
-    const {playing,bench} = this.props;
+    const { submitted, minute, selectedIn, selectedOut, playing, bench } = this.state;
     return (
       <View style={[objects.screen.topContainer]} >
         <Input
@@ -85,7 +94,7 @@ function mapStateToProps(state,ownProps) {
   const playing = [];
   const bench = [];
   game.players.filter(player => {
-    if (player.minutes.played[player.minutes.played - 1] === 90 || player.minutes.played.length % 2 !== 0) {
+    if (player.minutes.played[player.minutes.played.length - 1] === 90 || player.minutes.played.length % 2 !== 0) {
       playing.push(player);
     } else {
       bench.push(player);

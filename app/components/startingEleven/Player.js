@@ -53,7 +53,7 @@ export default function Player ({ name, position, x, y, size, shirtColor, shorts
 						fontSize={fontSize}
 						fontWeight="bold"
 						y="44"
-						x="20"
+						x="21"
 						textAnchor="middle"
 					>{name.toUpperCase() || position}</Text>
 				</Svg>

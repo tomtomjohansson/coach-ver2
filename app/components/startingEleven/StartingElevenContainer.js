@@ -56,13 +56,13 @@ class StartingElevenContainer extends Component {
     this.setState({ startingEleven: [] });
   }
   saveEleven() {
-    const { startingEleven } = this.state;
+    const { startingEleven, bench } = this.state;
     if (startingEleven.length < 11) {
       Alert.alert('För få spelare', `Du har bara tagit ut ${startingEleven.length} spelare.`);
     } else if (startingEleven.length > 11) {
       Alert.alert('För många spelare', `Du har tagit ut ${startingEleven.length - 11} spelare för mycket`);
     } else {
-      this.props.dispatch(saveEleven(this.props.game, startingEleven)).then(this.handleAJAXresponse);
+      this.props.dispatch(saveEleven(this.props.game, startingEleven, bench)).then(this.handleAJAXresponse);
     }
   }
   handleAJAXresponse(response) {
@@ -79,12 +79,16 @@ class StartingElevenContainer extends Component {
     });
   }
   pickPlayer(pos) {
-    const { startingEleven } = this.state;
+    const { startingEleven, bench } = this.state;
     const { players } = this.props;
     this.setState({
       pickingPosition: pos
     });
-    goToRoute('addPlayerToEleven', { startingEleven, players, checkPlayer: this.checkPlayer }, false);
+    if (pos === 'BENCH') {
+      goToRoute('addPlayerToBench', { startingEleven, bench, players, checkBench: this.checkBench }, false);
+    } else {
+      goToRoute('addPlayerToEleven', { startingEleven, bench, players, checkPlayer: this.checkPlayer }, false);
+    }
   }
   playerAdded(pos) {
     const { startingEleven } = this.state;
@@ -121,6 +125,15 @@ class StartingElevenContainer extends Component {
     const currentPlayer = players.filter((player) => player._id === id);
     const newArr = (i + 1) ? [ ...startingEleven.slice(0, i), ...startingEleven.slice(i + 1), { _id: id, name: currentPlayer[0].name, position: pickingPosition } ] : [ ...startingEleven, { _id: id, name: currentPlayer[0].name, position: pickingPosition } ];
     this.setState({ startingEleven: newArr, pickingPosition: null });
+  }
+  checkBench(id) {
+    Actions.pop();
+    const { players } = this.props;
+    const { bench, pickingPosition } = this.state;
+    const i = bench.findIndex(o => o._id === id);
+    const currentPlayer = players.filter((player) => player._id === id);
+    const newArr = (i + 1) ? [ ...bench.slice(0, i), ...bench.slice(i + 1), { _id: id, name: currentPlayer[0].name, position: pickingPosition } ] : [ ...bench, { _id: id, name: currentPlayer[0].name, position: pickingPosition } ];
+    this.setState({ bench: newArr, pickingPosition: null });
   }
   updateFormation(newFormation) {
     const { startingEleven } = this.state;
@@ -173,7 +186,7 @@ class StartingElevenContainer extends Component {
           <View style={{ position: 'absolute', top: 10, left: Dimensions.get('window').width / 2 - 25 }}>
             <Button
               text={<Icon name="weekend" size={metrics.icons.medium} style={{ color: colors.snow }}/>}
-              onPress={() => Alert.alert('Kommer snart...')}
+              onPress={() => this.pickPlayer('BENCH')}
               buttonType="benchRound"
             />
           </View>

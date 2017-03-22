@@ -20,12 +20,14 @@ class SinglePlayerContainer extends Component {
     super(props);
     this.state = {
       playerStats: [{}],
+      teamStats: [{}],
       change: false
     };
     this.active = 'game';
   }
   componentDidMount() {
     this.setStats('game');
+    this.setTeamStats('all');
   }
   componentWillReceiveProps(nextProps) {
     if (!nextProps.player) {
@@ -51,11 +53,26 @@ class SinglePlayerContainer extends Component {
       Alert.alert('Något gick fel',json.message);
     }
   }
+  async setTeamStats(venue) {
+    const url = `${rootUrl}/api/teamStats/${this.props.username}/${venue}`;
+    const headers = await getHeaders();
+    const response = await fetch(url,{
+      method: 'GET',
+      headers
+    });
+    const json = await response.json();
+    if (json.success) {
+      if (json.team.length) {
+        this.setState({ teamStats: json.team });
+      }
+    } else {
+      Alert.alert('Något gick fel', json.message);
+    }
+  }
   deletePlayer() {
     this.props.dispatch(deletePlayer(this.props.player._id)).then(this.handleAJAXresponse);
   }
   handleAJAXresponse(response) {
-    console.log(response);
     if (response.success) {
       goToRoute('players',{},true);
     } else {
@@ -63,10 +80,10 @@ class SinglePlayerContainer extends Component {
     }
   }
   showGameOrTraining() {
-    const {player} = this.props;
-    const {playerStats} = this.state;
+    const { player } = this.props;
+    const { playerStats, teamStats } = this.state;
     if (this.active === 'game') {
-      return (<PlayerStats player={player} playerStats={playerStats} />);
+      return (<PlayerStats player={player} playerStats={playerStats} teamStats={teamStats} />);
     } else {
       return (<TrainingStats player={player} stats={playerStats} />);
     }
@@ -75,7 +92,7 @@ class SinglePlayerContainer extends Component {
     return (
       <ScrollView style={[objects.screen.scrollViewContainer, {marginBottom:10}]}>
         {this.showGameOrTraining()}
-        <UpdateDelete
+        {/*<UpdateDelete
           updateText="Uppdatera spelare"
           deleteText="Radera spelare"
           onDeleteAction={this.deletePlayer}
@@ -88,7 +105,7 @@ class SinglePlayerContainer extends Component {
           <View style={{flex:1}} >
             <Button buttonType={this.active === 'training' ? 'active' : 'cta'} text="Träningar" onPress={()=> this.setStats('training')} />
           </View>
-        </View>
+        </View>*/}
       </ScrollView>
     );
   }
@@ -96,8 +113,10 @@ class SinglePlayerContainer extends Component {
 
 function mapStateToProps(state,ownProps) {
   const player = state.players.find(p => ownProps.id === p._id);
+  const { username } = state.user;
   return {
-    player
+    player,
+    username
   };
 }
 

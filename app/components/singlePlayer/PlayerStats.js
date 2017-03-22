@@ -1,16 +1,21 @@
 // Dependencies
 import React from 'React';
 import {View,Text} from 'react-native';
+import PlayerCard from '../../common/PlayerCard';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles
 import {objects,colors,metrics} from '../../themes';
 
-function PlayerStats({player,playerStats}) {
+function PlayerStats({player,playerStats,teamStats}) {
   const stats = playerStats[0];
+  const teamExists = teamStats[0].hasOwnProperty('avgGoalsFor');
   const exists = stats.hasOwnProperty('goalsAvg');
   const name = (player) ? player.name.toUpperCase() : null;
   const phone = (player) ? player.phone : null;
-  return (
+  const { avgGoalsFor, avgShotsFor, totalGoalsFor, count, shotConversionFor } = teamStats[0];
+  const { assists, games, gamesAsSub, gamesStarted, goalOnShotsAvg, goals, goalsAvg, minutesPerGame, minutesPerGoal, red, shots, shotsAvg, totalMinutes, yellow } = stats;
+  if (exists && teamExists) {
+    return (
       <View>
         <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}]} >
           <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ name }</Text>
@@ -22,49 +27,25 @@ function PlayerStats({player,playerStats}) {
           <Text style={{color:colors.offWhite,paddingRight:10}} >{ phone }</Text>
           </View>
         </View>
-        <View style={[objects.listitems.container, {justifyContent:'flex-start'}]} >
+        <View style={[objects.listitems.container, {justifyContent:'flex-start', marginBottom: metrics.baseMargin }]} >
           <Text style={[objects.listitems.text, {flex:1, color:colors.grassy}]} >OFFENSIVT</Text>
         </View>
-        <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-          <Text style={[objects.listitems.text, {flex:1}]} >Mål: <Text style={{fontWeight:'400'}} >{ exists ? stats.goals : 0 }</Text></Text>
-          <Text style={[objects.listitems.text, {flex:1} ]} >Assist: <Text style={{fontWeight:'400'}} >{ exists ? stats.assists : 0 }</Text></Text>
+        <Text style={[objects.listitems.text, {flex:1, color:colors.grassy,textAlign:'center', marginBottom: metrics.baseMargin}]} >TOTALT</Text>
+        <View style={{flex:1,flexDirection:'row',justifyContent:'space-around', marginBottom: metrics.baseMargin}}>
+          <PlayerCard title="Mål" number={goals} total={totalGoalsFor} />
+          <PlayerCard title="Assists" number={assists} total={totalGoalsFor} />
+          <PlayerCard title="Avslut" number={shots} total={avgShotsFor * games} />
         </View>
-        <View style={[objects.listitems.container, objects.listitems.narrow]} >
-          <Text style={[objects.listitems.text, {flex:1}]} >Avslut totalt: <Text style={{fontWeight:'400'}} >{ exists ? stats.shots : 0 }</Text></Text>
-          <Text style={[objects.listitems.text, {flex:1} ]} >Avslut per match: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.shotsAvg * 100) / 100 : 0}</Text></Text>
-        </View>
-        <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-          <Text style={[objects.listitems.text, {flex:1}]} >Mål per match: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.goalsAvg * 100) / 100 : 0 }</Text></Text>
-        </View>
-        <View style={[objects.listitems.container, objects.listitems.narrow]} >
-          <Text style={[objects.listitems.text, {flex:1}]} >Procent av avslut i mål: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.goalOnShotsAvg * 1000) / 10 : 0 }%</Text></Text>
-        </View>
-        <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-          <Text style={[objects.listitems.text, {flex:1}]} >Spelade minuter per mål: <Text style={{fontWeight:'400'}} >{ exists ? typeof stats.minutesPerGoal === 'number' ? Math.round(stats.minutesPerGoal * 100) / 100 : stats.minutesPerGoal : 0 }</Text></Text>
-        </View>
-        <View style={[objects.listitems.container, {justifyContent:'flex-start'}]} >
-          <Text style={[objects.listitems.text, {flex:1, color:colors.grassy}]} >DISCIPLIN</Text>
-        </View>
-        <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-          <Text style={[objects.listitems.text, {flex:1}]} >Gula kort: <Text style={{fontWeight:'400'}} >{ exists ? stats.yellow : 0 }</Text></Text>
-          <Text style={[objects.listitems.text, {flex:1}]} >Röda kort: <Text style={{fontWeight:'400'}} >{ exists ? stats.red : 0 }</Text></Text>
-        </View>
-        <View style={[objects.listitems.container, {justifyContent:'flex-start'}]} >
-          <Text style={[objects.listitems.text, {flex:1, color:colors.grassy}]} >SPELTID</Text>
-        </View>
-        <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-          <Text style={[objects.listitems.text, {flex:1}]} >Spelade matcher: <Text style={{fontWeight:'400'}} >{ exists ? stats.games : 0 }</Text></Text>
-          <Text style={[objects.listitems.text, {flex:1}]} >Spelade minuter: <Text style={{fontWeight:'400'}} >{ exists ? stats.totalMinutes : 0 }</Text></Text>
-        </View>
-        <View style={[objects.listitems.container, objects.listitems.narrow]} >
-          <Text style={[objects.listitems.text, {flex:1}]} >Matcher från start: <Text style={{fontWeight:'400'}} >{ exists ? stats.gamesStarted : 0 }</Text></Text>
-          <Text style={[objects.listitems.text, {flex:1}]} >Inhopp: <Text style={{fontWeight:'400'}} >{ exists ? stats.gamesAsSub : 0 }</Text></Text>
-        </View>
-        <View style={[objects.listitems.container, objects.listitems.green, objects.listitems.narrow]} >
-          <Text style={[objects.listitems.text, {flex:1}]} >Minuter per spelad match: <Text style={{fontWeight:'400'}} >{ exists ? Math.round(stats.minutesPerGame * 100) / 100 : 0 }</Text></Text>
+        <Text style={[objects.listitems.text, {flex:1, color:colors.grassy,textAlign:'center', marginBottom: metrics.baseMargin}]} >PER MATCH</Text>
+        <View style={{flex:1,flexDirection:'row',justifyContent:'space-around'}}>
+          <PlayerCard title="Mål" number={goalsAvg} total={avgGoalsFor} noBar />
+          <PlayerCard title="Assists" number={assists / games} total={avgGoalsFor} noBar />
+          <PlayerCard title="Avslut" number={shotsAvg} total={avgShotsFor} noBar />
         </View>
       </View>
     );
+  }
+  return <View />;
 }
 
 export default PlayerStats;
