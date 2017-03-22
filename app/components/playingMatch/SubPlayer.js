@@ -21,7 +21,7 @@ class SubPlayer extends Component {
       selectedOut: [],
       selectedIn:[],
       minute: {},
-      submitted: false
+      submitted: false,
     };
     this.validators = {minute: false };
     this.createValidator = createValidator.bind(this);
@@ -44,8 +44,7 @@ class SubPlayer extends Component {
     const {selectedOut,selectedIn,minute} = this.state;
     const {game} = this.props;
     if (this.checkValidation() && selectedOut.length && selectedIn.length) {
-      const playerIn = this.props.bench.find( player => player._id === selectedIn[0]);
-      this.props.dispatch(subPlayer(game,selectedOut[0],playerIn,minute.value)).then(this.handleAJAXResponse);
+      this.props.dispatch(subPlayer(game,selectedOut[0],selectedIn[0],minute.value)).then(this.handleAJAXResponse);
     }
   }
   handleAJAXResponse(response) {
@@ -83,15 +82,14 @@ class SubPlayer extends Component {
 
 function mapStateToProps(state,ownProps) {
   const game = state.games.find(g => g._id === ownProps.id);
-  const playing = game.players.filter(player => player.minutes.out === 90);
-  const bench = state.players.filter(player => {
-    var onField = true;
-    for (var p of game.players){
-			if (player._id === p._id){
-				onField = false;
-			}
-		}
-    return onField;
+  const playing = [];
+  const bench = [];
+  game.players.filter(player => {
+    if (player.position !== 'BENCH') {
+      playing.push(player);
+    } else {
+      bench.push(player);
+    }
   });
   return {
     game,
