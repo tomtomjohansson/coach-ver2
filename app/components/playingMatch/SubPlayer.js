@@ -94,7 +94,7 @@ function mapStateToProps(state,ownProps) {
   const playing = [];
   const bench = [];
   game.players.filter(player => {
-    if (player.minutes.played.length % 2 !== 0) {
+    if (player.minutes.played[player.minutes.played.length - 1] === 90 || player.minutes.played.length % 2 !== 0) {
       playing.push(player);
     } else {
       bench.push(player);
