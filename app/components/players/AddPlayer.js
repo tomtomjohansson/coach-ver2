@@ -33,7 +33,7 @@ export class AddPlayer extends Component {
     this.createValidator('name','username')(value);
   }
   onChangePhone(value) {
-    this.createValidator('phone','number')(value);
+    this.createValidator('phone','numberOptional')(value);
   }
   submitPlayer() {
     this.setState({submitted: true});

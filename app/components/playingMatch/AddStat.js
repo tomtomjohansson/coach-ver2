@@ -41,6 +41,9 @@ class AddStat extends Component {
       newGame.shots[team]++;
       const assPlayer = newGame.players.find(player => player._id === selectedAss[0]);
       assPlayer.assists++;
+      newGame.events.push({type:stat,team,player:selected[0],assPlayer:selectedAss});
+    } else {
+      newGame.events.push({type:stat,team,player:selected[0]});
     }
     this.props.dispatch(updateStat(newGame));
     NavigationActions.pop();
