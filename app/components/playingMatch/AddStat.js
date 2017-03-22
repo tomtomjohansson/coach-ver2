@@ -87,7 +87,7 @@ class AddStat extends Component {
 
 function mapStateToProps(state,ownProps) {
   const game = state.games.find(g => g._id === ownProps.id);
-  const players = game.players.filter( player => player.minutes.out === 90);
+  const players = game.players.filter( player => player.position !== 'BENCH');
   return {
     game,
     players

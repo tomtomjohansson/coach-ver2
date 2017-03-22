@@ -56,7 +56,7 @@ export function addGame(game) {
   };
 }
 
-export function saveEleven(game,eleven) {
+export function saveEleven(game,eleven,bench = []) {
   const url = `${rootUrl}/api/games/eleven`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
@@ -65,7 +65,7 @@ export function saveEleven(game,eleven) {
       const response = await fetch(url,{
         method: 'PUT',
         headers,
-        body: JSON.stringify({game,eleven})
+        body: JSON.stringify({game,eleven,bench})
       });
       const json = await response.json();
       if (json.success) {
