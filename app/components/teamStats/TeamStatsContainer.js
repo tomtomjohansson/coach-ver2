@@ -65,9 +65,8 @@ class TeamStatsContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const { username, club } = state.user;
+  const { club } = state.user;
   return {
-    username,
     club
   };
 }

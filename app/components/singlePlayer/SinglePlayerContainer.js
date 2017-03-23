@@ -54,7 +54,7 @@ class SinglePlayerContainer extends Component {
     }
   }
   async setTeamStats(venue) {
-    const url = `${rootUrl}/api/teamStats/${this.props.username}/${venue}`;
+    const url = `${rootUrl}/api/teamStats/${venue}`;
     const headers = await getHeaders();
     const response = await fetch(url,{
       method: 'GET',
@@ -113,10 +113,8 @@ class SinglePlayerContainer extends Component {
 
 function mapStateToProps(state,ownProps) {
   const player = state.players.find(p => ownProps.id === p._id);
-  const { username } = state.user;
   return {
-    player,
-    username
+    player
   };
 }
 
