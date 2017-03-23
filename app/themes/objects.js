@@ -247,7 +247,7 @@ const objects = {
       borderTopLeftRadius: 15,
       borderBottomLeftRadius: 15
     },
-    barTies: {
+    barDraws: {
       height: 20,
       backgroundColor: colors.neutral
     },

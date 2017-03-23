@@ -33,8 +33,7 @@ class TeamStatsContainer extends Component {
     const json = await response.json();
     if (json.success) {
       if (json.team.length) {
-
-        this.setState({ teamStats: json.team });
+        this.setState({ teamStats: [ ...json.team, ...json.training ] });
       }
     } else {
       Alert.alert('Något gick fel', json.message);
@@ -46,7 +45,7 @@ class TeamStatsContainer extends Component {
     return (
       <View style={objects.screen.mainContainer}>
         <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]}>
-          <TeamStats teamStats={teamStats[0]} club={club} />
+          <TeamStats teamStats={teamStats} club={club} />
         </ScrollView>
         <View style={[objects.screen.marginContainer,{ flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
           <View style={{flex:1, marginRight: 10}} >
