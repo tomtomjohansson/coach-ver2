@@ -41,8 +41,8 @@ class AddStat extends Component {
     if (stat === 'goals') {
       if (newPlayer) {
         newPlayer.shots++;
+        newGame.shots[team]++;
       }
-      newGame.shots[team]++;
       if (selectedAss[0] !== 'noAssist') {
         const assPlayer = newGame.players.find(player => player._id === selectedAss[0]);
         assPlayer.assists++;
