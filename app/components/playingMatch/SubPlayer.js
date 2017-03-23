@@ -22,8 +22,6 @@ class SubPlayer extends Component {
       selectedIn:[],
       minute: {},
       submitted: false,
-      bench: [ ...this.props.bench ],
-      playing: [ ...this.props.playing ]
     };
     this.validators = {minute: false };
     this.createValidator = createValidator.bind(this);
@@ -43,17 +41,9 @@ class SubPlayer extends Component {
   }
   makeSubstitution() {
     this.setState({submitted: true});
-    const { selectedOut, selectedIn, minute, bench, playing } = this.state;
+    const { selectedOut, selectedIn, minute } = this.state;
     const { game } = this.props;
-    const newPlayer = bench.filter(b => b._id === selectedIn[0]);
-    const findNewPlayer = bench.findIndex(p => p._id === selectedIn[0]);
-    const oldPlayer = playing.filter(p => p._id === selectedOut[0]);
-    const findOldPlayer = playing.findIndex(p => p._id === selectedOut[0]);
     if (this.checkValidation() && selectedOut.length && selectedIn.length) {
-      this.setState({
-        playing: [ ...playing.filter((e, i) => i !== findOldPlayer), newPlayer[0] ],
-        bench: [ ...bench.filter((e, i) => i !== findNewPlayer), oldPlayer[0] ]
-      });
       this.props.dispatch(subPlayer(game,selectedOut[0],selectedIn[0],minute.value)).then(this.handleAJAXResponse);
     }
   }

@@ -87,7 +87,7 @@ class AddStat extends Component {
 
 function mapStateToProps(state,ownProps) {
   const game = state.games.find(g => g._id === ownProps.id);
-  const players = game.players.filter( player => player.minutes.played[player.minutes.played - 1] === 90 || player.minutes.played.length % 2 !== 0);
+  const players = game.players.filter( player => player.minutes.played[player.minutes.played.length - 1] === 90 || player.minutes.played.length % 2 !== 0);
   return {
     game,
     players
