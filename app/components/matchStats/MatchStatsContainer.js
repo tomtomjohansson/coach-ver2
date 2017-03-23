@@ -17,7 +17,7 @@ class MatchStatsContainer extends Component {
     return (
       <ScrollView style={[objects.screen.scrollViewContainer]}>
         <MatchStats game={game} club={club} />
-        <IndividualStats players={game.players} />
+        <IndividualStats players={game.players} goals={game.goals.for} />
       </ScrollView>
     );
   }

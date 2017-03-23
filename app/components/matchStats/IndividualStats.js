@@ -4,14 +4,14 @@ import {View,Text} from 'react-native';
 // Styles
 import {objects} from '../../themes';
 
-export default function MatchStats({players}) {
+export default function MatchStats({players,goals}) {
   return (
     <View>
       <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'center',alignItems:'flex-end'}]} >
         <Text style={[objects.listitems.headerText, {textAlign:'center',fontSize:16}]} >Individuell statistik:</Text>
       </View>
       <View style={[objects.listitems.container, {minHeight:56, height:undefined, paddingVertical:5, justifyContent:'flex-start'}]} >
-        <Text style={[objects.listitems.text]} >Mål: <Text style={{fontWeight:'400'}} >{ getPlayersWithStat(players,'goals') }</Text></Text>
+        <Text style={[objects.listitems.text]} >Mål: <Text style={{fontWeight:'400'}} >{ getPlayersWithStat(players,'goals',goals) }</Text></Text>
       </View>
       <View style={[objects.listitems.container, {minHeight:56, height:undefined, paddingVertical:5, justifyContent:'flex-start'}]} >
         <Text style={[objects.listitems.text]} >Assist: <Text style={{fontWeight:'400'}} >{ getPlayersWithStat(players,'assists') }</Text></Text>
@@ -38,24 +38,81 @@ export default function MatchStats({players}) {
   );
 }
 
-function getPlayersWithStat(players,stat) {
+function checkForOwngoal(players,stat,goals) {
+  if (stat === 'goals') {
+    const goalCount = players.reduce((sum,player)=>{
+      return sum + player[stat]
+    },0);
+    const ownGoals = goals - goalCount;
+    if (ownGoals) {
+      return ownGoals > 1 ? `Självmål ${ownGoals}` : 'Självmål';
+    }
+    return null;
+  }
+  return null;
+}
+
+function getPlayersWithStat(players,stat,goals) {
   const playersWithStat = players.filter(player => player[stat] > 0)
-    .sort((a,b) => b[stat] -  a[stat])
-    .map(player => player[stat] > 1 ? `${player.name} ${player[stat]}` : player.name)
-    .join(', ');
+  .sort((a,b) => b[stat] -  a[stat])
+  .map(player => player[stat] > 1 ? `${player.name} ${player[stat]}` : player.name)
+  .concat(checkForOwngoal(players,stat,goals))
+  .join(', ');
   return playersWithStat;
 }
 
 function getStartingEleven(players) {
-  const startingEleven = players.filter(player => player.minutes.in === 0)
-    .map(player => player.minutes.out < 90 ? `${player.name} (${player.minutes.out})` : player.name)
+  const startingEleven = players.filter(player => player.minutes.played[0] === 0)
+    .map(player => {
+      if (player.minutes.played.length === 2 && player.minutes.played[1] === 90) {
+        return player.name;
+      } else {
+        return `${player.name} (${getSubTimesStarter(player.minutes.played)})`;
+      }
+    })
     .join(', ');
   return startingEleven;
 }
 
 function getSubs(players) {
-  const subs = players.filter(player => player.minutes.in !== 0)
-    .map(player => `${player.name} (${player.minutes.in})`)
+  const subs = players.filter(player => player.minutes.played[0] !== 0)
+    .map(player => `${player.name} (${getSubTimesSub(player.minutes.played)})`)
     .join(', ');
   return subs;
+}
+
+function getSubTimesSub(subTimes) {
+  if (subTimes.length === 2 && subTimes[1] === 90) {
+    return `in: ${subTimes[0]}`;
+  } else if (subTimes.length >= 2 && subTimes[1] !== 90) {
+    let arr = [];
+    subTimes.forEach((time,i)=> {
+      if (i % 2 === 0) {
+        arr.push(`in: ${time}`);
+      } else if (time !== 90) {
+        arr.push(`ut: ${time}`);
+      }
+    });
+    return arr.join(', ');
+  } else {
+    return null;
+  }
+}
+
+function getSubTimesStarter(subTimes) {
+  if (subTimes.length === 2 && subTimes[1] !== 90) {
+    return `ut: ${subTimes[1]}`;
+  } else if (subTimes.length > 2) {
+    let arr = [];
+    subTimes.forEach((time,i)=> {
+      if (i % 2 === 0 && i !== 0) {
+        arr.push(`in: ${time}`);
+      } else if ([0,90].indexOf(time)) {
+        arr.push(`ut: ${time}`);
+      }
+    });
+    return arr.join(', ');
+  } else {
+    return null;
+  }
 }

@@ -54,7 +54,7 @@ class SinglePlayerContainer extends Component {
     }
   }
   async setTeamStats(venue) {
-    const url = `${rootUrl}/api/teamStats/${this.props.username}/${venue}`;
+    const url = `${rootUrl}/api/teamStats/${venue}`;
     const headers = await getHeaders();
     const response = await fetch(url,{
       method: 'GET',
