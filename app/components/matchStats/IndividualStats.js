@@ -64,7 +64,7 @@ function getPlayersWithStat(players,stat,goals) {
 function getStartingEleven(players) {
   const startingEleven = players.filter(player => player.minutes.played[0] === 0)
     .map(player => {
-      if (player.minutes.played.length === 2 && player.minutes.played[1] === 90) {
+      if (player.minutes.played.length === 2 && player.minutes.played[1] === 90 || player.minutes.played.length === 1) {
         return player.name;
       } else {
         return `${player.name} (${getSubTimesStarter(player.minutes.played)})`;
@@ -76,13 +76,19 @@ function getStartingEleven(players) {
 
 function getSubs(players) {
   const subs = players.filter(player => player.minutes.played[0] !== 0)
-    .map(player => `${player.name} (${getSubTimesSub(player.minutes.played)})`)
+    .map(player => {
+      if (player.minutes.played.length) {
+        return `${player.name} (${getSubTimesSub(player.minutes.played)})`;
+      } else {
+        return `${player.name}`;
+      }
+    })
     .join(', ');
   return subs;
 }
 
 function getSubTimesSub(subTimes) {
-  if (subTimes.length === 2 && subTimes[1] === 90) {
+  if (subTimes.length === 2 && subTimes[1] === 90 || subTimes.length === 1) {
     return `in: ${subTimes[0]}`;
   } else if (subTimes.length >= 2 && subTimes[1] !== 90) {
     let arr = [];
@@ -95,7 +101,7 @@ function getSubTimesSub(subTimes) {
     });
     return arr.join(', ');
   } else {
-    return null;
+    return;
   }
 }
 
@@ -113,6 +119,6 @@ function getSubTimesStarter(subTimes) {
     });
     return arr.join(', ');
   } else {
-    return null;
+    return;
   }
 }
