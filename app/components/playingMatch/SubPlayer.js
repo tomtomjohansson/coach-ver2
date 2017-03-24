@@ -55,7 +55,8 @@ class SubPlayer extends Component {
     }
   }
   render() {
-    const { submitted, minute, selectedIn, selectedOut, playing, bench } = this.state;
+    const { submitted, minute, selectedIn, selectedOut } = this.state;
+    const {playing, bench} = this.props;
     return (
       <View style={[objects.screen.topContainer]} >
         <Input
