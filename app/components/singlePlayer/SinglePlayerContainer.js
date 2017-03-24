@@ -81,15 +81,12 @@ class SinglePlayerContainer extends Component {
   showGameOrTraining() {
     const { playerStats, teamStats, active } = this.state;
     if (active === 'game') {
-      console.log('game');
       return <PlayerStats playerStats={playerStats} teamStats={teamStats} />;
     } else {
-      console.log('training');
       return <TrainingStats stats={playerStats} />;
     }
   }
   render() {
-    console.log('*** render triggered ***');
     const { player } = this.props;
     const { active } = this.state;
     const name = (player) ? player.name.toUpperCase() : null;
