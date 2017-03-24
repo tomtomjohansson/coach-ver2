@@ -5,7 +5,7 @@ let rootUrl;
 if (Platform.OS === 'ios') {
   rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://139.162.151.160:3000';
 } else {
-  rootUrl = __DEV__ ? 'http://37.139.10.122:3000' : 'http://37.139.10.122:3000';
+  rootUrl = __DEV__ ? 'http://10.0.3.2:3000' : 'http://37.139.10.122:3000';
 }
 
 
