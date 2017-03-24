@@ -35,12 +35,18 @@ class AddStat extends Component {
     const newGame = JSON.parse(JSON.stringify(game));
     newGame[stat][team]++;
     const newPlayer = newGame.players.find(player => player._id === selected[0]);
-    newPlayer[stat]++;
+    if (newPlayer) {
+      newPlayer[stat]++;
+    }
     if (stat === 'goals') {
-      newPlayer.shots++;
-      newGame.shots[team]++;
-      const assPlayer = newGame.players.find(player => player._id === selectedAss[0]);
-      assPlayer.assists++;
+      if (newPlayer) {
+        newPlayer.shots++;
+        newGame.shots[team]++;
+      }
+      if (selectedAss[0] !== 'noAssist') {
+        const assPlayer = newGame.players.find(player => player._id === selectedAss[0]);
+        assPlayer.assists++;
+      }
       newGame.events.push({type:stat,team,player:selected[0],assPlayer:selectedAss});
     } else {
       newGame.events.push({type:stat,team,player:selected[0]});
