@@ -113,7 +113,7 @@ function getSubTimesStarter(subTimes) {
     subTimes.forEach((time,i)=> {
       if (i % 2 === 0 && i !== 0) {
         arr.push(`in: ${time}`);
-      } else if ([0,90].indexOf(time)) {
+      } else if ([0,90].indexOf(time) < 0) {
         arr.push(`ut: ${time}`);
       }
     });
