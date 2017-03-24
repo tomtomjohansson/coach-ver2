@@ -36,7 +36,7 @@ export default class TeamStats extends Component {
         <View style={{backgroundColor: colors.semiDarken, paddingBottom: 5}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: metrics.baseMargin}}>
             <Text style={[objects.stats.leftText, objects.listitems.headerText, {fontSize: 14,color:colors.grassy}]} >VINST</Text>
-            <Text style={[objects.stats.centerText, objects.listitems.headerText, {fontSize: 14,color:colors.neutralDark,marginLeft:20}]} >OAVGJORT</Text>
+            <Text style={[objects.stats.centerText, objects.listitems.headerText, {fontSize: 14,color:colors.neutralDark}]} >OAVGJORT</Text>
             <Text style={[objects.stats.rightText, objects.listitems.headerText, {fontSize: 14,color:colors.danger} ]} >FÖRLUST</Text>
           </View>
 
@@ -201,7 +201,7 @@ export default class TeamStats extends Component {
         <View style={{backgroundColor: colors.semiDarken, paddingBottom: 5}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: metrics.baseMargin}}>
             <Text style={[objects.stats.leftText, objects.listitems.headerText, {fontSize: 14,color:colors.grassy}]} >VINST</Text>
-            <Text style={[objects.stats.centerText, objects.listitems.headerText, {fontSize: 14,color:colors.neutralDark,marginLeft:20}]} >OAVGJORT</Text>
+            <Text style={[objects.stats.centerText, objects.listitems.headerText, {fontSize: 14,color:colors.neutralDark}]} >OAVGJORT</Text>
             <Text style={[objects.stats.rightText, objects.listitems.headerText, {fontSize: 14,color:colors.danger} ]} >FÖRLUST</Text>
           </View>
 
