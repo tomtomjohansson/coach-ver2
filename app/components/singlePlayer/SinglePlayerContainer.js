@@ -1,6 +1,6 @@
 // Dependencies
 import React, {Component} from 'React';
-import {Alert, View,ScrollView} from 'react-native';
+import { Alert, ScrollView, InteractionManager, View, Text } from 'react-native';
 import {connect} from 'react-redux';
 import {deletePlayer} from '../../actions/playerActions';
 import {goToRoute} from '../../actions/routeActions';
@@ -10,9 +10,9 @@ import autobind from 'autobind-decorator';
 import PlayerStats from './PlayerStats';
 import TrainingStats from './TrainingStats';
 import Button from '../../common/Button';
-import UpdateDelete from '../../common/UpdateDelete';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles
-import {objects} from '../../themes';
+import { objects, metrics, colors } from '../../themes';
 
 @autobind
 class SinglePlayerContainer extends Component {
@@ -21,13 +21,14 @@ class SinglePlayerContainer extends Component {
     this.state = {
       playerStats: [{}],
       teamStats: [{}],
-      change: false
+      active: 'game'
     };
-    this.active = 'game';
   }
   componentDidMount() {
-    this.setStats('game');
-    this.setTeamStats('all');
+    InteractionManager.runAfterInteractions(() => {
+      this.setStats('game');
+      this.setTeamStats('all');
+    });
   }
   componentWillReceiveProps(nextProps) {
     if (!nextProps.player) {
@@ -35,7 +36,7 @@ class SinglePlayerContainer extends Component {
     }
   }
   async setStats(type) {
-    this.active = type;
+    if (this.state.active !== type) { this.setState({active: type}); }
     const url = `${rootUrl}/api/playerStats/${type}/${this.props.player._id}/`;
     const headers = await getHeaders();
     const response = await fetch(url,{
@@ -44,8 +45,6 @@ class SinglePlayerContainer extends Component {
     });
     const json = await response.json();
     if (json.success) {
-      const change = !this.state.change;
-      this.setState({change});
       if (json.playerStats.length) {
         this.setState({playerStats:json.playerStats});
       }
@@ -80,43 +79,57 @@ class SinglePlayerContainer extends Component {
     }
   }
   showGameOrTraining() {
-    const { player } = this.props;
-    const { playerStats, teamStats } = this.state;
-    if (this.active === 'game') {
-      return (<PlayerStats player={player} playerStats={playerStats} teamStats={teamStats} />);
+    const { playerStats, teamStats, active } = this.state;
+    if (active === 'game') {
+      return <PlayerStats playerStats={playerStats} teamStats={teamStats} />;
     } else {
-      return (<TrainingStats player={player} stats={playerStats} />);
+      return <TrainingStats stats={playerStats} />;
     }
   }
   render() {
+    const { player } = this.props;
+    const { active } = this.state;
+    const name = (player) ? player.name.toUpperCase() : null;
+    const phone = (player) ? player.phone : null;
     return (
-      <ScrollView style={[objects.screen.scrollViewContainer, {marginBottom:10}]}>
-        {this.showGameOrTraining()}
-        {/*<UpdateDelete
+      <View style={objects.screen.mainContainer}>
+        <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]}>
+          <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}]} >
+            <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ name }</Text>
+            <View style={[objects.buttons.button,objects.buttons.cta,{marginBottom:0,flexDirection:'row'}]} >
+              <Icon name="phone"
+              size={metrics.icons.medium}
+              style={[objects.listitems.icon,{color:colors.offWhite}]}
+            />
+            <Text style={{color:colors.offWhite,paddingRight:10}} >{ phone }</Text>
+            </View>
+          </View>
+          {this.showGameOrTraining()}
+        </ScrollView>
+        {/* Flytta detta till höger i router-headern?
+        <UpdateDelete
           updateText="Uppdatera spelare"
           deleteText="Radera spelare"
           onDeleteAction={this.deletePlayer}
           onUpdateAction={() => Alert.alert('Funktionen finns ej', 'Kommer snart...')}
-        />
-        <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between'} ]} >
+        />*/}
+        <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
           <View style={{flex:1, marginRight: 10}} >
-            <Button buttonType={this.active === 'game' ? 'active' : 'cta'} text="Matcher"  onPress={()=> this.setStats('game')} />
+            <Button buttonType={active === 'game' ? 'active' : 'cta'} text="Matcher"  onPress={()=> this.setStats('game')} />
           </View>
           <View style={{flex:1}} >
-            <Button buttonType={this.active === 'training' ? 'active' : 'cta'} text="Träningar" onPress={()=> this.setStats('training')} />
+            <Button buttonType={active === 'training' ? 'active' : 'cta'} text="Träningar" onPress={()=> this.setStats('training')} />
           </View>
-        </View>*/}
-      </ScrollView>
+        </View>
+      </View>
     );
   }
 }
 
 function mapStateToProps(state,ownProps) {
   const player = state.players.find(p => ownProps.id === p._id);
-  const { username } = state.user;
   return {
-    player,
-    username
+    player
   };
 }
 

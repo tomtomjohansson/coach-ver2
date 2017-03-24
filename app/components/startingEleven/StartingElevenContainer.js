@@ -190,7 +190,7 @@ class StartingElevenContainer extends Component {
               buttonType="benchRound"
             />
           </View>
-          <Stats onButton={this.changeFormation} eleven={this.state.startingEleven} bench={this.state.bench} formation={this.state.formation.name} />
+          <Stats onButton={this.changeFormation} bench={this.state.bench} formation={this.state.formation.name} />
         </Image>
       );
   }

@@ -247,7 +247,7 @@ const objects = {
       borderTopLeftRadius: 15,
       borderBottomLeftRadius: 15
     },
-    barTies: {
+    barDraws: {
       height: 20,
       backgroundColor: colors.neutral
     },
@@ -259,23 +259,26 @@ const objects = {
     },
     barText: {
       textAlign: 'center',
-      color: colors.black,
+      color: colors.offBlack,
       fontWeight: '600'
     },
     leftText: {
+      flex: 1,
       fontWeight: '600',
       fontSize: 14,
       textAlign: 'left',
       marginLeft: 10,
-      textAlignVertical: 'center'
+      textAlignVertical: 'center',
     },
     centerText: {
+      flex: 1,
       fontWeight: '600',
       fontSize: 14,
       textAlign: 'center',
-      textAlignVertical: 'center'
+      textAlignVertical: 'center',
     },
     rightText: {
+      flex: 1,
       fontWeight: '600',
       fontSize: 14,
       textAlign: 'right',

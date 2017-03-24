@@ -5,19 +5,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // Styles
 import {objects,colors,metrics} from '../../themes';
 
-function TrainingStats({player,stats}) {
+function TrainingStats({stats}) {
   return (
       <View>
-        <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}]} >
-          <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ player.name.toUpperCase() }</Text>
-          <View style={[objects.buttons.button,objects.buttons.cta,{marginBottom:0,flexDirection:'row'}]} >
-            <Icon name="phone"
-            size={metrics.icons.medium}
-            style={[objects.listitems.icon,{color:colors.offWhite}]}
-            />
-            <Text style={{color:colors.offWhite,paddingRight:10}} >{player.phone}</Text>
-          </View>
-        </View>
         <View style={[objects.listitems.container, {justifyContent:'flex-start'}]} >
           <Text style={[objects.listitems.text, {flex:1, color:colors.grassy}]} >TRÄNINGAR</Text>
         </View>

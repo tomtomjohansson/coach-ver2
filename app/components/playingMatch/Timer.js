@@ -77,21 +77,18 @@ class Timer extends Component {
     const minutes = moment.duration(min).asMinutes().toString();
     const seconds = moment(startTime).add(diff).subtract(minus).format('ss');
     return (
-      <View style={{ flex: 1, marginTop: 10 }}>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-          <Icon name="timer" size={metrics.icons.medium} style={{ flex: 1, textAlign: 'right', color: colors.greyishBlue }} />
-          <Text style={{ textAlign: 'center', fontSize: 32, color: colors.darkBlue }}>
+      <View style={{ flex: 1, marginTop: 10, flexDirection: 'row', alignItems: 'flex-start' }}>
+        <View style={{ flex:1, marginLeft: 10 }} >
+          <Button buttonType={'cta'} text={this.state.buttonText} onPress={this.handleStartStop.bind(this)} />
+        </View>
+        <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+          <Icon name="timer" size={metrics.icons.medium} style={{ color: colors.greyishBlue }} />
+          <Text style={{ fontSize: 32, color: colors.darkBlue }}>
             {(startTime) ? `${(minutes.length === 1) ? `0${minutes}` : minutes }:${seconds}` : '00:00'}
           </Text>
-          <View style={{ flex: 1 }} />
         </View>
-        <View style={[objects.screen.marginContainer,{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' } ]} >
-          <View style={{ flex:1, marginRight: 10 }} >
-            <Button buttonType={'cta'} text={this.state.buttonText} onPress={this.handleStartStop.bind(this)} />
-          </View>
-          <View style={{ flex: 1 }} >
-            <Button buttonType={'active'} text={this.state.buttonText2} onPress={this.halftime.bind(this)} disabled={this.state.btn2Disabled} />
-          </View>
+        <View style={{ flex: 1, marginRight: 10 }} >
+          <Button buttonType={'active'} text={this.state.buttonText2} onPress={this.halftime.bind(this)} disabled={this.state.btn2Disabled} />
         </View>
       </View>
     );

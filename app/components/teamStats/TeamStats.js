@@ -1,7 +1,8 @@
 import React, { Component } from 'React';
-import { View, Text, UIManager, LayoutAnimation, Dimensions } from 'react-native';
+import { View, Text, UIManager, LayoutAnimation, Dimensions, InteractionManager } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { objects, colors, metrics } from '../../themes';
+import roundToTwo from '../../common/scripts/roundToTwo';
 
 UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
@@ -10,15 +11,22 @@ export default class TeamStats extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      club: this.props.club || null,
-      count: this.props.teamStats.count || 0
+      ready: false
     };
+  }
+
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({
+        ready: true
+      });
+    });
   }
 
   renderDummy() {
     const width = Dimensions.get('window').width;
     return (
-      <View>
+      <View style={{ opacity: 0.5 }}>
 
         <View style={objects.stats.header}>
           <Text style={[objects.listitems.headerText,objects.stats.leftText,{fontSize: 16}]}>Klubb</Text>
@@ -28,19 +36,19 @@ export default class TeamStats extends Component {
         <View style={{backgroundColor: colors.semiDarken, paddingBottom: 5}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: metrics.baseMargin}}>
             <Text style={[objects.stats.leftText, objects.listitems.headerText, {fontSize: 14,color:colors.grassy}]} >VINST</Text>
-            <Text style={[objects.stats.centerText, objects.listitems.headerText, {fontSize: 14,color:colors.neutralDark,marginLeft:20}]} >OAVGJORT</Text>
+            <Text style={[objects.stats.centerText, objects.listitems.headerText, {fontSize: 14,color:colors.neutralDark}]} >OAVGJORT</Text>
             <Text style={[objects.stats.rightText, objects.listitems.headerText, {fontSize: 14,color:colors.danger} ]} >FÖRLUST</Text>
           </View>
 
           <View>
             <View style={[objects.stats.barContainer,{ width }]}>
-              <View style={[objects.stats.barFor, { width: width / 3 }]}>
+              <View style={[objects.stats.barFor, { width: width / 3 - metrics.baseMargin }]}>
                 <Text style={objects.stats.leftText}/>
               </View>
-              <View style={[objects.stats.barTies, { width: width / 3 }]}>
+              <View style={[objects.stats.barDraws, { width: width / 3 }]}>
                 <Text style={objects.stats.centerText}/>
               </View>
-              <View style={[objects.stats.barAgainst, { width: width / 3 }]}>
+              <View style={[objects.stats.barAgainst, { width: width / 3 - metrics.baseMargin }]}>
                 <Text style={objects.stats.rightText}/>
               </View>
             </View>
@@ -144,6 +152,24 @@ export default class TeamStats extends Component {
           </View>
         </View>
 
+        <View style={{paddingBottom: 5, borderTopWidth: 1, borderTopColor: colors.darken}}>
+          <View style={{marginVertical: metrics.baseMargin}}>
+            <Text style={[objects.stats.leftText, objects.listitems.headerText, {fontSize: 14,color:colors.grassy}]} >TRÄNINGAR</Text>
+          </View>
+
+          <View>
+            <Text style={objects.stats.barText}>Närvaro i snitt</Text>
+            <View style={[objects.stats.barContainer,{ width }]}>
+              <View style={[objects.stats.barFor, { width: width / 2 - metrics.baseMargin }]}>
+                <Text style={objects.stats.leftText}/>
+              </View>
+              <View style={[objects.stats.barAgainst, { width: width / 2 - metrics.baseMargin, backgroundColor: colors.neutral }]}>
+                <Text style={objects.stats.rightText}/>
+              </View>
+            </View>
+          </View>
+        </View>
+
       </View>
     );
   }
@@ -151,7 +177,6 @@ export default class TeamStats extends Component {
   renderStats() {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     const { teamStats } = this.props;
-    const { club } = this.state;
     const { width } = Dimensions.get('window');
     const {
       totalGoalsFor, totalGoalsAgainst,
@@ -160,13 +185,10 @@ export default class TeamStats extends Component {
       avgGoalsFor, avgGoalsAgainst,
       avgYellowFor, avgRedFor,
       avgShotsFor, avgShotsAgainst,
-      count
-    } = teamStats;
-
-    // temp results, awaiting backend
-    let wins = 4,
-        ties = 2,
-        loss = 1;
+      count, wins, draws, losses,
+      club
+    } = teamStats[0];
+    const { avgAttendance } = teamStats[1];
 
     return (
       <View>
@@ -179,20 +201,20 @@ export default class TeamStats extends Component {
         <View style={{backgroundColor: colors.semiDarken, paddingBottom: 5}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: metrics.baseMargin}}>
             <Text style={[objects.stats.leftText, objects.listitems.headerText, {fontSize: 14,color:colors.grassy}]} >VINST</Text>
-            <Text style={[objects.stats.centerText, objects.listitems.headerText, {fontSize: 14,color:colors.neutralDark,marginLeft:20}]} >OAVGJORT</Text>
+            <Text style={[objects.stats.centerText, objects.listitems.headerText, {fontSize: 14,color:colors.neutralDark}]} >OAVGJORT</Text>
             <Text style={[objects.stats.rightText, objects.listitems.headerText, {fontSize: 14,color:colors.danger} ]} >FÖRLUST</Text>
           </View>
 
           <View>
             <View style={[objects.stats.barContainer,{ width }]}>
-              <View style={[objects.stats.barFor, { width: (width) ? ((wins / (wins + ties + loss) * 100) / 100) * width - metrics.marginHorizontal : 0 }]}>
+              <View style={[objects.stats.barFor, { width: (width) ? ((wins / (wins + draws + losses) * 100) / 100) * width - metrics.marginHorizontal : 0 }]}>
                 <Text style={objects.stats.leftText}>{ wins > 0 ? wins : null }</Text>
               </View>
-              <View style={[objects.stats.barTies, { width: ((ties / (wins + ties + loss) * 100) / 100) * width}]}>
-                <Text style={objects.stats.centerText}>{ ties > 0 ? ties : null }</Text>
+              <View style={[objects.stats.barDraws, { width: ((draws / (wins + draws + losses) * 100) / 100) * width}]}>
+                <Text style={objects.stats.centerText}>{ draws > 0 ? draws : null }</Text>
               </View>
-              <View style={[objects.stats.barAgainst, { width: ((loss / (wins + ties + loss) * 100) / 100) * width - metrics.marginHorizontal }]}>
-                <Text style={objects.stats.rightText}>{ loss > 0 ? loss : null }</Text>
+              <View style={[objects.stats.barAgainst, { width: ((losses / (wins + draws + losses) * 100) / 100) * width - metrics.marginHorizontal }]}>
+                <Text style={objects.stats.rightText}>{ losses > 0 ? losses : null }</Text>
               </View>
             </View>
           </View>
@@ -281,7 +303,7 @@ export default class TeamStats extends Component {
                   size={metrics.icons.xl}
                   style={[objects.listitems.icon,{ color: 'gold', paddingHorizontal: 0, paddingLeft: -10, paddingRight: 0 }]}
                 />
-                <Text style={{ fontSize: metrics.icons.large }}>{Math.round(avgYellowFor)}</Text>
+                <Text style={{ fontSize: metrics.icons.large }}>{roundToTwo(avgYellowFor)}</Text>
             </View>
 
             <View style={{ flexDirection: 'row'}}>
@@ -290,7 +312,25 @@ export default class TeamStats extends Component {
                   size={metrics.icons.xl}
                   style={[objects.listitems.icon,{ color: colors.danger }]}
                 />
-                <Text style={{ fontSize: metrics.icons.large }}>{Math.round(avgRedFor)}</Text>
+                <Text style={{ fontSize: metrics.icons.large }}>{roundToTwo(avgRedFor)}</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={{paddingBottom: 5, borderTopWidth: 1, borderTopColor: colors.darken}}>
+          <View style={{marginVertical: metrics.baseMargin}}>
+            <Text style={[objects.stats.leftText, objects.listitems.headerText, {fontSize: 14,color:colors.grassy}]} >TRÄNINGAR</Text>
+          </View>
+
+          <View>
+            <Text style={objects.stats.barText}>Närvaro i snitt</Text>
+            <View style={[objects.stats.barContainer,{ width }]}>
+              <View style={[objects.stats.barFor, { width: (avgAttendance !== 0) ? (avgAttendance / 100) * width - metrics.marginHorizontal : width - (metrics.marginHorizontal * 2) }]}>
+                <Text style={objects.stats.leftText}/>
+              </View>
+              <View style={[objects.stats.barAgainst, { width: (avgAttendance !== 0) ? (Math.abs(100 - avgAttendance) / 100) * width - metrics.marginHorizontal : width - (metrics.marginHorizontal * 2), backgroundColor: colors.neutral }]}>
+                <Text style={objects.stats.rightText}/>
+              </View>
             </View>
           </View>
         </View>
@@ -301,8 +341,10 @@ export default class TeamStats extends Component {
 
   render() {
     const { teamStats } = this.props;
-    const exists = teamStats.hasOwnProperty('totalGoalsFor');
-    return (exists) ? this.renderStats() : this.renderDummy();
+    // const teamStats = [{},{}];
+    const { ready } = this.state;
+    const exists = teamStats[0].hasOwnProperty('totalGoalsFor');
+    return (exists && ready) ? this.renderStats() : this.renderDummy();
   }
 
 }

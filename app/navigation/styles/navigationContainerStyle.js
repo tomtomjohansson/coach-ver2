@@ -4,6 +4,7 @@ import {StyleSheet} from 'react-native';
 
 const NavbarHeight = Platform.OS === 'ios' ? 44 : 56;
 const statusMargin = Platform.OS === 'ios' ? -20 : 0;
+const fixOffset = Platform.OS === 'ios' ? 0 : 3;
 
 export default StyleSheet.create({
   container: {
@@ -22,11 +23,11 @@ export default StyleSheet.create({
     fontSize: 18
   },
   leftButton: {
-    marginTop: statusMargin,
+    marginTop: statusMargin - fixOffset,
     color: colors.snow
   },
   rightButton: {
-    marginTop: statusMargin,
+    marginTop: statusMargin - fixOffset,
     color: colors.snow
   }
 });
