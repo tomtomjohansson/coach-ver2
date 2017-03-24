@@ -10,9 +10,9 @@ export default function StatItem({title,stat,statName,onPress,club,opponent}) {
     return (
       <View>
         <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end'}]} >
-          <Text style={[objects.listitems.headerText, {textAlign:'center',fontSize:16}]} >{ club.length < 10 ? club : `${club.slice(0,8)}.` }</Text>
-          <Text style={[objects.listitems.headerText, {textAlign:'center'}]} >{title}</Text>
-          <Text style={[objects.listitems.headerText, {textAlign:'center',fontSize:16}]} >{ opponent.length < 10 ? opponent : `${opponent.slice(0,8)}.` }</Text>
+          <Text style={[objects.listitems.headerText, {flex:1,textAlign:'left',fontSize:16}]} >{ club.length < 10 ? club : `${club.slice(0,8)}.` }</Text>
+          <Text style={[objects.listitems.headerText, {flex:1,textAlign:'center'}]} >{title}</Text>
+          <Text style={[objects.listitems.headerText, {flex:1,textAlign:'right',fontSize:16}]} >{ opponent.length < 10 ? opponent : `${opponent.slice(0,8)}.` }</Text>
         </View>
         <View style={[objects.listitems.matchStats]} >
           <TouchableOpacity onPress={()=> onPress('for',statName)}>
