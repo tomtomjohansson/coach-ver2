@@ -11,6 +11,7 @@ import PlayerStats from './PlayerStats';
 import TrainingStats from './TrainingStats';
 import Button from '../../common/Button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import LoadingSpinner from '../../LoadingSpinner';
 // Styles
 import { objects, metrics, colors } from '../../themes';
 
@@ -46,7 +47,9 @@ class SinglePlayerContainer extends Component {
     const json = await response.json();
     if (json.success) {
       if (json.playerStats.length) {
-        this.setState({playerStats:json.playerStats});
+        this.setState({
+          playerStats: json.playerStats
+        });
       }
     } else {
       Alert.alert('Något gick fel',json.message);
@@ -62,7 +65,9 @@ class SinglePlayerContainer extends Component {
     const json = await response.json();
     if (json.success) {
       if (json.team.length) {
-        this.setState({ teamStats: json.team });
+        this.setState({
+          teamStats: json.team
+        });
       }
     } else {
       Alert.alert('Något gick fel', json.message);
@@ -88,11 +93,13 @@ class SinglePlayerContainer extends Component {
   }
   render() {
     const { player } = this.props;
-    const { active } = this.state;
+    const { active, teamStats, playerStats } = this.state;
     const name = (player) ? player.name.toUpperCase() : null;
     const phone = (player) ? player.phone : null;
+    const loading = (!teamStats[0].hasOwnProperty('club') && !playerStats[0].hasOwnProperty('goalsAvg'));
     return (
       <View style={objects.screen.mainContainer}>
+        <LoadingSpinner loading={loading} />
         <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]}>
           <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}]} >
             <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ name }</Text>

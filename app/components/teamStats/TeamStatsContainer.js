@@ -7,8 +7,9 @@ import autobind from 'autobind-decorator';
 // Components
 import TeamStats from './TeamStats';
 import Button from '../../common/Button';
+import LoadingSpinner from '../../LoadingSpinner';
 // Styles
-import {objects} from '../../themes';
+import { objects } from '../../themes';
 
 @autobind
 class TeamStatsContainer extends Component {
@@ -42,8 +43,10 @@ class TeamStatsContainer extends Component {
   render() {
     const { teamStats } = this.state;
     const { club } = this.props;
+    const loading = (!teamStats[0].hasOwnProperty('club'));
     return (
       <View style={objects.screen.mainContainer}>
+        <LoadingSpinner loading={loading} />
         <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]}>
           <TeamStats teamStats={teamStats} club={club} />
         </ScrollView>
