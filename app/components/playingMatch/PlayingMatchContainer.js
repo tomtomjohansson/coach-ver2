@@ -18,6 +18,7 @@ class PlayingMatchContainer extends Component {
     super(props);
   }
   submitStat(team,stat) {
+    if (!this.checkIfMatchEnded()){
     if ( team === 'for' && (stat !== 'corners') ) {
       goToRoute('addStatModal',{id: this.props.id,stat,team},false);
     } else {
@@ -30,11 +31,10 @@ class PlayingMatchContainer extends Component {
       }
       this.props.dispatch(updateStat(newGame));
     }
+    }
   }
   saveGameAsFinished() {
-    if (this.props.game.ended) {
-      Alert.alert('Matchen är över!','Du har redan sparat matchen som avslutad.')
-    } else {
+    if (!this.checkIfMatchEnded()) {
       this.props.dispatch(saveGameAsFinished(this.props.game)).then(this.handleAJAXresponse);
     }
   }
@@ -46,10 +46,16 @@ class PlayingMatchContainer extends Component {
     }
   }
   subPlayer() {
-    if (this.props.game.ended) {
-      Alert.alert('Matchen är över!','Du har redan sparat matchen som avslutad.')
-    } else {
+    if (!this.checkIfMatchEnded()) {
       goToRoute('subPlayerModal',{id: this.props.id},false);
+    }
+  }
+  checkIfMatchEnded() {
+     if (this.props.game.ended) {
+      Alert.alert('Matchen är över!','Du har redan sparat matchen som avslutad.');
+      return true;
+    } else {
+      return false;
     }
   }
   render() {
