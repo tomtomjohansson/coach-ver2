@@ -32,6 +32,7 @@ local.properties
 haste-map-react-native-packager*
 react-native-packager-cache*
 android/app/src/main/assets/index.android.bundle
+keystore.properties
 
 # node.js
 #
