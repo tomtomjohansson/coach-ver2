@@ -297,6 +297,21 @@ const objects = {
       borderTopLeftRadius: 15,
       borderBottomLeftRadius: 15
     }
+  },
+  settingsMenu: {
+    container: {
+      position: 'absolute',
+      top: 10,
+      right: 10,
+      backgroundColor: colors.offWhite,
+      padding: metrics.baseMargin,
+      borderRadius: 3,
+      borderWidth: 1,
+      borderColor: colors.semiTransparent
+    },
+    text: {
+      marginBottom: 5
+    }
   }
 };
 
