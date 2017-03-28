@@ -4,7 +4,7 @@ import {StyleSheet} from 'react-native';
 
 const NavbarHeight = Platform.OS === 'ios' ? 44 : 56;
 const statusMargin = Platform.OS === 'ios' ? -20 : 0;
-const fixOffset = Platform.OS === 'ios' ? 0 : 3;
+const fixOffset = Platform.OS === 'ios' ? 0 : 5;
 
 export default StyleSheet.create({
   container: {

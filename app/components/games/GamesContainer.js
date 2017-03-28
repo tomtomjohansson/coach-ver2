@@ -1,6 +1,6 @@
 // Dependencies
 import React, {Component} from 'React';
-import {View,ListView} from 'react-native';
+import {View,ListView,Keyboard} from 'react-native';
 import {connect} from 'react-redux';
 import {goToRoute} from '../../actions/routeActions';
 // Components
@@ -21,6 +21,7 @@ class GamesContainer extends Component {
     };
   }
   componentWillMount() {
+    Keyboard.dismiss();
     this.sortGames(this.props.games);
   }
   componentWillReceiveProps(nextProps){

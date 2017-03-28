@@ -17,7 +17,8 @@ class LoginContainer extends Component {
     this.state = {
       password: {},
       username: {},
-      submitted: false
+      submitted: false,
+      loading: false
     };
     this.validators = {password: false ,username: false };
     this.createValidator = createValidator.bind(this);
@@ -36,20 +37,22 @@ class LoginContainer extends Component {
   }
   @autobind
   submitLogin() {
-    this.setState({submitted: true});
+    this.setState({submitted: true,loading:true});
     if (this.checkValidation()) {
       const user = {
         username: this.state.username.value,
         password: this.state.password.value
       };
       this.props.dispatch(loginUser(user)).then(this.handleLoginResponse);
+    } else {
+      this.setState({loading:false});
     }
   }
   handleLoginResponse(response) {
     !response.success && Alert.alert('Inloggningen misslyckades', response.message);
   }
   render() {
-    const {password,username,submitted} = this.state;
+    const {password,username,submitted,loading} = this.state;
     return (
       <View style={{flex:1}} >
       <Image source={require('../../images/pitch.jpg')} style={[objects.screen.backgroundImage]} />
@@ -61,6 +64,7 @@ class LoginContainer extends Component {
         onChangeUsername={this.onChangeUsername}
         submitLogin={this.submitLogin}
         goToRegister={this.goToRegister}
+        loading={loading}
       />
       </View>
     );

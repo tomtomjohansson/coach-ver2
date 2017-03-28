@@ -1,7 +1,8 @@
 // Dependencies
 import React, {Component} from 'React';
-import { Alert, ScrollView, InteractionManager, View, Text } from 'react-native';
+import { Alert, ScrollView, InteractionManager, View, Text, TouchableOpacity } from 'react-native';
 import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
 import {deletePlayer} from '../../actions/playerActions';
 import {goToRoute} from '../../actions/routeActions';
 import {rootUrl,getHeaders} from '../../actions/ajaxConfig';
@@ -11,8 +12,11 @@ import PlayerStats from './PlayerStats';
 import TrainingStats from './TrainingStats';
 import Button from '../../common/Button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import LoadingSpinner from '../../LoadingSpinner';
+import CurrentPageSettings from '../../common/CurrentPageSettings';
 // Styles
 import { objects, metrics, colors } from '../../themes';
+import styles from '../../navigation/styles/navigationContainerStyle';
 
 @autobind
 class SinglePlayerContainer extends Component {
@@ -21,10 +25,12 @@ class SinglePlayerContainer extends Component {
     this.state = {
       playerStats: [{}],
       teamStats: [{}],
-      active: 'game'
+      active: 'game',
+      isVisible: false
     };
   }
   componentDidMount() {
+    Actions.refresh({ renderRightButton: this.renderPageSettings });
     InteractionManager.runAfterInteractions(() => {
       this.setStats('game');
       this.setTeamStats('all');
@@ -34,6 +40,19 @@ class SinglePlayerContainer extends Component {
     if (!nextProps.player) {
       goToRoute('players',{},true);
     }
+  }
+  renderPageSettings() {
+    return (
+      <TouchableOpacity onPress={() => this.togglePageSettings()}>
+        <Icon name="more-vert"
+          size={metrics.icons.medium}
+          style={styles.rightButton}
+        />
+      </TouchableOpacity>
+    );
+  }
+  togglePageSettings() {
+    this.setState({isVisible: !this.state.isVisible});
   }
   async setStats(type) {
     if (this.state.active !== type) { this.setState({active: type}); }
@@ -46,7 +65,9 @@ class SinglePlayerContainer extends Component {
     const json = await response.json();
     if (json.success) {
       if (json.playerStats.length) {
-        this.setState({playerStats:json.playerStats});
+        this.setState({
+          playerStats: json.playerStats
+        });
       }
     } else {
       Alert.alert('Något gick fel',json.message);
@@ -62,7 +83,9 @@ class SinglePlayerContainer extends Component {
     const json = await response.json();
     if (json.success) {
       if (json.team.length) {
-        this.setState({ teamStats: json.team });
+        this.setState({
+          teamStats: json.team
+        });
       }
     } else {
       Alert.alert('Något gick fel', json.message);
@@ -88,11 +111,25 @@ class SinglePlayerContainer extends Component {
   }
   render() {
     const { player } = this.props;
-    const { active } = this.state;
+    const { active, teamStats, playerStats, isVisible } = this.state;
     const name = (player) ? player.name.toUpperCase() : null;
     const phone = (player) ? player.phone : null;
+    const loading = (!teamStats[0].hasOwnProperty('club') && !playerStats[0].hasOwnProperty('goalsAvg'));
     return (
       <View style={objects.screen.mainContainer}>
+        <CurrentPageSettings visible={isVisible} toggle={() => this.togglePageSettings()}>
+          <Text style={objects.settingsMenu.text} onPress={() => {
+            this.togglePageSettings();
+            Alert.alert('Kommer snart..');
+          }}>Uppdatera spelare</Text>
+          <Text onPress={() => {
+            this.togglePageSettings();
+            Alert.alert('',
+              `Är du säker att du vill radera spelaren ${name}? Datan går inte att få tillbaka!`,
+              [{ text: 'Avbryt' },{ text: 'Radera spelaren', onPress: () => this.deletePlayer() }]);
+          }}>Radera spelare</Text>
+        </CurrentPageSettings>
+        <LoadingSpinner loading={loading} />
         <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]}>
           <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}]} >
             <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ name }</Text>
@@ -106,13 +143,6 @@ class SinglePlayerContainer extends Component {
           </View>
           {this.showGameOrTraining()}
         </ScrollView>
-        {/* Flytta detta till höger i router-headern?
-        <UpdateDelete
-          updateText="Uppdatera spelare"
-          deleteText="Radera spelare"
-          onDeleteAction={this.deletePlayer}
-          onUpdateAction={() => Alert.alert('Funktionen finns ej', 'Kommer snart...')}
-        />*/}
         <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
           <View style={{flex:1, marginRight: 10}} >
             <Button buttonType={active === 'game' ? 'active' : 'cta'} text="Matcher"  onPress={()=> this.setStats('game')} />
