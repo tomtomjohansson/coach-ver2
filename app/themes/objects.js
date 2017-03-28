@@ -39,9 +39,9 @@ const objects = {
     },
     scrollViewContainer: {
       marginTop: metrics.navBarHeight,
-      marginBottom: 62,
+      marginBottom: 60,
       flex: 1,
-      backgroundColor: colors.offWhite
+      backgroundColor: colors.transparent
     },
     marginContainer: {
       margin: metrics.baseMargin,

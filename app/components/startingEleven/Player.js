@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Dimensions } from 'react-native';
+import { View, TouchableOpacity, Dimensions, Platform } from 'react-native';
 import ExtraDimensions from 'react-native-extra-dimensions-android';
 import Svg, { Path, Text } from 'react-native-svg';
 import { colors } from '../../themes';
@@ -38,7 +38,7 @@ export default function Player ({ name, position, x, y, size, shirtColor, shorts
 	};
 
 	return (
-		<View>
+		<View style={Platform.OS === 'ios' && { zIndex: 200 }} >
 			<TouchableOpacity style={styles.player} onPress={() => onPress(position)}>
 				<Svg height={playerHeight} width={playerWidth} viewBox="0 0 40 70">
 					{/* SHIRT */}

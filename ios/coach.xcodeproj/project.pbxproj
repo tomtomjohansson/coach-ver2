@@ -40,6 +40,7 @@
 		C30108391E39EA6200E1CE0E /* Cabin-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C30108381E39EA6200E1CE0E /* Cabin-Regular.ttf */; };
 		C301083B1E39EA7400E1CE0E /* Cabin-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C301083A1E39EA7400E1CE0E /* Cabin-SemiBold.ttf */; };
 		C301083E1E39EA8B00E1CE0E /* Cabin-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C301083D1E39EA8B00E1CE0E /* Cabin-Italic.ttf */; };
+		C3BD31001E895CF100EE96D7 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BD30DB1E894FA100EE96D7 /* libART.a */; };
 		C6145DD303F7499385C49C5E /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 905B01D3377948EF90EC61CC /* SimpleLineIcons.ttf */; };
 		D8CED94CDE7A423ABC19FACD /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08F7DF7DD4F04F98A3432634 /* Foundation.ttf */; };
 		FFA6FD07B438405F97E56EF3 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C83A178A0A19481285E6D7D5 /* FontAwesome.ttf */; };
@@ -235,6 +236,20 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		C3BD30DA1E894FA100EE96D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3BD30D61E894FA100EE96D7 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
+		C3BD30FC1E89520D00EE96D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3BD30F81E89520D00EE96D7 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
 		C3DD317D1E80874500444190 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C31F6A0C3E4D0CBD1CC1F2 /* RNSVG.xcodeproj */;
@@ -286,6 +301,8 @@
 		C301083A1E39EA7400E1CE0E /* Cabin-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cabin-SemiBold.ttf"; path = "../../../../Downloads/Cabin-SemiBold.ttf"; sourceTree = "<group>"; };
 		C301083C1E39EA8200E1CE0E /* Cabin-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cabin-Medium.ttf"; path = "../../../../Downloads/Cabin-Medium.ttf"; sourceTree = "<group>"; };
 		C301083D1E39EA8B00E1CE0E /* Cabin-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cabin-Italic.ttf"; path = "../../../../Downloads/Cabin-Italic.ttf"; sourceTree = "<group>"; };
+		C3BD30D61E894FA100EE96D7 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		C3BD30F81E89520D00EE96D7 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		C83A178A0A19481285E6D7D5 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		E49A0419EEAD44928E11BD5D /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		F164EEB4F612491CADB7254A /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -304,6 +321,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3BD31001E895CF100EE96D7 /* libART.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -441,6 +459,7 @@
 		73B2B48672EE40DA8B385BED /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C3BD30D61E894FA100EE96D7 /* ART.xcodeproj */,
 				C301083D1E39EA8B00E1CE0E /* Cabin-Italic.ttf */,
 				C301083C1E39EA8200E1CE0E /* Cabin-Medium.ttf */,
 				C301083A1E39EA7400E1CE0E /* Cabin-SemiBold.ttf */,
@@ -475,6 +494,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C3BD30F81E89520D00EE96D7 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -527,6 +547,22 @@
 			isa = PBXGroup;
 			children = (
 				C30108371E39EA0200E1CE0E /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C3BD30D71E894FA100EE96D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C3BD30DB1E894FA100EE96D7 /* libART.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C3BD30F91E89520D00EE96D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C3BD30FD1E89520D00EE96D7 /* libART.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -605,6 +641,14 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = C3BD30D71E894FA100EE96D7 /* Products */;
+					ProjectRef = C3BD30D61E894FA100EE96D7 /* ART.xcodeproj */;
+				},
+				{
+					ProductGroup = C3BD30F91E89520D00EE96D7 /* Products */;
+					ProjectRef = C3BD30F81E89520D00EE96D7 /* ART.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -847,6 +891,20 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = C30108361E39EA0200E1CE0E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C3BD30DB1E894FA100EE96D7 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = C3BD30DA1E894FA100EE96D7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C3BD30FD1E89520D00EE96D7 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = C3BD30FC1E89520D00EE96D7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C3DD317E1E80874500444190 /* libRNSVG.a */ = {

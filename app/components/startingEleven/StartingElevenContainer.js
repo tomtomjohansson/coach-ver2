@@ -56,13 +56,13 @@ class StartingElevenContainer extends Component {
     this.setState({ startingEleven: [] });
   }
   saveEleven() {
-    const { startingEleven, bench } = this.state;
+    const { startingEleven, bench, formation } = this.state;
     if (startingEleven.length < 11) {
       Alert.alert('För få spelare', `Du har bara tagit ut ${startingEleven.length} spelare.`);
     } else if (startingEleven.length > 11) {
       Alert.alert('För många spelare', `Du har tagit ut ${startingEleven.length - 11} spelare för mycket`);
     } else {
-      this.props.dispatch(saveEleven(this.props.game, startingEleven, bench)).then(this.handleAJAXresponse);
+      this.props.dispatch(saveEleven(this.props.game, startingEleven, bench, formation.name)).then(this.handleAJAXresponse);
     }
   }
   handleAJAXresponse(response) {
@@ -199,8 +199,8 @@ class StartingElevenContainer extends Component {
 function mapStateToProps(state,ownProps) {
   const { players, user } = state;
   const { teamColors } = user;
-  const formation = '4-4-2';
   const game = state.games.find(g => g._id === ownProps.id);
+  const formation = game.formation || '4-4-2';
   const startingEleven = game.players.filter(p => p.position !== 'BENCH');
   const bench = game.players.filter(p => p.position === 'BENCH');
   return {

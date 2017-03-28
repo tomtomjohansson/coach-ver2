@@ -13,7 +13,7 @@ const metrics = {
   searchBarHeight: 30,
   screenWidth: width < height ? width : height,
   screenHeight: width < height ? height : width,
-  navBarHeight: (Platform.OS === 'ios') ? 44 : 54,
+  navBarHeight: (Platform.OS === 'ios') ? 44 : 56,
   buttonRadius: 4,
   icons: {
     tiny: 15,
