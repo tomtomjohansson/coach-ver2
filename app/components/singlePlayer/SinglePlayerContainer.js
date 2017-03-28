@@ -143,13 +143,6 @@ class SinglePlayerContainer extends Component {
           </View>
           {this.showGameOrTraining()}
         </ScrollView>
-        {/* Flytta detta till höger i router-headern?
-        <UpdateDelete
-          updateText="Uppdatera spelare"
-          deleteText="Radera spelare"
-          onDeleteAction={this.deletePlayer}
-          onUpdateAction={() => Alert.alert('Funktionen finns ej', 'Kommer snart...')}
-        />*/}
         <View style={[objects.screen.marginContainer,{flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
           <View style={{flex:1, marginRight: 10}} >
             <Button buttonType={active === 'game' ? 'active' : 'cta'} text="Matcher"  onPress={()=> this.setStats('game')} />
