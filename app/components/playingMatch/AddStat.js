@@ -1,7 +1,7 @@
 // Dependencies
 import React, {Component} from 'React';
 import {connect} from 'react-redux';
-import {View} from 'react-native';
+import {View,Alert} from 'react-native';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 import {updateStat} from '../../actions/gameActions';
 import autobind from 'autobind-decorator';
@@ -39,6 +39,10 @@ class AddStat extends Component {
       newPlayer[stat]++;
     }
     if (stat === 'goals') {
+      if (!selectedAss[0]) {
+        Alert.alert('Oj då!','Du måste välja en assistläggare. Om ingen gjorde assist så välj alternativet "Ingen Assist".');
+        return;
+      }
       if (newPlayer) {
         newPlayer.shots++;
         newGame.shots[team]++;
