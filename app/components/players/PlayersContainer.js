@@ -1,6 +1,6 @@
 // Dependencies
 import React, {Component} from 'React';
-import {View} from 'react-native';
+import {View,Keyboard} from 'react-native';
 import {connect} from 'react-redux';
 import {goToRoute} from '../../actions/routeActions';
 import autobind from 'autobind-decorator';
@@ -17,6 +17,9 @@ class PlayerContainer extends Component {
     this.state = {
       players: [ ...this.props.players ]
     };
+  }
+  componentWillMount() {
+    Keyboard.dismiss();
   }
   goToSinglePlayer(id) {
     goToRoute('singlePlayer',{id:id}, false);
