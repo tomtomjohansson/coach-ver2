@@ -130,7 +130,7 @@ class SinglePlayerContainer extends Component {
           }}>Radera spelare</Text>
         </CurrentPageSettings>
         <LoadingSpinner loading={loading} />
-        <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]}>
+        <ScrollView style={[objects.screen.scrollViewContainer]}>
           <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}]} >
             <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ name }</Text>
             <View style={[objects.buttons.button,objects.buttons.cta,{marginBottom:0,flexDirection:'row'}]} >
