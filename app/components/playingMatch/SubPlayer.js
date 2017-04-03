@@ -61,7 +61,6 @@ class SubPlayer extends Component {
       <View style={[objects.screen.topContainer]} >
         <Input
           label="Minut för byte*"
-          autoFocus
           autoCapitalize={'none'}
           onChangeText={this.onChangeMinute}
           error={minute.error}
