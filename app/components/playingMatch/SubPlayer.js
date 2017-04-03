@@ -20,8 +20,8 @@ class SubPlayer extends Component {
     this.state = {
       selectedOut: [],
       selectedIn:[],
-      minute: {},
-      submitted: false,
+      minute: { value: this.props.minute } || {},
+      submitted: false
     };
     this.validators = {minute: false };
     this.createValidator = createValidator.bind(this);
@@ -91,10 +91,12 @@ function mapStateToProps(state,ownProps) {
       bench.push(player);
     }
   });
+  const minute = ownProps.minute.toString();
   return {
     game,
     playing,
-    bench
+    bench,
+    minute
   };
 }
 
