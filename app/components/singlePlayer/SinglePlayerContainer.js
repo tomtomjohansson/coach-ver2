@@ -123,7 +123,6 @@ class SinglePlayerContainer extends Component {
     const { active, teamStats, playerStats, isVisible } = this.state;
     const name = (player) ? player.name.toUpperCase() : null;
     const phone = (player) ? player.phone : null;
-    const loading = (!teamStats[0].hasOwnProperty('club') && !playerStats[0].hasOwnProperty('goalsAvg'));
     return (
       <View style={objects.screen.mainContainer}>
         <CurrentPageSettings visible={isVisible} toggle={() => this.togglePageSettings()}>
@@ -138,7 +137,6 @@ class SinglePlayerContainer extends Component {
               [{ text: 'Avbryt' },{ text: 'Radera spelaren', onPress: () => this.deletePlayer() }]);
           }}>Radera spelare</Text>
         </CurrentPageSettings>
-        <LoadingSpinner loading={loading} />
         <ScrollView style={[objects.screen.scrollViewContainer]}>
           <View style={[objects.listitems.header, {flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}]} >
             <Text style={[objects.listitems.headerText, {fontSize:16, flex:1}]} >{ name }</Text>

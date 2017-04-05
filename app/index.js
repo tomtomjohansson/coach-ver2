@@ -8,6 +8,7 @@ import {persistStore} from 'redux-persist';
 import LoginHandler from './LoginHandler';
 import AppStatusBar from './components/statusBar/StatusBar';
 import LoadingSpinner from './LoadingSpinner';
+import InitialSpinner from './InitialSpinner';
 // Styles
 import {colors} from './themes';
 
@@ -41,7 +42,7 @@ class App extends Component {
     if (!this.state.rehydrated) {
       return (
         <View style={{flex:1}}>
-          <Text> Laddar ...</Text>
+          <InitialSpinner loading />
         </View>
       );
     }
