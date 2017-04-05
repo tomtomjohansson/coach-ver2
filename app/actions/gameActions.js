@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import {rootUrl,getHeaders} from './ajaxConfig';
-import {beginAjaxCall, ajaxCallError} from './ajaxActions';
+import {beginAjaxCall, ajaxCallError, ajaxCallDone} from './ajaxActions';
 
 export function addGameSuccess(games) {
   return {
@@ -23,7 +23,7 @@ export function saveElevenSuccess(game) {
   };
 }
 
-export function updateStat(game) {
+export function updateStatSuccess(game) {
   return {
     type: types.UPDATE_STAT_SUCCESS,
     game
@@ -46,6 +46,7 @@ export function addGame(game) {
         await dispatch(addGameSuccess(json.games));
         return { success: json.success };
       } else {
+        dispatch(ajaxCallDone);
         return { success: json.success, message: json.message };
       }
     }
@@ -72,6 +73,7 @@ export function saveEleven(game,eleven,bench = [],formation) {
         await dispatch(saveElevenSuccess(json.game));
         return { success: json.success };
       } else {
+        dispatch(ajaxCallDone);
         return { success: json.success, message: json.message };
       }
     }
@@ -95,9 +97,10 @@ export function saveGameAsFinished(game) {
       });
       const json = await response.json();
       if (json.success) {
-        await dispatch(updateStat(json.game));
+        await dispatch(updateStatSuccess(json.game));
         return { success: json.success };
       } else {
+        dispatch(ajaxCallDone);
         return { success: json.success, message: json.message };
       }
     }
@@ -121,9 +124,10 @@ export function subPlayer(game,playerOut,playerIn,minute) {
       });
       const json = await response.json();
       if (json.success) {
-        await dispatch(updateStat(json.game));
+        await dispatch(updateStatSuccess(json.game));
         return { success: json.success };
       } else {
+        dispatch(ajaxCallDone);
         return { success: json.success, message: json.message };
       }
     }
@@ -149,6 +153,34 @@ export function removeGame(gameID) {
         await dispatch(removeGameSuccess(gameID));
         return { success: json.success, message: json.message };
       } else {
+        dispatch(ajaxCallDone);
+        return { success: json.success, message: json.message };
+      }
+    }
+    catch (e) {
+      dispatch(ajaxCallError);
+      return { success: false, message: e };
+    }
+  };
+}
+
+export function updateStat(game) {
+  const url = `${rootUrl}/api/games/stat`;
+  return async (dispatch,getState) => {
+    const headers = await getHeaders();
+    dispatch(beginAjaxCall());
+    try {
+      const response = await fetch(url,{
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({game})
+      });
+      const json = await response.json();
+      if (json.success) {
+        await dispatch(updateStatSuccess(json.game));
+        return { success: json.success };
+      } else {
+        dispatch(ajaxCallDone);
         return { success: json.success, message: json.message };
       }
     }

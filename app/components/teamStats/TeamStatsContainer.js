@@ -7,9 +7,9 @@ import autobind from 'autobind-decorator';
 // Components
 import TeamStats from './TeamStats';
 import Button from '../../common/Button';
-import LoadingSpinner from '../../LoadingSpinner';
 // Styles
 import { objects } from '../../themes';
+import {beginAjaxCall,ajaxCallError,ajaxCallDone} from '../../actions/ajaxActions';
 
 @autobind
 class TeamStatsContainer extends Component {
@@ -25,6 +25,7 @@ class TeamStatsContainer extends Component {
   }
   async setStats(venue) {
     this.active = venue;
+    this.props.dispatch(beginAjaxCall());
     const url = `${rootUrl}/api/teamStats/${venue}`;
     const headers = await getHeaders();
     const response = await fetch(url,{
@@ -36,17 +37,17 @@ class TeamStatsContainer extends Component {
       if (json.team.length) {
         this.setState({ teamStats: [ ...json.team, ...json.training ] });
       }
+        this.props.dispatch(ajaxCallDone());
     } else {
+      this.props.dispatch(ajaxCallError());
       Alert.alert('Något gick fel', json.message);
     }
   }
   render() {
     const { teamStats } = this.state;
     const { club } = this.props;
-    const loading = (!teamStats[0].hasOwnProperty('club'));
     return (
       <View style={objects.screen.mainContainer}>
-        <LoadingSpinner loading={loading} />
         <ScrollView style={[objects.screen.scrollViewContainer]}>
           <TeamStats teamStats={teamStats} club={club} />
         </ScrollView>

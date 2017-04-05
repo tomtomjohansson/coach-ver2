@@ -1,10 +1,10 @@
 import * as types from './actionTypes';
 import {rootUrl,getHeaders,saveToken} from './ajaxConfig';
-import {beginAjaxCall, ajaxCallError} from './ajaxActions';
+import {beginAjaxCall, ajaxCallError, ajaxCallDone} from './ajaxActions';
 
 export function loginUserSuccess(response) {
   return {
-    type: types.LOGIN_USER_SUCCESS,
+    type: types.LOGIN_USER_DONE,
     user: response.user,
     players: response.players,
     trainings: response.trainings,
@@ -14,7 +14,7 @@ export function loginUserSuccess(response) {
 
 export function registerUserSuccess(response) {
   return {
-    type: types.REGISTER_USER_SUCCESS,
+    type: types.REGISTER_USER_DONE,
     user: response.user,
     players: response.players,
     trainings: response.trainings,
@@ -32,7 +32,7 @@ export function loginUser(credentials) {
   const url = `${rootUrl}/api/authenticate/login`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    dispatch(beginAjaxCall());
+    // dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'POST',
@@ -47,6 +47,7 @@ export function loginUser(credentials) {
           success: json.success
         };
       } else {
+        // dispatch(ajaxCallDone);
         return {
           success: json.success,
           message: json.message
@@ -54,7 +55,7 @@ export function loginUser(credentials) {
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      // dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };
@@ -64,7 +65,7 @@ export function registerUser (credentials) {
   const url = `${rootUrl}/api/authenticate/register`;
   return async (dispatch,getState) => {
     const headers = await getHeaders();
-    dispatch(beginAjaxCall());
+    // dispatch(beginAjaxCall());
     try {
       const response = await fetch(url,{
         method: 'POST',
@@ -79,6 +80,7 @@ export function registerUser (credentials) {
           success: json.success
         };
       } else {
+        // dispatch(ajaxCallDone);
         return {
           success: json.success,
           message: json.message
@@ -86,7 +88,7 @@ export function registerUser (credentials) {
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      // dispatch(ajaxCallError);
       return { success: false, message: e };
     }
   };

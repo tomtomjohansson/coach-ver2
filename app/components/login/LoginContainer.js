@@ -48,7 +48,9 @@ class LoginContainer extends Component {
       this.setState({loading:false});
     }
   }
+  @autobind
   handleLoginResponse(response) {
+    this.setState({loading:false});
     !response.success && Alert.alert('Inloggningen misslyckades', response.message);
   }
   render() {

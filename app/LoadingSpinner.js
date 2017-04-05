@@ -1,9 +1,25 @@
-import React from 'React';
+import React, {Component} from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { connect } from 'react-redux';
 import {colors} from './themes';
 
-function LoadingSpinner({loading}) {
-  return <Spinner visible={loading} textContent={'Laddar...'} textStyle={{color: colors.grassy}} color={colors.grassy} overlayColor={colors.semiPlusTransparentBlack} />;
+
+class LoadingSpinner extends Component {
+  constructor (props) {
+    super(props);
+  }
+  render(){
+    return (
+      <Spinner visible={this.props.loading > 0} textStyle={{color: colors.grassy}} color={colors.grassy} overlayColor={colors.semiPlusTransparentBlack} />
+    );
+  }
 }
 
-export default LoadingSpinner;
+function mapStateToProps(state) {
+  const loading = state.ajax;
+  return {
+    loading
+  };
+}
+
+export default connect(mapStateToProps)(LoadingSpinner);

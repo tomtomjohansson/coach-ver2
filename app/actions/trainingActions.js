@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import {rootUrl,getHeaders} from './ajaxConfig';
-import {beginAjaxCall, ajaxCallError} from './ajaxActions';
+import {beginAjaxCall, ajaxCallError, ajaxCallDone} from './ajaxActions';
 
 export function addTrainingSuccess(trainings) {
   return {
@@ -35,8 +35,14 @@ export function addTraining(training) {
         body: JSON.stringify(training)
       });
       const json = await response.json();
-      await dispatch(addTrainingSuccess(json.trainings));
-      return { success: json.success, message: json.message };
+      if (json.success) {
+        await dispatch(addTrainingSuccess(json.trainings));
+        return { success: json.success, message: json.message };
+      } else {
+        dispatch(ajaxCallDone);
+        return { success: json.success, message: json.message };
+      }
+      
     }
     catch (e) {
       dispatch(ajaxCallError);
@@ -60,6 +66,7 @@ export function deleteTraining(trainingID) {
         await dispatch(deleteTrainingSuccess(trainingID));
         return { success: json.success };
       } else {
+        dispatch(ajaxCallDone);
         return { success: json.success, message: json.message };
       }
     }
@@ -86,6 +93,7 @@ export function updateTraining(training,attending,attendance) {
         await dispatch(updateTrainingSuccess(json.training));
         return { success: json.success };
       } else {
+        dispatch(ajaxCallDone);
         return { success: json.success, message: json.message };
       }
     }
@@ -107,6 +115,9 @@ export function getTrainings() {
         headers
       });
       const json = await response.json();
+      setTimeout(()=>{
+        dispatch(ajaxCallDone);
+      },500);
       return { success: json.success, message: json.message, trainings: json.trainings };
     }
     catch (e) {

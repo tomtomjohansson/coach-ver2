@@ -3,9 +3,9 @@ import * as types from '../actions/actionTypes';
 
 export default function playerReducer(state = initialState.players, action) {
   switch (action.type) {
-    case types.LOGIN_USER_SUCCESS:
+    case types.LOGIN_USER_DONE:
       return action.players;
-    case types.REGISTER_USER_SUCCESS:
+    case types.REGISTER_USER_DONE:
       return action.players;
     case types.LOGOUT_USER_SUCCESS:
       return [

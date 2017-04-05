@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import {rootUrl,getHeaders} from './ajaxConfig';
-import {beginAjaxCall, ajaxCallError} from './ajaxActions';
+import {beginAjaxCall, ajaxCallError, ajaxCallDone} from './ajaxActions';
 
 export function addPlayerSuccess(players) {
   return {
@@ -32,6 +32,7 @@ export function addPlayer(player) {
         await dispatch(addPlayerSuccess(json.players));
         return { success: json.success };
       } else {
+        dispatch(ajaxCallDone);
         return { success: json.success, message: json.message };
       }
     }
@@ -57,6 +58,7 @@ export function deletePlayer(playerID) {
         await dispatch(removePlayerSuccess(playerID));
         return { success: json.success };
       } else {
+        dispatch(ajaxCallDone);
         return { success: json.success, message: json.message };
       }
     }

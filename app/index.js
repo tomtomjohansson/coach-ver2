@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { View, AsyncStorage } from 'react-native';
+import { View, AsyncStorage, Text } from 'react-native';
 import {persistStore} from 'redux-persist';
 // Containers, Components
 import LoginHandler from './LoginHandler';
@@ -41,7 +41,7 @@ class App extends Component {
     if (!this.state.rehydrated) {
       return (
         <View style={{flex:1}}>
-          <LoadingSpinner loading />
+          <Text> Laddar ...</Text>
         </View>
       );
     }
@@ -50,6 +50,7 @@ class App extends Component {
         <View style={{flex:1}}>
           <AppStatusBar backgroundColor={colors.black} barStyle="light-content" />
           <LoginHandler />
+          <LoadingSpinner />
         </View>
       </Provider>
     );
