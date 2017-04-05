@@ -47,7 +47,7 @@ class TeamStatsContainer extends Component {
     return (
       <View style={objects.screen.mainContainer}>
         <LoadingSpinner loading={loading} />
-        <ScrollView style={[objects.screen.mainContainer,{marginTop: 56,marginBottom: 60}]}>
+        <ScrollView style={[objects.screen.scrollViewContainer]}>
           <TeamStats teamStats={teamStats} club={club} />
         </ScrollView>
         <View style={[objects.screen.marginContainer,{ flex:1, flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0} ]} >
