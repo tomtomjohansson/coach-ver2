@@ -46,12 +46,12 @@ export function addGame(game) {
         await dispatch(addGameSuccess(json.games));
         return { success: json.success };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -73,12 +73,12 @@ export function saveEleven(game,eleven,bench = [],formation) {
         await dispatch(saveElevenSuccess(json.game));
         return { success: json.success };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -100,12 +100,12 @@ export function saveGameAsFinished(game) {
         await dispatch(updateStatSuccess(json.game));
         return { success: json.success };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -127,12 +127,12 @@ export function subPlayer(game,playerOut,playerIn,minute) {
         await dispatch(updateStatSuccess(json.game));
         return { success: json.success };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -153,12 +153,12 @@ export function removeGame(gameID) {
         await dispatch(removeGameSuccess(gameID));
         return { success: json.success, message: json.message };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -180,12 +180,12 @@ export function updateStat(game) {
         await dispatch(updateStatSuccess(json.game));
         return { success: json.success };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };

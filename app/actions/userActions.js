@@ -47,7 +47,7 @@ export function loginUser(credentials) {
           success: json.success
         };
       } else {
-        // dispatch(ajaxCallDone);
+        // dispatch(ajaxCallDone());
         return {
           success: json.success,
           message: json.message
@@ -55,7 +55,7 @@ export function loginUser(credentials) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError);
+      // dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -80,7 +80,7 @@ export function registerUser (credentials) {
           success: json.success
         };
       } else {
-        // dispatch(ajaxCallDone);
+        // dispatch(ajaxCallDone());
         return {
           success: json.success,
           message: json.message
@@ -88,7 +88,7 @@ export function registerUser (credentials) {
       }
     }
     catch (e) {
-      // dispatch(ajaxCallError);
+      // dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };

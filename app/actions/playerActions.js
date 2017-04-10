@@ -32,12 +32,12 @@ export function addPlayer(player) {
         await dispatch(addPlayerSuccess(json.players));
         return { success: json.success };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -58,12 +58,12 @@ export function deletePlayer(playerID) {
         await dispatch(removePlayerSuccess(playerID));
         return { success: json.success };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };

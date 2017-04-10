@@ -39,13 +39,13 @@ export function addTraining(training) {
         await dispatch(addTrainingSuccess(json.trainings));
         return { success: json.success, message: json.message };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
       
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -66,12 +66,12 @@ export function deleteTraining(trainingID) {
         await dispatch(deleteTrainingSuccess(trainingID));
         return { success: json.success };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -93,12 +93,12 @@ export function updateTraining(training,attending,attendance) {
         await dispatch(updateTrainingSuccess(json.training));
         return { success: json.success };
       } else {
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
         return { success: json.success, message: json.message };
       }
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
@@ -116,12 +116,12 @@ export function getTrainings() {
       });
       const json = await response.json();
       setTimeout(()=>{
-        dispatch(ajaxCallDone);
+        dispatch(ajaxCallDone());
       },500);
       return { success: json.success, message: json.message, trainings: json.trainings };
     }
     catch (e) {
-      dispatch(ajaxCallError);
+      dispatch(ajaxCallError());
       return { success: false, message: e };
     }
   };
