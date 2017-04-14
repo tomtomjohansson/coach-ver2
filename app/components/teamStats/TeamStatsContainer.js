@@ -1,7 +1,7 @@
 // Dependencies
 import React, {Component} from 'React';
 import {connect} from 'react-redux';
-import {ScrollView,View,Alert} from 'react-native';
+import {ScrollView,View,Alert,Platform} from 'react-native';
 import {rootUrl,getHeaders} from '../../actions/ajaxConfig';
 import autobind from 'autobind-decorator';
 // Components
@@ -19,12 +19,16 @@ class TeamStatsContainer extends Component {
       teamStats: [{}]
     };
     this.active = 'all';
+    this.initial = true;
   }
   componentDidMount() {
     this.setStats('all');
   }
   async setStats(venue) {
-    this.active = venue;
+    if (this.active === venue && this.initial === false){
+      return;
+    }
+    this.initial = false;
     this.props.dispatch(beginAjaxCall());
     const url = `${rootUrl}/api/teamStats/${venue}`;
     const headers = await getHeaders();
@@ -35,9 +39,16 @@ class TeamStatsContainer extends Component {
     const json = await response.json();
     if (json.success) {
       if (json.team.length) {
+        this.active = venue;
         this.setState({ teamStats: [ ...json.team, ...json.training ] });
       }
+      if (Platform.OS === 'ios') {
         this.props.dispatch(ajaxCallDone());
+      } else {
+        setTimeout(()=>{
+          this.props.dispatch(ajaxCallDone());
+        },100);
+      }     
     } else {
       this.props.dispatch(ajaxCallError());
       Alert.alert('Något gick fel', json.message);

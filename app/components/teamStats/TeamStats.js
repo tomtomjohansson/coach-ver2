@@ -188,7 +188,7 @@ export default class TeamStats extends Component {
       count, wins, draws, losses,
       club
     } = teamStats[0];
-    const { avgAttendance } = teamStats[1];
+    const { avgAttendance } = teamStats[1] || 0;
 
     return (
       <View>

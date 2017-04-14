@@ -53,16 +53,20 @@ class StartingElevenContainer extends Component {
     return colors.black;
   }
   removeAllFromEleven() {
-    this.setState({ startingEleven: [] });
+    if (!this.checkIfMatchEnded()) {
+      this.setState({ startingEleven: [] });
+    }
   }
   saveEleven() {
-    const { startingEleven, bench, formation } = this.state;
-    if (startingEleven.length < 11) {
-      Alert.alert('För få spelare', `Du har bara tagit ut ${startingEleven.length} spelare.`);
-    } else if (startingEleven.length > 11) {
-      Alert.alert('För många spelare', `Du har tagit ut ${startingEleven.length - 11} spelare för mycket`);
-    } else {
-      this.props.dispatch(saveEleven(this.props.game, startingEleven, bench, formation.name)).then(this.handleAJAXresponse);
+    if (!this.checkIfMatchEnded()) {
+      const { startingEleven, bench, formation } = this.state;
+      if (startingEleven.length < 11) {
+        Alert.alert('För få spelare', `Du har bara tagit ut ${startingEleven.length} spelare.`);
+      } else if (startingEleven.length > 11) {
+        Alert.alert('För många spelare', `Du har tagit ut ${startingEleven.length - 11} spelare för mycket`);
+      } else {
+        this.props.dispatch(saveEleven(this.props.game, startingEleven, bench, formation.name)).then(this.handleAJAXresponse);
+      }
     }
   }
   handleAJAXresponse(response) {
@@ -79,15 +83,17 @@ class StartingElevenContainer extends Component {
     });
   }
   pickPlayer(pos) {
-    const { startingEleven, bench } = this.state;
-    const { players } = this.props;
-    this.setState({
-      pickingPosition: pos
-    });
-    if (pos === 'BENCH') {
-      goToRoute('addPlayerToBench', { startingEleven, bench, players, checkBench: this.checkBench }, false);
-    } else {
-      goToRoute('addPlayerToEleven', { startingEleven, bench, players, checkPlayer: this.checkPlayer }, false);
+    if (!this.checkIfMatchEnded()) {
+      const { startingEleven, bench } = this.state;
+      const { players } = this.props;
+      this.setState({
+        pickingPosition: pos
+      });
+      if (pos === 'BENCH') {
+        goToRoute('addPlayerToBench', { startingEleven, bench, players, checkBench: this.checkBench }, false);
+      } else {
+        goToRoute('addPlayerToEleven', { startingEleven, bench, players, checkPlayer: this.checkPlayer }, false);
+      }
     }
   }
   playerAdded(pos) {
@@ -170,7 +176,17 @@ class StartingElevenContainer extends Component {
     Actions.pop();
   }
   changeFormation(currentFormation) {
+    if (!this.checkIfMatchEnded()) {
     goToRoute('pickFormation', { formations, updateFormation: this.updateFormation }, false);
+    }
+  }
+  checkIfMatchEnded() {
+     if (this.props.game.ended) {
+      Alert.alert('Matchen är över!','Du har redan sparat matchen som avslutad.');
+      return true;
+    } else {
+      return false;
+    }
   }
   render() {
       return (
