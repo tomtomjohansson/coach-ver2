@@ -59,10 +59,14 @@ class SinglePlayerContainer extends Component {
     this.setState({isVisible: !this.state.isVisible});
   }
   async setStats(type) {
+    if (this.state.active !== type) { 
+      this.setState({active: type}); 
+    } else if (!this.initial) {
+      return;
+    }
     if (!this.initial) {
       this.props.dispatch(beginAjaxCall());
     }
-    if (this.state.active !== type) { this.setState({active: type}); }
     const url = `${rootUrl}/api/playerStats/${type}/${this.props.player._id}/`;
     const headers = await getHeaders();
     const response = await fetch(url,{
